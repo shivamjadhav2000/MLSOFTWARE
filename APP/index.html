@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script type="text/javascript" src="/eel.js"></script>
+    <script src="main.js"></script>
+    <title>SNFLOW</title>
+  </head>
+  <body>
+    <div class="nav">
+      <p class="Logo">Logo Here</p>
+    </div>
+    <form class="form" onsubmit="return false;"><br>
+          <button id='FileUpload' onclick="handleUploadFile()">UPLOADFILE</button><br>
+          <div id="main1">
+              <div id="inputPathCont">
+                <input type='text' id="inputFile" placeholder="enter path for dataset"/>
+                <button onclick="handlecolums()" id="submitbtn">extract columns</button>
+              </div>
+              <div  id="Xcolumns">  
+              </div>
+              <div  id="Ycolumns">
+              </div>
+          </div>
+          <div class="FormContainer">
+                    <div class="Container">
+                            <p class="headLine">Algorithm</p>
+                            <label><input type="radio" class="TypeRadio" name="Algorithm" value="Logistic Regression"/>
+                            Logistic Regression
+                            </label>
+                            <label><input type="radio" class="TypeRadio" name="Algorithm" value="Support Vector Machine" />
+                            Support Vector Machine
+                            </label>
+                            <label><input type="radio" class="TypeRadio" name= "Algorithm" value="K nearest neighbour"/>
+                            K nearest neighbour
+                            </label>
+                            <label><input type="radio" class="TypeRadio" name="Algorithm" value="Naive Bayes"/>
+                            Naive Bayes
+                            </label>
+                        </div>
+                        <div class="Container">
+                            <p class="headLine"> Optimizers</p>
+                            <label>
+                            <input  type="checkbox"
+                              class="Typecbox"
+                              checked="checked" />
+                            Batch Normalization
+                            </label>
+                            <label >
+                            <input type="checkbox" 
+                            class="Typecbox"
+                              />
+                            ADAM
+                            </label>
+                            <label >
+                            <input type="checkbox"  
+                            class="Typecbox"
+                            />
+                            Momentum
+                            </label>
+                            <label >
+                            <input type="checkbox"
+                              class="Typecbox"
+                              />
+                            RMS PROP
+                            </label>
+                            <label >
+                            <input type="checkbox" 
+                              class="Typecbox"
+                              />
+                            Sochastic
+                            </label>
+                            <label>
+                            <input type="checkbox" 
+                              class="Typecbox"
+                              />
+                            none
+                            </label>
+                        </div>
+                        <div class="Container">
+                                <label><input class="TypeText" type="text" name="ip1"/>Learning Rate</label>
+                                <label><input class="TypeText" type="text" name="ip2"/>lambda</label>
+                                <lable><input class="TypeText" type="text" name="ip3"/>iterations</lable>
+                        </div>
+            </div> 
+            <div class="FormContainer">
+              <button id="Submit" type="submit" onclick="build()">build</button>
+              <button class="vizualize" type="submit" onclick="vizualize()">visualize</button>
+            </div>
+        </form>
+   <div id="temp" style="display:none;text-align: center;">
+        
+   </div>
+  </body>
+  
+</html>

@@ -1,0 +1,231 @@
+
+#FileUpload{
+  padding:2%;
+  text-align: center;
+  border:none;
+  outline-style: none;
+  background-color: rgba(247, 245, 242, 0);
+  color:white;
+  font-size: larger;
+  border:1px solid rgba(172, 168, 168, 0.685);
+}
+#main1{
+  display:none;
+}
+#inputPathCont{
+ padding:0px;
+ text-align: center;
+ margin:2%;
+ margin-bottom:5px;
+ padding:2% 0%;
+  }
+
+button{
+outline-style: none;
+border:none;
+}
+input{
+outline-style: none;
+}
+
+#inputFile{
+width:350px;
+height:55px;
+border:none;
+padding:2px 2%;
+font-size: larger;
+box-shadow: 5px 0px 20px rgba(248, 247, 247, 0.144);
+outline-style: none;
+animation-name: animate2;
+animation-duration: 3s;
+border-radius:3px;
+animation-timing-function: ease-out;
+}
+#submitbtn{
+  text-align: center;
+  border:none;
+  outline-style: none;
+  font-size: larger;
+  padding:15px 5px;
+border-radius:3px;
+animation-name: animate1;
+animation-duration: 3s;
+animation-timing-function: ease-out;
+}
+@keyframes animate1{
+from {opacity: 0;}
+to {opacity: 1;}
+}
+@keyframes animate2{
+from {opacity: 0}
+to {opacity: 1}
+}
+#Xcolumns{
+  display:none;
+  color:white;
+  text-align: center;
+}
+#Xcolumns button{
+padding:2% 0px;
+width:150px;
+margin:2%;
+text-align: center;
+font-size: medium;
+}
+#Ycolumns{
+  display:none;
+  color:white;
+  text-align: center;
+}
+#Ycolumns button{
+  width:150px;
+  padding:2% 0px;
+  margin:2%;
+  text-align: center;
+  font-size: medium;
+}
+#nextbtn{
+  
+  border: 2px solid rgba(255, 255, 255, 0.938);
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.404);
+  background-color: #0c0c0c00;
+  color:white;
+
+}
+
+body {
+background-color:#0c0c0c; 
+font-family:Sentinel SSm A,Sentinel SSm B,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+font-weight: 400;
+}
+.App {
+margin:0;
+padding:0;
+text-align: center;
+color:rgba(255, 249, 249, 0.897);
+padding:3%;
+padding-top:5px;
+}
+.nav{
+height:100px;
+}
+.App-logo {
+height: 40vmin;
+pointer-events: none;
+}   
+.Logo{
+color:rgb(230, 230, 230);
+float: left;
+font-size: xx-large;
+font-weight: 100;
+padding:10px;
+border-left: 6px solid rgb(250, 250, 250);
+font-style: inherit;
+font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+border-radius:2px;
+background-image: linear-gradient(45deg,rgba(0, 0, 3, 0.973) 50%,rgb(226, 0, 0)50%);
+}
+.form{
+color:white;
+background-color:#0c0c0c;
+font-weight: 100;
+font-size: 18px;
+margin:20px;
+} 
+.headLine{
+font-size: xx-large;
+margin-bottom: 5px;
+}
+
+.TypeText{
+border-style: none;
+width:150px;
+height:50px;
+margin: 20px 0px;
+color:white;
+margin-right:10px;
+outline-style: none;
+border-radius:2px;
+background-color: #0c0c0c;
+border:0.5px solid rgb(255, 255, 255);
+}
+.TypeText:hover{
+border:1px solid red;
+}
+.Display{
+text-align: initial;
+}
+.TypeRadio{
+width:20px;
+height:20px;
+text-align: center;
+}
+.Typecbox{
+width:20px;
+height:20px;
+}
+
+.Container{
+margin-top:20px;
+display:grid;
+grid-template-columns: 100%;
+text-align: initial;
+border:1px solid  rgb(253, 253, 253);
+margin-right:40px;
+
+border-radius: 10px;
+box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.336);
+padding:0px 15px;
+}
+#Submit{
+width:200px;
+height:75px;
+margin-top: 50px;
+font-weight: 100;
+font-size: 25px;
+background-color: rgba(216, 5, 5, 0.938);
+box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.404);
+border-style: none;
+outline-style: none;
+color:white;
+
+}
+.vizualize{
+width:200px;
+height:75px;
+margin-top: 50px;
+font-weight: 100;
+font-size: 25px;
+border: 2px solid rgba(255, 255, 255, 0.938);
+border-radius: 5px;
+box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.404);
+background-color: #0c0c0c00;
+color:white;
+}
+.FormContainer{
+display: grid;
+grid-template-columns: 33% 33% 33%;
+}
+
+.Text{
+width:60%;
+height:60px;
+padding:2px;
+border-style: none;
+}
+#viz{
+display:none;
+text-align:center;
+}
+#temp button{
+  margin:2%;
+  padding:10px 25px;
+  text-align: center;
+  border:none;
+  outline-style: none;
+  background-color: rgba(247, 245, 242, 0);
+  color:white;
+  font-size: larger;
+  border:1px solid rgba(172, 168, 168, 0.685);
+}

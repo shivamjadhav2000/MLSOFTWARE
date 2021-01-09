@@ -1,0 +1,156 @@
+<div id="root">
+        <div class="App">
+          
+            <div class="nav">
+            <p class="Logo">Logo Here</p>
+            </div>
+            <div id="MAIN">
+              <form class="form" onsubmit="return false;">
+              
+                <div class="inputFile">
+                 <input class="custom-file-input" id="FILE" onchange="handleUpload(event)" type="file" />
+                  
+              </div>
+              
+              <input type='text' id="inputFile" />
+              <button onclick="dummy()">uploadpath</button>
+              <br/>
+              <div class="FormContainer">
+              <div class="Container">
+                      <p class="headLine">Algorithm</p>
+                      <label><input type="radio" class="TypeRadio" name="Algorithm" value="Logistic Regression"/>
+                      Logistic Regression
+                      </label>
+                      <label><input type="radio" class="TypeRadio" name="Algorithm" value="Support Vector Machine" />
+                      Support Vector Machine
+                      </label>
+                      <label><input type="radio" class="TypeRadio" name= "Algorithm" value="K nearest neighbour"/>
+                      K nearest neighbour
+                      </label>
+                      <label><input type="radio" class="TypeRadio" name="Algorithm" value="Naive Bayes"/>
+                      Naive Bayes
+                      </label>
+                  </div>
+                  
+                  <div class="Container">
+                     <p class="headLine"> Optimizers</p>
+                      <label>
+                      <input  type="checkbox"
+                       class="Typecbox"
+                       checked="checked" />
+                      Batch Normalization
+                      </label>
+                      <label >
+                      <input type="checkbox" 
+                      class="Typecbox"
+                       />
+                      ADAM
+                      </label>
+                      <label >
+                      <input type="checkbox"  
+                      class="Typecbox"
+                      />
+                      Momentum
+                      </label>
+                      <label >
+                      <input type="checkbox"
+                       class="Typecbox"
+                        />
+                      RMS PROP
+                      </label>
+                      <label >
+                      <input type="checkbox" 
+                       class="Typecbox"
+                       />
+                      Sochastic
+                      </label>
+                      <label>
+                      <input type="checkbox" 
+                       class="Typecbox"
+                       />
+                      none
+                      </label>
+                  </div>
+                  <div class="Container">
+                          <label><input class="TypeText" type="text" name="ip1"/>Learning Rate</label>
+                          <label><input class="TypeText" type="text" name="ip2"/>lambda</label>
+                      
+                          <lable><input class="TypeText" type="text" name="ip3"/>iterations</lable>
+  
+                  </div>
+  
+              </div> 
+
+                  <div class="FormContainer">
+                    <button id="Submit" type="submit" onclick="build()">build</button>
+                    <button class="vizualize" type="submit" onclick="vizualize()">visualize</button>
+                  </div>
+              </form>
+          </div>
+            
+        </div>
+            <div id="viz">
+              <div id="IMG">
+
+              </div>
+              <button class="vizualize" type="submit" onclick="vizualizeOFF()"> Back </button>
+            </div>
+    </div>
+
+
+    #Importing dataset to build model 
+    print(filepath,type(filepath))
+    dataset=pd.read_csv(filepath)
+    #Taking Dependent and Independent variables
+
+    X=dataset.iloc[:,0:1].values
+    Y=dataset.iloc[:,-1].values
+    print(X,Y)
+    # following general form Y=Mx+C to find Correlation 
+    # Y is dependent variable M is Slope and C is intercept
+    # m=sum((y-y^)*(x-x^))/sum((x-x^)**2) """
+    x_mean=np.mean(X)
+    y_mean=np.mean(Y)
+
+    numerator=0
+    denominator=0
+    for i in range(30):
+        numerator+=((X[i]-x_mean)*(Y[i]-y_mean))
+        denominator+=(X[i]-x_mean)**2
+    M=numerator/denominator
+    C=y_mean-M*x_mean
+
+
+    # Building Model
+
+    max_x=np.max(X)
+    min_x=np.min(X)
+
+    x=np.linspace(min_x,max_x,1000)
+    y=M*x+C
+
+
+    # Visualising data
+
+    plt.plot(x,y,color="purple")
+    plt.scatter(X,Y,color="red")
+    plt.title("Experience vs Salary {Linear Regression}")
+    plt.xlabel('Position level')
+    plt.ylabel('Salary')
+    plt.savefig("APP/output.png")
+    return 'running!!'
+
+
+
+    <div>
+        <div id="inputpathcont">
+          <input type='text' id="inputFile" placeholder="enter path for dataset"/>
+          <button onclick="handlecolums()" id="submitbtn">extract columns</button>
+        </div>
+        <div  id="Xcolumns">
+             
+        </div>
+        <div  id="Ycolumns">
+             
+        </div>
+      </div>
