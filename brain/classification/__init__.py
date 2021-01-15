@@ -1,0 +1,2 @@
+from brain.classification.LogisticRegression import LogisticRegression
+from brain.classification.KNN import KNN
