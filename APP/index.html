@@ -33,16 +33,16 @@
                     <div class="Container">
                          <div class="childCont">
                             <p class="headLine">Algorithm</p>
-                            <label><input type="radio" class="TypeRadio" name="Algorithm" value="Logistic Regression"/>
+                            <label><input type="radio" class="TypeRadio" name="Algorithm" value="LogisticRegression"/>
                             Logistic Regression
                             </label>
-                            <label><input type="radio" class="TypeRadio" name="Algorithm" value="Support Vector Machine" />
+                            <label><input type="radio" class="TypeRadio" name="Algorithm" value="SupportVectorMachine" />
                             Support Vector Machine
                             </label>
-                            <label><input type="radio" class="TypeRadio" name= "Algorithm" value="K nearest neighbour"/>
+                            <label><input type="radio" class="TypeRadio" name= "Algorithm" value="KNN"/>
                             K nearest neighbour
                             </label>
-                            <label><input type="radio" class="TypeRadio" name="Algorithm" value="Naive Bayes"/>
+                            <label><input type="radio" class="TypeRadio" name="Algorithm" value="NaiveBayes"/>
                             Naive Bayes
                             </label>
                           </div>
@@ -98,7 +98,14 @@
                         </div>
             </div> 
             <div class="FormContainer">
-              <div id="buildCont"> <button id="Submit" type="submit" onclick="build()"><img src="build.png" id="buildImg" width="50" height="50"></button><p >Build</p> </div>
+              <div id="buildCont"> 
+                <label id="buildContChild">
+                      <button id="Submit" type="submit"  onclick="build()" >
+                        <img src="build.png" id="buildImg" width="50" height="50">
+                      </button>
+                      Build
+                </label>
+               </div>
               <button class="vizualize" type="submit" onclick="vizualize()">visualize</button>
             </div>
         </form>

@@ -41,7 +41,7 @@ function handleColX(event){
     let tempX=event.target.innerHTML
     if(!X.includes(tempX)){
        X.push(tempX)
-       event.target.style.backgroundImage='linear-gradient(45deg,rgba(9, 255, 0, 0.863),rgba(9, 238, 58, 0.822)) ' 
+       event.target.style.backgroundImage='linear-gradient(45deg,#ee0979  ,#ff6a00 )' 
     }
     else{
         let index = X.indexOf(tempX);
@@ -71,7 +71,7 @@ function handleColY(event){
     let tempY=event.target.innerHTML
     if(!Y.includes(tempY)){
        Y.push(tempY)
-       event.target.style.backgroundImage='linear-gradient(45deg,rgba(9, 255, 0, 0.863),rgba(9, 238, 58, 0.822)) ' 
+       event.target.style.backgroundImage="linear-gradient(45deg,#ee0979  ,#ff6a00 )" 
     }
     else{
         let index = Y.indexOf(tempY);
@@ -87,26 +87,49 @@ function handletransitonYtoD(){
     let inputPathCont=document.getElementById("inputPathCont")
     let Xcolumns=document.getElementById("Xcolumns")
     let Ycolumns=document.getElementById("Ycolumns")
+    let Build=document
     inputPathCont.style.display='none'
     Xcolumns.style.display='none'
     Ycolumns.style.display='none'
-    eel.display(fpath,X,Y)((r)=>{
-         let fig1=r[0]
-         let fig2=r[1]
-          temp.innerHTML=`
-          <div style="
-          display: flex;
-          align-items: center;
-          flex-direction:row;
-          ">
-            <img src='accuracy.png' width="600" />
-            <br> <img src='cost.png' width="600"/>
-            <br>
-            <button onclick="handleVizOff()">Back</button>
-          </div>`
-          X=[]
-          Y=[]
-    })
+
+    
+    
+}
+//Run model
+function build(){
+    let AlgorithmArray=document.getElementsByName("Algorithm")
+    let Algorithm=""
+    for(i = 0; i < AlgorithmArray.length; i++){
+        if(AlgorithmArray[i].checked){
+            Algorithm=AlgorithmArray[i].value
+        }
+    }
+    
+    if(X.length && Y.length && Algorithm.length){
+        let element=document.getElementById("buildImg")
+        element.style="-webkit-animation:spin 6s linear infinite;-moz-animation:spin 6s linear infinite;animation:spin 6s linear infinite;"
+        eel.display(fpath,X,Y,Algorithm)((r)=>{
+            let fig1=r[0]
+            let fig2=r[1]
+             temp.innerHTML=`
+             <div style="
+             display: flex;
+             align-items: center;
+             flex-direction:row;
+             ">
+               <img src='accuracy.png' width="600" />
+               <br> <img src='cost.png' width="600"/>
+               <br>
+               <button onclick="handleVizOff()">Back</button>
+             </div>`
+             X=[]
+             Y=[]
+             element.style=""
+        })
+    }
+    
+        
+    
     
 }
 //handle vizualization

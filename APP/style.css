@@ -1,69 +1,65 @@
+button{
+    cursor: pointer;
+    outline-style: none;
+    border:none;
+}
 #FileUpload{
-margin-left:10px;
-height:60px;
-font-size: larger;
-background: -webkit-linear-gradient(45deg,#ee0979,#ff6a00);
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
+    margin-left:10px;
+    height:60px;
+    font-size: larger;
+    background: -webkit-linear-gradient(45deg,#ee0979,#ff6a00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 #main1{
   display:none;
 }
 #inputPathCont{
- padding:0px;
- text-align: center;
- margin:2%;
- margin-bottom:5px;
- padding:2% 0%;
+    padding:0px;
+    text-align: center;
+    margin:2%;
+    margin-bottom:5px;
+    padding:2% 0%;
   }
-
-button{
-outline-style: none;
-border:none;
-}
 input{
-outline-style: none;
+    outline-style: none;
 }
-#buildImg {
-  -webkit-animation:spin 6s linear infinite;
-  -moz-animation:spin 6s linear infinite;
-  animation:spin 6s linear infinite;
-}
+
 @-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
 @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
 @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 
 #inputFile{
-width:350px;
-height:55px;
-border:none;
-padding:2px 2%;
-font-size: larger;
-box-shadow: 5px 0px 20px rgba(248, 247, 247, 0.144);
-outline-style: none;
-animation-name: animate2;
-animation-duration: 3s;
-border-radius:3px;
-animation-timing-function: ease-out;
+    width:350px;
+    height:55px;
+    border:none;
+    padding:2px 2%;
+    font-size: larger;
+    box-shadow: 5px 0px 20px rgba(248, 247, 247, 0.144);
+    outline-style: none;
+    animation-name: animate2;
+    animation-duration: 3s;
+    border-radius:3px;
+    animation-timing-function: ease-out;
 }
 #submitbtn{
-  text-align: center;
-  border:none;
-  outline-style: none;
-  font-size: larger;
-  padding:15px 5px;
-border-radius:3px;
-animation-name: animate1;
-animation-duration: 3s;
-animation-timing-function: ease-out;
+    text-align: center;
+    border:none;
+    outline-style: none;
+    font-size: larger;
+    padding:15px 5px;
+    border-radius:3px;
+    animation-name: animate1;
+    animation-duration: 3s;
+    animation-timing-function: ease-out;
 }
 @keyframes animate1{
-from {opacity: 0;}
-to {opacity: 1;}
+    from {opacity: 0;}
+    to {opacity: 1;}
 }
 @keyframes animate2{
-from {opacity: 0}
-to {opacity: 1}
+    from {opacity: 0}
+    to {opacity: 1}
 }
 
 #Xcolumns{
@@ -72,11 +68,11 @@ to {opacity: 1}
   text-align: center;
 }
 #Xcolumns button{
-padding:2% 0px;
-width:150px;
-margin:2%;
-text-align: center;
-font-size: medium;
+  padding:2% 0px;
+  width:150px;
+  margin:2%;
+  text-align: center;
+  font-size: medium;
 }
 #Ycolumns{
   display:none;
@@ -189,17 +185,26 @@ margin:15px 10px;
 background-color: #02000000;
 color: red;
 margin:0px;
+cursor: pointer;
 
 }
 #buildCont{
+  margin-top:35px;
   display: flex;
   align-items: center;
   flex-direction:row;
   font-size: larger;
   font-weight: 400;
 }
-#Submit{
-  margin-right:10px;
+#buildContChild{
+  display: flex;
+  align-items: center;
+  flex-direction:row;
+  font-size: larger;
+  font-weight: 400;
+  cursor: pointer;
+  
+  
 }
 .vizualize{
 width:200px;
