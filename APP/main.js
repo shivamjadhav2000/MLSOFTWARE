@@ -91,7 +91,19 @@ function handletransitonYtoD(){
     Xcolumns.style.display='none'
     Ycolumns.style.display='none'
     eel.display(fpath,X,Y)((r)=>{
-          temp.innerHTML=`<img src=${r}/>'<br><button onclick="handleVizOff()">Back</button>`
+         let fig1=r[0]
+         let fig2=r[1]
+          temp.innerHTML=`
+          <div style="
+          display: flex;
+          align-items: center;
+          flex-direction:row;
+          ">
+            <img src='accuracy.png' width="600" />
+            <br> <img src='cost.png' width="600"/>
+            <br>
+            <button onclick="handleVizOff()">Back</button>
+          </div>`
           X=[]
           Y=[]
     })

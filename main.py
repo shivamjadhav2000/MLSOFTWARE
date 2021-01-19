@@ -1,8 +1,14 @@
+import brain
+from brain.classification import LogisticRegression
+from brain.utils import plot_cost_acc
+import sklearn
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+import numpy as np
 import eel
 import matplotlib.pyplot as plt
 import pandas as pd
-import brain
-from brain.classification import LogisticRegression
+
 eel.init("APP")
 @eel.expose
 
@@ -18,22 +24,14 @@ def display(fpath,x,y):
     dataset=pd.read_csv(fpath)
     X=dataset[x].values
     Y=dataset[y].values
-    lg=LogisticRegression()
+    sc = StandardScaler()
+    X = sc.fit_transform(X)
+    lg=LogisticRegression(learning_rate=0.05,epochs=1000)
     lg.fit(X,Y)
-    x,y=lg.Vizualize()
+    path = "./APP"
+    c, a = lg.get_cst_acc()
+    plot_cost_acc(c, a, True, path)
 
-    # Visualising data
-
-    plt.plot(x,y,color="purple")
-    plt.scatter(x,y,color="red")
-    plt.title("{Linear Regression}")
-    plt.xlabel('cost')
-    plt.ylabel('Accuracy')
-    plt.savefig("APP/output.png")
-    return "/output.png"
+    return 1
     
-    
-    
-
-
 eel.start('index.html',size=(1000,700))

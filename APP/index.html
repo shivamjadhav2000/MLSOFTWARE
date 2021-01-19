@@ -18,7 +18,7 @@
       <p class="Logo">Logo Here</p>
     </div>
     <form class="form" onsubmit="return false;"><br>
-          <button id='FileUpload' onclick="handleUploadFile()">UPLOADFILE</button><br>
+          <div id="FileUploadCont"><button id='FileUpload' onclick="handleUploadFile()">UPLOADFILE</button></div><br>
           <div id="main1">
               <div id="inputPathCont">
                 <input type='text' id="inputFile" placeholder="enter path for dataset"/>
@@ -31,6 +31,7 @@
           </div>
           <div class="FormContainer">
                     <div class="Container">
+                         <div class="childCont">
                             <p class="headLine">Algorithm</p>
                             <label><input type="radio" class="TypeRadio" name="Algorithm" value="Logistic Regression"/>
                             Logistic Regression
@@ -44,8 +45,11 @@
                             <label><input type="radio" class="TypeRadio" name="Algorithm" value="Naive Bayes"/>
                             Naive Bayes
                             </label>
-                        </div>
+                          </div>
+                      </div>
+
                         <div class="Container">
+                          <div class="childCont">
                             <p class="headLine"> Optimizers</p>
                             <label>
                             <input  type="checkbox"
@@ -83,15 +87,18 @@
                               />
                             none
                             </label>
+                          </div>
                         </div>
                         <div class="Container">
+                          <div class="childCont">
                                 <label><input class="TypeText" type="text" name="ip1"/>Learning Rate</label>
                                 <label><input class="TypeText" type="text" name="ip2"/>lambda</label>
                                 <lable><input class="TypeText" type="text" name="ip3"/>iterations</lable>
+                           </div>
                         </div>
             </div> 
             <div class="FormContainer">
-              <button id="Submit" type="submit" onclick="build()">build</button>
+              <div id="buildCont"> <button id="Submit" type="submit" onclick="build()"><img src="build.png" id="buildImg" width="50" height="50"></button><p >Build</p> </div>
               <button class="vizualize" type="submit" onclick="vizualize()">visualize</button>
             </div>
         </form>

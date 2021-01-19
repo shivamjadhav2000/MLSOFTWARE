@@ -1,13 +1,10 @@
-
 #FileUpload{
-  padding:2%;
-  text-align: center;
-  border:none;
-  outline-style: none;
-  background-color: rgba(247, 245, 242, 0);
-  color:white;
-  font-size: larger;
-  border:1px solid rgba(172, 168, 168, 0.685);
+margin-left:10px;
+height:60px;
+font-size: larger;
+background: -webkit-linear-gradient(45deg,#ee0979,#ff6a00);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
 }
 #main1{
   display:none;
@@ -27,6 +24,14 @@ border:none;
 input{
 outline-style: none;
 }
+#buildImg {
+  -webkit-animation:spin 6s linear infinite;
+  -moz-animation:spin 6s linear infinite;
+  animation:spin 6s linear infinite;
+}
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 
 #inputFile{
 width:350px;
@@ -60,6 +65,7 @@ to {opacity: 1;}
 from {opacity: 0}
 to {opacity: 1}
 }
+
 #Xcolumns{
   display:none;
   color:white;
@@ -110,21 +116,17 @@ padding-top:5px;
 .nav{
 height:100px;
 }
-.App-logo {
-height: 40vmin;
-pointer-events: none;
-}   
+
 .Logo{
-color:rgb(230, 230, 230);
+  color:white;
 float: left;
 font-size: xx-large;
 font-weight: 100;
 padding:10px;
-border-left: 6px solid rgb(250, 250, 250);
-font-style: inherit;
 font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 border-radius:2px;
-background-image: linear-gradient(45deg,rgba(0, 0, 3, 0.973) 50%,rgb(226, 0, 0)50%);
+background-image: linear-gradient(45deg,#ee0979  ,#ff6a00 );
+margin-left:30px;
 }
 .form{
 color:white;
@@ -165,31 +167,39 @@ text-align: center;
 width:20px;
 height:20px;
 }
-
-.Container{
-margin-top:20px;
+.childCont{  
 display:grid;
 grid-template-columns: 100%;
 text-align: initial;
-border:1px solid  rgb(253, 253, 253);
-margin-right:40px;
-
+background-color:#0c0c0c;
+border-radius: 10px;
+padding:5px 10px;
+}
+.Container{
+display:grid;
+grid-template-columns: 100%;
+text-align: initial;
 border-radius: 10px;
 box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.336);
-padding:0px 15px;
+background-image: linear-gradient(45deg,#ee0979,#ff6a00);
+padding: 2px;
+margin:15px 10px;
 }
 #Submit{
-width:200px;
-height:75px;
-margin-top: 50px;
-font-weight: 100;
-font-size: 25px;
-background-color: rgba(216, 5, 5, 0.938);
-box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.404);
-border-style: none;
-outline-style: none;
-color:white;
+background-color: #02000000;
+color: red;
+margin:0px;
 
+}
+#buildCont{
+  display: flex;
+  align-items: center;
+  flex-direction:row;
+  font-size: larger;
+  font-weight: 400;
+}
+#Submit{
+  margin-right:10px;
 }
 .vizualize{
 width:200px;
