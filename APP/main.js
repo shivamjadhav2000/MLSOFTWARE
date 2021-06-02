@@ -2,6 +2,7 @@ let X=[]
 let Y=[]
 let cols
 let fpath=''
+//about chart.js
 //control handleUploadFile
 function handleUploadFile(){
     document.getElementById("inputPathCont").style.display='block'

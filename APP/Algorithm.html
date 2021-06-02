@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="stylesheet" href="Algorithm.css" />
+    <script src="main.js"></script>
+    <title>SNFLOW</title>
+  </head>
+  <body style="margin: 0px;padding: 10px;">
+    <div class="nav">
+      <a href="main.html"><p class="Logo">Logo Here</p></a>
+      <a href="main.html"><p class="navItem">Dashboard</p></a>
+      <p class="navItem">vizualization</p>
+      <p class="navItem">Documentation</p>   
+   </div>
+   <div class="subNav">
+    <a href="index.html"><p class="navItem">preprocess</p></a>
+    <a href="Algorithm.html"><p class="Active">Algorithm</p></a>
+    <p class="navItem">reviewAndAnalysis</p>
+  </div>
+    <form class="form" onsubmit="return false;"><br>
+          <div class="FormContainer">
+                    <div class="Container">
+                         <div class="childCont">
+                            <p class="headLine">Algorithm</p>
+                            <label><input type="radio" class="TypeRadio" name="Algorithm" value="LogisticRegression"/>
+                            Logistic Regression
+                            </label>
+                            <label><input type="radio" class="TypeRadio" name="Algorithm" value="SupportVectorMachine" />
+                            Support Vector Machine
+                            </label>
+                            <label><input type="radio" class="TypeRadio" name= "Algorithm" value="KNN"/>
+                            K nearest neighbour
+                            </label>
+                            <label><input type="radio" class="TypeRadio" name="Algorithm" value="NaiveBayes"/>
+                            Naive Bayes
+                            </label>
+                          </div>
+                      </div>
+
+            </div> 
+            <div class="FormContainer">
+              <div id="buildCont"> 
+                <label id="buildContChild">
+                      <button id="Submit" type="submit"  onclick="build()" >
+                        <img src="build.png" id="buildImg" width="50" height="50">
+                      </button>
+                      Build
+                </label>
+               </div>
+              <button class="vizualize" type="submit" onclick="vizualize()">visualize</button>
+            </div>
+        </form>
+   <div id="temp" style="display:none;text-align: center;">
+        
+   </div>
+  </body>
+  
+</html>
