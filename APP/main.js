@@ -2,10 +2,6 @@ let X=[]
 let Y=[]
 let cols
 let fpath=''
-eel.trymedaddy()((r)=>{
-    console.log(r)
-    console.log("im comming too!!! ")
-})
 //control handleUploadFile
 function handleUploadFile(){
     document.getElementById("inputPathCont").style.display='block'

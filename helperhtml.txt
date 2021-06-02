@@ -1,0 +1,48 @@
+<div class="Container">
+                          <div class="childCont">
+                            <p class="headLine"> Optimizers</p>
+                            <label>
+                            <input  type="checkbox"
+                              class="Typecbox"
+                              checked="checked" />
+                            Batch Normalization
+                            </label>
+                            <label >
+                            <input type="checkbox" 
+                            class="Typecbox"
+                              />
+                            ADAM
+                            </label>
+                            <label >
+                            <input type="checkbox"  
+                            class="Typecbox"
+                            />
+                            Momentum
+                            </label>
+                            <label >
+                            <input type="checkbox"
+                              class="Typecbox"
+                              />
+                            RMS PROP
+                            </label>
+                            <label >
+                            <input type="checkbox" 
+                              class="Typecbox"
+                              />
+                            Sochastic
+                            </label>
+                            <label>
+                            <input type="checkbox" 
+                              class="Typecbox"
+                              />
+                            none
+                            </label>
+                          </div>
+                        </div>
+                         <div class="Container">
+                          <div class="childCont">
+                                <label><input class="TypeText" type="text" name="ip1"/>Learning Rate</label>
+                                <label><input class="TypeText" type="text" name="ip2"/>lambda</label>
+                                <lable><input class="TypeText" type="text" name="ip3"/>iterations</lable>
+                           </div>
+                        </div>
