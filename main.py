@@ -11,15 +11,18 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 eel.init("APP")
+
 @eel.expose
-
-
 def run(filepath):
      #Importing dataset to build model 
-    dataset=pd.read_csv(filepath)
+    dataset=pd.read_csv(filepath,nrows=6)
     #Taking Dependent and Independent variables
-    temp=list(dataset.columns)
-    return temp
+    columnNames=list(dataset.columns)
+    df=dataset.values
+    df=df.tolist()
+
+    print(dataset)
+    return columnNames,df
 @eel.expose
 def display(fpath,x,y,Algorithm):
     if len(x)>0 and len(y)>0:
@@ -38,8 +41,8 @@ def display(fpath,x,y,Algorithm):
         return 1
     else:
         return 0 
-    
-    
-    
-    
+
 eel.start("main.html",size=(1000,700))
+
+    
+    

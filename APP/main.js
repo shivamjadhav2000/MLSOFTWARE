@@ -12,25 +12,38 @@ function handleUploadFile(){
 
 //control display of dynamic columns rendering get data from python as all columns 
 function handlecolums(){
-    
+    console.log("hello")
     let inputf=document.getElementById("inputFile").value
+    let THEAD=document.getElementById("THEAD")
+    let TBODY=document.getElementById("TBODY")
     fpath=inputf
     eel.run(inputf)((r)=>{
         if(r){
-            cols=r
+            console.log("hello in eel")
+            console.log("array,",r[0],"rows,",r[1])    
+            let cols=r[0]
+            let rows=r[1]
             let targetX=document.getElementById("Xcolumns")
-    let targetY=document.getElementById("Ycolumns")
-    
-    targetY.style.display="none"
+            let theadcontent=`<tr><th scope="col">SNO</th>`
+            let tbodycontent=``
+            let t='<p>select Independent variables</p>'
+            cols.forEach((i,idx)=>{
+            theadcontent=theadcontent+`<th scope="col">${i}</th>`
+            t=t+'<button onclick="handleColX(event)" name="btn">'+i+'</button>'
+            })
+            rows.forEach((i,idx)=>{
+            tbodycontent=tbodycontent+`<tr><th scope="row">${idx}</th>`
+            i.forEach((j)=>{
+                tbodycontent=tbodycontent+`<td>${j}</td>`
+            })
+            tbodycontent=tbodycontent+`</tr>`
+            })
+            theadcontent=theadcontent+`</tr>`
+            THEAD.innerHTML=theadcontent
+            TBODY.innerHTML=tbodycontent
 
-    
-    let t='<p>select Independent variables</p>'
-    cols.forEach((i)=>{
-        t=t+'<button onclick="handleColX(event)" name="btn">'+i+'</button>'
-    })
-    t=t+'<br><button id="nextbtn" onclick="handletransitonXtoY()">Next</button>'
-    targetX.innerHTML=t
-    targetX.style.display="block"
+            t=t+'<br><button id="nextbtn" onclick="handletransitonXtoY()">Next</button>'
+            targetX.innerHTML=t
         }
     
     })

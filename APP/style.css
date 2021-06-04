@@ -73,7 +73,8 @@ input{
 }
 
 #Xcolumns{
-  display:none;
+  /* display:none; */
+  border:10px solid white;
   color:white;
   text-align: center;
 }
@@ -85,7 +86,7 @@ input{
   font-size: medium;
 }
 #Ycolumns{
-  display:none;
+  /* display:none; */
   color:white;
   text-align: center;
 }

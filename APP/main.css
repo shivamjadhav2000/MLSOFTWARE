@@ -110,6 +110,32 @@ background-image: linear-gradient(45deg,#ee0979  ,#ff6a00 );
     height: 200px;
  }
  
+
+ #Xcolumns{
+  /* display:none; */
+  color:white;
+  text-align: center;
+}
+#Xcolumns button{
+  padding:2% 0px;
+  width:150px;
+  margin:2%;
+  text-align: center;
+  font-size: medium;
+}
+#Ycolumns{
+  /* display:none; */
+  color:white;
+  text-align: center;
+}
+#Ycolumns button{
+  width:150px;
+  padding:2% 0px;
+  margin:2%;
+  text-align: center;
+  font-size: medium;
+}
+
   /* animation */
   @keyframes navAnimation {
     from {border-bottom: 5px solid red;}
