@@ -42,4 +42,4 @@ def display(fpath,x,y,Algorithm):
     
     
     
-eel.start('main.html',size=(1000,700))
+eel.start("main.html",size=(1000,700))
