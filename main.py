@@ -14,6 +14,7 @@ eel.init("APP")
 
 @eel.expose
 def run(filepath):
+    print(filepath)
      #Importing dataset to build model 
     dataset=pd.read_csv(filepath,nrows=6)
     #Taking Dependent and Independent variables
