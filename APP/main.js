@@ -3,12 +3,6 @@ let Y=[]
 let cols
 let fpath=''
 //about chart.js
-//control handleUploadFile
-function handleUploadFile(){
-    document.getElementById("inputPathCont").style.display='block'
-    let main1=document.getElementById("main1")
-    main1.style.display='block'
-} 
 
 //control display of dynamic columns rendering get data from python as all columns 
 function handlecolums(){
@@ -16,20 +10,42 @@ function handlecolums(){
     let inputf=document.getElementById("inputFile").value
     let THEAD=document.getElementById("THEAD")
     let TBODY=document.getElementById("TBODY")
+    let ctx4 = document.getElementById('myChart3').getContext('2d');
+   
+
     fpath=inputf
-    eel.run(inputf)((r)=>{
+    eel.main(inputf)((r)=>{
         if(r){
-            console.log("hello in eel")
-            console.log("array,",r[0],"rows,",r[1])    
-            let cols=r[0]
-            let rows=r[1]
-            let targetX=document.getElementById("Xcolumns")
+            console.log("r=",r)
+            let rows=r[0]
+            let cols=r[1]
+            let noOfNumericalValues = r[2]
+            let noOfCategoricalValues = r[3]
+            //filling radial graph
+            const data = {
+                labels: [
+                  'Red',
+                  'Blue'
+                  ],
+                datasets: [{
+                  label: 'features',
+                  data: [noOfCategoricalValues,noOfNumericalValues],
+                  backgroundColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(54, 162, 235)',
+                  ],
+                  hoverOffset: 4
+                }]
+              };
+            const myChart4 =new Chart(ctx4,{
+            type: 'doughnut',
+            data: data
+            }
+            )
             let theadcontent=`<tr><th scope="col">SNO</th>`
             let tbodycontent=``
-            let t='<p>select Independent variables</p>'
             cols.forEach((i,idx)=>{
             theadcontent=theadcontent+`<th scope="col">${i}</th>`
-            t=t+'<button onclick="handleColX(event)" name="btn">'+i+'</button>'
             })
             rows.forEach((i,idx)=>{
             tbodycontent=tbodycontent+`<tr><th scope="row">${idx}</th>`
@@ -41,14 +57,77 @@ function handlecolums(){
             theadcontent=theadcontent+`</tr>`
             THEAD.innerHTML=theadcontent
             TBODY.innerHTML=tbodycontent
-
-            t=t+'<br><button id="nextbtn" onclick="handletransitonXtoY()">Next</button>'
-            targetX.innerHTML=t
+            
+            eel.GetFeatureValues("Age")((res)=>{
+                featureName="Age"
+                console.log(res)
+                var options = {
+                    series: [
+                    {
+                      name: 'box',
+                      type: 'boxPlot',
+                      data: [
+                        {
+                          x: featureName,
+                          y: res
+                        }
+                      ]
+                    },
+                    
+                  ],
+                    chart: {
+                    type: 'boxPlot',
+                    height: 350
+                  },
+                  colors: ['#008FFB', '#FEB019'],
+                  title: {
+                    text: `BoxPlot -${featureName}`,
+                    align: 'left'
+                  }
+                 
+                  };
+                var chart = new ApexCharts(document.querySelector("#myChart1"), options);
+                chart.render();
+            })
         }
     
     })
     
 
+}
+function handleBoxPlot(featureName){
+    alert(featureName,typeof(featureName))
+    eel.GetFeatureValues(featureName)((res)=>{
+        console.log(res)
+        var options = {
+            series: [
+            {
+              name: 'box',
+              type: 'boxPlot',
+              data: [
+                {
+                  x: featureName,
+                  y: res
+                }
+              ]
+            },
+            
+          ],
+            chart: {
+            type: 'boxPlot',
+            height: 350
+          },
+          colors: ['#008FFB', '#FEB019'],
+          title: {
+            text: `BoxPlot -${featureName}`,
+            align: 'left'
+          }
+         
+          };
+          document.querySelector("#myChart1").innerHTML=""  
+        var chart = new ApexCharts(document.querySelector("#myChart1"), options);
+        chart.render();
+    })
 }
 //handle logic for selecting X or dependent variable columns 
 function handleColX(event){

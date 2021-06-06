@@ -14,13 +14,13 @@
     <script src="Bootstrap/slim.min.js" ></script>
     <script src="Bootstrap/popper.min.js" ></script>
     <script src="Bootstrap/bootstrap.min.js" ></script>
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-
+    <script src="apexcharts/apexchart.js"></script>
+    <script src="main.js"></script>
     <script src="chart.min.js" ></script>
 
     <title>preprocess</title>
   </head>
-  <body style="margin: 0px;padding: 10px;  background-color:#0c0c0c;">
+  <body style="margin: 0px;padding: 10px; ">
     <div class="nav">
       <a href="index.html"><p class="Logo">Logo Here</p></a>
       <a href="index.html"><p class="navItem">Dashboard</p></a>
@@ -38,6 +38,16 @@
             <div class="FileUploadCont">
                 <button id='FileUpload'  data-toggle="modal" data-target="#exampleModalLong">UPLOADFILE</button>
             </div>
+            <div class="dropdown">
+              <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                Dropdown button
+              </button>
+              <div class="dropdown-menu">
+                <button class="dropdown-item" onclick="handleBoxPlot('Age')" >Age</button>
+                <button class="dropdown-item active" onclick="handleBoxPlot('EstimatedSalary')">EstimatedSalary</button>
+                <button class="dropdown-item "onclick="handleBoxPlot('Purchased')">Purchased</button>
+              </div>
+            </div>
             <!-- Button trigger modal -->
           <!-- Modal -->
           <div class="modal fade " id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
@@ -50,7 +60,6 @@
           </button>
           </div>
           <div class="modal-body">
-
           <div id="inputPathCont">
             <input type='text' id="inputFile" placeholder="enter path for dataset"/>
             <!-- <button onclick="handlecolums()" id="submitbtn">extract columns</button> -->
@@ -72,7 +81,7 @@
       <div class="data-visualization-section">
           <div class="ChartsArea">
             <div class="chartItem">
-              <canvas id="myChart1" ></canvas>
+              <div id="myChart1"></div>
             </div>
             <div class="chartItem">
               <canvas id="myChart2" ></canvas>
@@ -98,8 +107,6 @@
               </tbody>
             </table>
           </div>
-          
-        
           
       </div>
     </div>

@@ -1,34 +1,31 @@
-const ctx1 = document.getElementById('myChart1').getContext('2d');
 const ctx2 = document.getElementById('myChart2').getContext('2d');
-const ctx3 = document.getElementById('myChart3').getContext('2d');
 
 // const ctx3 = document.getElementById('myChart3').getContext('2d');
 // const ctx4 = document.getElementById('myChart4').getContext('2d');
-let typesOfFeatures=[9,2]
-const data1= {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    }
+// const data1= {
+//         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+//         datasets: [{
+//             label: '# of Votes',
+//             data: [12, 19, 3, 5, 2, 3],
+//             backgroundColor: [
+//                 'rgba(255, 99, 132, 0.2)',
+//                 'rgba(54, 162, 235, 0.2)',
+//                 'rgba(255, 206, 86, 0.2)',
+//                 'rgba(75, 192, 192, 0.2)',
+//                 'rgba(153, 102, 255, 0.2)',
+//                 'rgba(255, 159, 64, 0.2)'
+//             ],
+//             borderColor: [
+//                 'rgba(255, 99, 132, 1)',
+//                 'rgba(54, 162, 235, 1)',
+//                 'rgba(255, 206, 86, 1)',
+//                 'rgba(75, 192, 192, 1)',
+//                 'rgba(153, 102, 255, 1)',
+//                 'rgba(255, 159, 64, 1)'
+//             ],
+//             borderWidth: 1
+//         }]
+//     }
 const data2 = {
   labels: [
     'Eating',
@@ -61,21 +58,7 @@ const data2 = {
     pointHoverBorderColor: 'rgb(54, 162, 235)'
   }]
 };
-const data3 = {
-  labels: [
-    'Red',
-    'Blue'
-    ],
-  datasets: [{
-    label: 'My First Dataset',
-    data: typesOfFeatures,
-    backgroundColor: [
-      'rgb(255, 99, 132)',
-      'rgb(54, 162, 235)',
-    ],
-    hoverOffset: 4
-  }]
-};
+
 // const data4 = {
 //   labels: [
 //     'Red',
@@ -94,19 +77,19 @@ const data3 = {
 //   }]
 // };
 
-const myChart1 = new Chart(ctx1, {
-    type: 'bar',
-    data: data1,
-    options: {
-      responsive:true,
-       maintainAspectRatio: false,
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    }
-});
+// const myChart1 = new Chart(ctx1, {
+//     type: 'bar',
+//     data: data1,
+//     options: {
+//       responsive:true,
+//        maintainAspectRatio: false,
+//         scales: {
+//             y: {
+//                 beginAtZero: true
+//             }
+//         }
+//     }
+// });
 const myChart2 = new Chart(ctx2, {
     type: 'radar',
     data: data2,
@@ -121,11 +104,7 @@ const myChart2 = new Chart(ctx2, {
   },
 });
 
-const myChart3 =new Chart(ctx3,{
-  type: 'doughnut',
-  data: data3
-}
-)
+
 
 // const boxplotData = {
 //   // define label tree
@@ -181,88 +160,3 @@ const myChart3 =new Chart(ctx3,{
 //       }
 //     }
 //   });
-
-var options = {
-  series: [
-  {
-    name: 'box',
-    type: 'boxPlot',
-    data: [
-      {
-        x: new Date('2017-01-01').getTime(),
-        y: [54, 66, 69, 75, 88]
-      },
-      {
-        x: new Date('2018-01-01').getTime(),
-        y: [43, 65, 69, 76, 81]
-      },
-      {
-        x: new Date('2019-01-01').getTime(),
-        y: [31, 39, 45, 51, 59]
-      },
-      {
-        x: new Date('2020-01-01').getTime(),
-        y: [39, 46, 55, 65, 71]
-      },
-      {
-        x: new Date('2021-01-01').getTime(),
-        y: [29, 31, 35, 39, 44]
-      }
-    ]
-  },
-  {
-    name: 'outliers',
-    type: 'scatter',
-    data: [
-      {
-        x: new Date('2017-01-01').getTime(),
-        y: 32
-      },
-      {
-        x: new Date('2018-01-01').getTime(),
-        y: 25
-      },
-      {
-        x: new Date('2019-01-01').getTime(),
-        y: 64
-      },
-      {
-        x: new Date('2020-01-01').getTime(),
-        y: 27
-      },
-      {
-        x: new Date('2020-01-01').getTime(),
-        y: 78
-      },
-      {
-        x: new Date('2021-01-01').getTime(),
-        y: 15
-      }
-    ]
-  }
-],
-  chart: {
-  type: 'boxPlot',
-  height: 350
-},
-colors: ['#008FFB', '#FEB019'],
-title: {
-  text: 'BoxPlot - Scatter Chart',
-  align: 'left'
-},
-xaxis: {
-  type: 'datetime',
-  tooltip: {
-    formatter: function(val) {
-      return new Date(val).getFullYear()
-    }
-  }
-},
-tooltip: {
-  shared: false,
-  intersect: true
-}
-};
-
-var chart = new ApexCharts(document.querySelector("#myChart1"), options);
-chart.render();
