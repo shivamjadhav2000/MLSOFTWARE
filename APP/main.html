@@ -19,7 +19,7 @@
 
     <title>preprocess</title>
   </head>
-  <body style="margin: 0px;padding: 10px;background-color: #0c0c0c;">
+  <body style="margin: 0px;padding: 10px;">
     <div class="nav">
       <a href="index.html"><p class="Logo">Logo Here</p></a>
       <a href="index.html"><p class="navItem">Dashboard</p></a>
@@ -65,6 +65,9 @@
           <div id="Xcolumns">
              <h1>hiiiiiiiiiii</h1>
           </div>
+        <div class="chartItem">
+          <canvas id="myChart3" ></canvas>
+        </div>
       </div>
      
       <div class="data-visualization-section">
@@ -108,8 +111,11 @@
   <script>
 const ctx1 = document.getElementById('myChart1').getContext('2d');
 const ctx2 = document.getElementById('myChart2').getContext('2d');
+const ctx3 = document.getElementById('myChart3').getContext('2d');
+
 // const ctx3 = document.getElementById('myChart3').getContext('2d');
 // const ctx4 = document.getElementById('myChart4').getContext('2d');
+let typesOfFeatures=[9,2]
 const data1= {
         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
         datasets: [{
@@ -166,26 +172,21 @@ const data2 = {
     pointHoverBorderColor: 'rgb(54, 162, 235)'
   }]
 };
-// const data3 = {
-//   labels: [
-//     'Red',
-//     'Green',
-//     'Yellow',
-//     'Grey',
-//     'Blue'
-//   ],
-//   datasets: [{
-//     label: 'My First Dataset',
-//     data: [11, 16, 7, 3, 14],
-//     backgroundColor: [
-//       'rgb(255, 99, 132)',
-//       'rgb(75, 192, 192)',
-//       'rgb(255, 205, 86)',
-//       'rgb(201, 203, 207)',
-//       'rgb(54, 162, 235)'
-//     ]
-//   }]
-// };
+const data3 = {
+  labels: [
+    'Red',
+    'Blue'
+    ],
+  datasets: [{
+    label: 'My First Dataset',
+    data: typesOfFeatures,
+    backgroundColor: [
+      'rgb(255, 99, 132)',
+      'rgb(54, 162, 235)',
+    ],
+    hoverOffset: 4
+  }]
+};
 // const data4 = {
 //   labels: [
 //     'Red',
@@ -231,18 +232,11 @@ const myChart2 = new Chart(ctx2, {
   },
 });
 
-// const myChart3 =new Chart(ctx3,{
-//   type: 'polarArea',
-//   data: data3,
-//   options: {
-//     responsive:true,
-//        maintainAspectRatio: false,
-//   }
-//  })
-// function randomValues(count, min, max) {
-//   const delta = max - min;
-//   return Array.from({length: count}).map(() => Math.random() * delta + min);
-// }
+const myChart3 =new Chart(ctx3,{
+  type: 'doughnut',
+  data: data3
+}
+)
 
 // const boxplotData = {
 //   // define label tree
