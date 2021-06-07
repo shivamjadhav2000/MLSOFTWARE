@@ -6,30 +6,30 @@ let fpath=''
 
 //control display of dynamic columns rendering get data from python as all columns 
 function handlecolums(){
-    console.log("hello")
     let inputf=document.getElementById("inputFile").value
     let THEAD=document.getElementById("THEAD")
     let TBODY=document.getElementById("TBODY")
     let ctx4 = document.getElementById('myChart3').getContext('2d');
-   
+    let targetDropdown=document.querySelector("#targetDropdown")
+
 
     fpath=inputf
     eel.main(inputf)((r)=>{
         if(r){
-            console.log("r=",r)
             let rows=r[0]
             let cols=r[1]
-            let noOfNumericalValues = r[2]
-            let noOfCategoricalValues = r[3]
+            let NumericalValues = r[2]
+            console.log("noOfNumericalValues,",NumericalValues)
+            let CategoricalValues = r[3]
             //filling radial graph
             const data = {
                 labels: [
-                  'Red',
-                  'Blue'
+                  'NumericalValues',
+                  'CategoricalValues'
                   ],
                 datasets: [{
                   label: 'features',
-                  data: [noOfCategoricalValues,noOfNumericalValues],
+                  data: [NumericalValues.length,CategoricalValues.length],
                   backgroundColor: [
                     'rgb(255, 99, 132)',
                     'rgb(54, 162, 235)',
@@ -58,10 +58,9 @@ function handlecolums(){
             THEAD.innerHTML=theadcontent
             TBODY.innerHTML=tbodycontent
             
-            eel.GetFeatureValues("Age")((res)=>{
-                featureName="Age"
-                console.log(res)
-                var options = {
+            eel.GetFeatureValues(NumericalValues[0])((res)=>{
+                featureName=NumericalValues[0]
+                var BoxPlotoptions = {
                     series: [
                     {
                       name: 'box',
@@ -86,8 +85,74 @@ function handlecolums(){
                   }
                  
                   };
-                var chart = new ApexCharts(document.querySelector("#myChart1"), options);
-                chart.render();
+                 var HeatMapOptions = {
+                  series: [{
+                  name: 'Metric1',
+                  data: [11,22, 5,7,11,4]
+                },
+                {
+                  name: 'Metric2',
+                  data: [11,53,78,32,46,12]
+                },
+                {
+                  name: 'Metric3',
+                  data: [11,53,78,32,46,12]
+                },
+                {
+                  name: 'Metric4',
+                  data: [34,56,2,7,5,2]
+                },
+                {
+                  name: 'Metric5',
+                  data: [1,5,2,9,0,1]
+                },
+                {
+                  name: 'Metric6',
+                  data: [1,32,3,4,5,3]
+                },
+                {
+                  name: 'Metric7',
+                  data: [1,32,3,4,5,3]
+                },
+                {
+                  name: 'Metric8',
+                  data: [1,5,2,9,0,1]
+                },
+                {
+                  name: 'Metric9',
+                  data: [1,32,3,4,5,3]
+                }
+                ],
+                  chart: {
+                  height: 350,
+                  type: 'heatmap',
+                },
+                dataLabels: {
+                  enabled: false
+                },
+                colors: ["#008FFB"],
+                title: {
+                  text: 'HeatMap Chart (Single color)'
+                },
+                };
+                var chart1 = new ApexCharts(document.querySelector("#myChart1"), BoxPlotoptions);
+                chart1.render();
+                var chart2 = new ApexCharts(document.querySelector("#myChart2"), HeatMapOptions);
+                console.log(document.querySelector("#myChart2"),"chart2=",chart2)
+                chart2.render();
+
+                let temp =``
+                NumericalValues.forEach((i,idx)=>{
+                    if(idx==0){
+                      temp=temp+`<button class="dropdown-item active" onclick="handleBoxPlot('${i}')" >${i}</button>`
+                    }
+                    else{
+                      temp=temp+`<button class="dropdown-item " onclick="handleBoxPlot('${i}')" >${i}</button>`
+
+                    }
+                })
+                targetDropdown.innerHTML=temp
+
             })
         }
     
@@ -96,7 +161,6 @@ function handlecolums(){
 
 }
 function handleBoxPlot(featureName){
-    alert(featureName,typeof(featureName))
     eel.GetFeatureValues(featureName)((res)=>{
         console.log(res)
         var options = {
@@ -127,6 +191,7 @@ function handleBoxPlot(featureName){
           document.querySelector("#myChart1").innerHTML=""  
         var chart = new ApexCharts(document.querySelector("#myChart1"), options);
         chart.render();
+        
     })
 }
 //handle logic for selecting X or dependent variable columns 
