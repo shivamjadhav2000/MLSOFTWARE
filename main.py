@@ -42,7 +42,7 @@ def display(fpath,x,y,Algorithm):
     else:
         return 0 
 
-eel.start("main.html",size=(1000,700))
+eel.start("main.html",size=(1000,700),port=5000)
 
     
     

@@ -18,7 +18,7 @@ button{
     height:60px;
     font-size: larger;
     background: -webkit-linear-gradient(45deg,#ee0979,#ff6a00);
-    -webkit-background-clip: text;
+    /* -webkit-background-clip: text; */
     -webkit-text-fill-color: transparent;
 }
 #main1{

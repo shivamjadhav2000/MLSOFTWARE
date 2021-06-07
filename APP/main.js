@@ -32,7 +32,7 @@ function handlecolums(){
             t=t+'<button onclick="handleColX(event)" name="btn">'+i+'</button>'
             })
             rows.forEach((i,idx)=>{
-            tbodycontent=tbodycontent+`<tr><th scope="row">${idx}</th>`
+            tbodycontent=tbodycontent+`<tr><th scope="row">${idx+1}</th>`
             i.forEach((j)=>{
                 tbodycontent=tbodycontent+`<td>${j}</td>`
             })
