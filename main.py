@@ -1,48 +1,77 @@
-import brain
-from brain.classification import LogisticRegression
-from brain.classification import KNN
-from brain.utils import plot_cost_acc
-import sklearn
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
-import numpy as np
 import eel
-import matplotlib.pyplot as plt
+import numpy as np
 import pandas as pd
+import os
+from sklearn.preprocessing import StandardScaler, LabelEncoder, OneHotEncoder
+
+myDataFrame=None
+myFeatures=None
+"""
+0 : file path doesnt exist
+1 : file type errors
+"""
 
 eel.init("APP")
-
 @eel.expose
-def run(filepath):
-     #Importing dataset to build model 
-    dataset=pd.read_csv(filepath,nrows=6)
-    #Taking Dependent and Independent variables
-    columnNames=list(dataset.columns)
-    df=dataset.values
-    df=df.tolist()
+def main(file_pth):
+    file_pth = file_pth[1:-1]
+    data = check_for_errors(file_pth)
+    global myDataFrame
+    myDataFrame=data
+    columns = list(data.columns)
+    global myFeatures
+    myFeatures=columns
+    column_dtypes = np.array(data.dtypes).astype(str).tolist()
+    categorical = len([tp for tp in column_dtypes if tp=='object'])
+    numerical = len(columns) - categorical
+    return np.array(data.head(10)).tolist(), columns, numerical, categorical
 
-    print(dataset)
-    return columnNames,df
-@eel.expose
-def display(fpath,x,y,Algorithm):
-    if len(x)>0 and len(y)>0:
-        dataset=pd.read_csv(fpath)
-        X=dataset[x].values
-        Y=dataset[y].values
-        sc = StandardScaler()
-        X = sc.fit_transform(X)
-        if Algorithm=="LogisticRegression":
-            ob=LogisticRegression(learning_rate=0.05,epochs=1000)
-            ob.fit(X,Y) 
-            path = "./APP"
-            c, a = ob.get_cst_acc()
-            plot_cost_acc(c, a, False, path)
 
-        return 1
+def check_for_errors(file_pth):
+
+    """
+    This part of code checks for for any errors in loading or opening the dataset.
+    """
+    error = -1
+    if not os.path.exists(file_pth):
+        error = 0
+        return error
+
+    file_type = os.path.split(file_pth)[-1].split('.')[-1]
+
+    if file_type == 'csv':
+        data = pd.read_csv(file_pth)
+
+    elif file_type == 'xlsx':
+        data = pd.read_excel(file_pth)
+
     else:
-        return 0 
+        error = 1
+        return error
 
+<<<<<<< HEAD
 eel.start("main.html",size=(1000,700),port=5000)
+||||||| 48f967f
+eel.start("main.html",size=(1000,700))
+=======
+    """
+    This part of code checks for for NaN values in the dataset.
+    """
+>>>>>>> 5c7d96b6ce95c1b79237e6189794c56b49422c9d
 
-    
-    
+    # columns_mask = list(data.isna().sum() == len(data))
+    # data_columns = data.columns
+    # masked_columns = data_columns[columns_mask]
+    # data.drop(labels=masked_columns, axis=1, inplace=True)
+
+    data.dropna(axis=1, inplace=True)
+
+    return data
+
+@eel.expose
+def GetFeatureValues(featureName):
+    print("fname,",featureName)
+    if featureName in myFeatures:
+        print("df,",myDataFrame[featureName])
+        return list(myDataFrame[featureName])
+eel.start("main.html",size=(1000,700))
