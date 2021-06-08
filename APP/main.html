@@ -23,7 +23,7 @@
   <body style="margin: 0px;padding: 10px; ">
     <div class="nav">
       <a href="index.html"><p class="Logo">Logo Here</p></a>
-      <a href="index.html"><p class="navItem">Dashboard</p></a>
+      <a href="index.html"><p class="Active">Dashboard</p></a>
       <p class="navItem">vizualization</p>
       <p class="navItem">Documentation</p>   
    </div>
@@ -38,14 +38,11 @@
             <div class="FileUploadCont">
                 <button id='FileUpload'  data-toggle="modal" data-target="#exampleModalLong">UPLOADFILE</button>
             </div>
-            <div class="dropdown">
-              <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                Dropdown button
+            <div class="dropdown" id="dropdown">
+              <button type="button" class="btn btn-light dropdown-toggle" id="dropdownButton" data-toggle="dropdown">
+                  select feature
               </button>
-              <div class="dropdown-menu">
-                <button class="dropdown-item" onclick="handleBoxPlot('Age')" >Age</button>
-                <button class="dropdown-item active" onclick="handleBoxPlot('EstimatedSalary')">EstimatedSalary</button>
-                <button class="dropdown-item "onclick="handleBoxPlot('Purchased')">Purchased</button>
+              <div class="dropdown-menu" id="targetDropdown">
               </div>
             </div>
             <!-- Button trigger modal -->
@@ -84,11 +81,11 @@
               <div id="myChart1"></div>
             </div>
             <div class="chartItem">
-              <canvas id="myChart2" ></canvas>
+              <div id="myChart2" ></div>
             </div>
           </div>
           <div class="tableContainer">
-            <table class="table table-striped table-dark mb-0">
+            <table class="table table-striped table-light mb-0">
               <thead id="THEAD">
                 <tr>
                   <th scope="col">#</th>

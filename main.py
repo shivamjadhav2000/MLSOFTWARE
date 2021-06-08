@@ -22,8 +22,8 @@ def main(file_pth):
     global myFeatures
     myFeatures=columns
     column_dtypes = np.array(data.dtypes).astype(str).tolist()
-    categorical = len([tp for tp in column_dtypes if tp=='object'])
-    numerical = len(columns) - categorical
+    categorical = [columns[idx] for idx,tp in enumerate(column_dtypes) if tp=='object']
+    numerical =   [columns[idx] for idx,tp in enumerate(column_dtypes) if tp=='int64'] 
     return np.array(data.head(10)).tolist(), columns, numerical, categorical
 
 
@@ -64,8 +64,6 @@ def check_for_errors(file_pth):
 
 @eel.expose
 def GetFeatureValues(featureName):
-    print("fname,",featureName)
     if featureName in myFeatures:
-        print("df,",myDataFrame[featureName])
         return list(myDataFrame[featureName])
 eel.start("main.html",size=(1000,700))
