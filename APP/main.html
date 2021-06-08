@@ -2,7 +2,6 @@
 <html lang="en">
   <head>
     <script  src="eel.js"></script>
-
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
@@ -20,17 +19,18 @@
 
     <title>preprocess</title>
   </head>
-  <body style="margin: 0px;padding: 10px; ">
+  <body class="mainBODY">
     <div class="nav">
-      <a href="index.html"><p class="Logo">Logo Here</p></a>
-      <a href="index.html"><p class="Active">Dashboard</p></a>
-      <p class="navItem">vizualization</p>
-      <p class="navItem">Documentation</p>   
+      <a href="index.html" class="myanchor"><p class="Logo">Logo Here</p></a>
+      <a href="index.html" class="myanchor"><p class="Active">Dashboard</p></a>
+      <p class="navItem" >vizualization</p>
+      <p class="navItem">Documentation</p>
+      <button onclick="handleToggle()">change mode</button>   
    </div>
    <div class="subNav">
-    <a href="main.html"><p class="Active">preprocess</p></a>
-    <a href="Algorithm.html"> <p class="navItem">Algorithm</p></a>
-   <a href="dummy.html"> <p class="navItem">reviewAndAnalysis</p></a>
+    <a href="main.html" class="myanchor"><p class="Active">preprocess</p></a>
+    <a href="Algorithm.html" class="myanchor"> <p class="navItem">Algorithm</p></a>
+   <a href="dummy.html" class="myanchor"> <p class="navItem">reviewAndAnalysis</p></a>
   </div>
     <div class="Container">
       
@@ -85,7 +85,7 @@
             </div>
           </div>
           <div class="tableContainer">
-            <table class="table table-striped table-light mb-0">
+            <table id="targetTable" class="table table-striped table-light mb-0">
               <thead id="THEAD">
                 <tr>
                   <th scope="col">#</th>
@@ -109,7 +109,6 @@
     </div>
     
   
-  <script type="text/javascript" src="js/main.js"></script>
   </body>
 
   

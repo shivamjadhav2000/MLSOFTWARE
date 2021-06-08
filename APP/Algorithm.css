@@ -1,3 +1,21 @@
+/* //anchor tags */
+.myanchor{
+  color:rgb(8, 8, 8);
+  text-decoration:none ;
+}
+.myanchor:hover{
+  color:rgb(8, 8, 8);
+  text-decoration: none;
+}
+.myanchorToggle{
+  color: rgb(253, 253, 253);
+  text-decoration: none;
+}
+.myanchorToggle:hover{
+  color: rgb(253, 253, 253);
+  text-decoration: none;
+
+}
 button{
     cursor: pointer;
     outline-style: none;
@@ -5,7 +23,6 @@ button{
 }
 .Active{
   cursor: pointer;
-  color:white;
   float:left;
   font-size: 16px;
   font-weight: 80;
@@ -13,14 +30,7 @@ button{
   margin-right:20px;
   border-bottom:1px solid white;
 }
-#FileUpload{
-    margin-left:10px;
-    height:60px;
-    font-size: larger;
-    background: -webkit-linear-gradient(45deg,#ee0979,#ff6a00);
-    /* -webkit-background-clip: text; */
-    -webkit-text-fill-color: transparent;
-}
+
 #main1{
   display:none;
 }
@@ -39,89 +49,29 @@ input{
 @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
 @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 
-#inputFile{
-    width:350px;
-    height:55px;
-    border:none;
-    padding:2px 2%;
-    font-size: larger;
-    box-shadow: 5px 0px 20px rgba(248, 247, 247, 0.144);
-    outline-style: none;
-    animation-name: animate2;
-    animation-duration: 3s;
-    border-radius:3px;
-    animation-timing-function: ease-out;
-}
-#submitbtn{
-    text-align: center;
-    border:none;
-    outline-style: none;
-    font-size: larger;
-    padding:15px 5px;
-    border-radius:3px;
-    animation-name: animate1;
-    animation-duration: 3s;
-    animation-timing-function: ease-out;
-}
-@keyframes animate1{
-    from {opacity: 0;}
-    to {opacity: 1;}
-}
-@keyframes animate2{
-    from {opacity: 0}
-    to {opacity: 1}
-}
-
-#Xcolumns{
-  display:none;
-  color:white;
-  text-align: center;
-}
-#Xcolumns button{
-  padding:2% 0px;
-  width:150px;
-  margin:2%;
-  text-align: center;
-  font-size: medium;
-}
-#Ycolumns{
-  display:none;
-  color:white;
-  text-align: center;
-}
-#Ycolumns button{
-  width:150px;
-  padding:2% 0px;
-  margin:2%;
-  text-align: center;
-  font-size: medium;
-}
-#nextbtn{
-  
-  border: 2px solid rgba(255, 255, 255, 0.938);
-  border-radius: 5px;
-  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.404);
-  background-color: #0c0c0c00;
-  color:white;
-
-}
-body {
-  background-color:#0c0c0c; 
+.mainBODY {
+  /* style="margin: 0px;padding: 10px;" */
+  margin: 0px;
+  padding: 10px; 
+  background-color:#fcf4f4; 
+  color: black;
   font-family:Sentinel SSm A,Sentinel SSm B,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
   font-weight: 400;
+ 
+  }
+  .dark-mode {
+    background-color: rgb(8, 2, 2);
+    color: white;
   }
   /* navbar section */
-  a:link { text-decoration: none; }
-a:visited { text-decoration: none; }
-a:hover { text-decoration: none; }
-a:active { text-decoration: none; }
+  
   .nav{
     height:35px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     padding:2px 5px;
-    margin-bottom:10px;
+    margin-bottom:5px;
     border: 1px solid rgba(226, 212, 212, 0.075) ;
 
     }
@@ -139,7 +89,6 @@ background-image: linear-gradient(45deg,#ee0979  ,#ff6a00 );
 
 .navItem{
     cursor: pointer;
-  color:white;
   float:left;
   font-size: 16px;
   font-weight: 80;
@@ -176,7 +125,6 @@ background-image: linear-gradient(45deg,#ee0979  ,#ff6a00 );
   }
   .dashboard{
     cursor: pointer;
-    color:white;
     float:left;
     font-size: 16px;
     font-weight: 80;
@@ -206,8 +154,6 @@ padding:3%;
 padding-top:5px;
 }
 .form{
-color:white;
-background-color:#0c0c0c;
 font-weight: 100;
 font-size: 18px;
 margin:20px;
@@ -222,11 +168,9 @@ border-style: none;
 width:150px;
 height:50px;
 margin: 20px 0px;
-color:white;
 margin-right:10px;
 outline-style: none;
 border-radius:2px;
-background-color: #0c0c0c;
 border:0.5px solid rgb(255, 255, 255);
 }
 .TypeText:hover{
@@ -248,7 +192,6 @@ height:20px;
 display:grid;
 grid-template-columns: 100%;
 text-align: initial;
-background-color:#0c0c0c;
 border-radius: 10px;
 padding:5px 10px;
 }

@@ -2,7 +2,36 @@ let X=[]
 let Y=[]
 let cols
 let fpath=''
+// //general helperfunction 
+function handleToggle(){
+  
+  var element = document.body;
+  var anchorTemp = document.getElementsByTagName("a")
+  var navbarHover =document.getElementsByTagName("h6")
+
+  var targetTable=document.getElementById("targetTable")
+  document.getElementById("dropdownButton").classList.toggle("btn-dark")
+  targetTable.classList.toggle("table-dark")
+   element.classList.toggle("dark-mode");
+   for(let i=0;i<anchorTemp.length;i++){
+     anchorTemp[i].classList.toggle("myanchorToggle")
+   }
+   for(var j=0;j<navbarHover.length;j++){
+    navbarHover[j].classList.toggle("navItemDark")
+   }
+
+}
+
+
+
+
+
 //about chart.js
+
+
+
+
+
 
 //control display of dynamic columns rendering get data from python as all columns 
 function handlecolums(){

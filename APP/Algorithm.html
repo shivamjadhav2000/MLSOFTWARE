@@ -11,17 +11,18 @@
     <script src="/eel.js"></script>
     <title>SNFLOW</title>
   </head>
-  <body style="margin: 0px;padding: 10px;">
+  <body class="mainBODY">
     <div class="nav">
-      <a href="index.html"><p class="Logo">Logo Here</p></a>
-      <a href="index.html"><p class="navItem">Dashboard</p></a>
-      <p class="navItem">vizualization</p>
-      <p class="navItem">Documentation</p>   
+      <a href="index.html" class="myanchor"><p class="Logo">Logo Here</p></a>
+      <a href="index.html" class="myanchor"><p class="Active">Dashboard</p></a>
+      <p class="navItem" >vizualization</p>
+      <p class="navItem">Documentation</p>
+      <button onclick="handleToggle()">change mode</button>   
    </div>
    <div class="subNav">
-    <a href="main.html"><p class="navItem">preprocess</p></a>
-    <a href="Algorithm.html"><p class="Active">Algorithm</p></a>
-    <p class="navItem">reviewAndAnalysis</p>
+    <a href="main.html" class="myanchor"><p class="navItem">preprocess</p></a>
+    <a href="Algorithm.html" class="myanchor"> <p class="Active">Algorithm</p></a>
+   <a href="dummy.html" class="myanchor"> <p class="navItem">reviewAndAnalysis</p></a>
   </div>
     <form class="form" onsubmit="return false;"><br>
           <div class="FormContainer">
@@ -59,6 +60,7 @@
    <div id="temp" style="display:none;text-align: center;">
         
    </div>
+   <script src="js/main.js"></script>
   </body>
   
 </html>
