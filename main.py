@@ -49,15 +49,9 @@ def check_for_errors(file_pth):
         error = 1
         return error
 
-<<<<<<< HEAD
-eel.start("main.html",size=(1000,700),port=5000)
-||||||| 48f967f
-eel.start("main.html",size=(1000,700))
-=======
     """
     This part of code checks for for NaN values in the dataset.
     """
->>>>>>> 5c7d96b6ce95c1b79237e6189794c56b49422c9d
 
     # columns_mask = list(data.isna().sum() == len(data))
     # data_columns = data.columns
