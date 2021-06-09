@@ -151,7 +151,7 @@ input{
   }
   .dark-mode {
     background-color: rgb(8, 2, 2);
-    color: white;
+    color: rgb(255, 255, 255);
   }
   /* navbar section */
 
@@ -313,6 +313,7 @@ cursor: pointer;
     
   }
   .ChartsArea{
+    color:black;
     display: grid;
     grid-template-columns: 50% 50%;
     /* border: 1px solid rgba(226, 212, 212, 0.075) ; */
