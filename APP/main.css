@@ -19,17 +19,24 @@
 /* anchor tag */
 button{
     cursor: pointer;
-    outline-style: none;
+    background: transparent;
+    outline: none !important;
     border:none;
+    outline-style: none;
 }
-.Active{
+button:hover, button:focus {
+  outline: none !important;
+  border: none;
+  text-decoration: none;
+}
+#Active{
   cursor: pointer;
   float:left;
   font-size: 16px;
   font-weight: 80;
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin-right:20px;
-  border-bottom:1px solid white;
+  border-bottom:1px solid rgba(240, 18, 18, 0.884);
 }
 #FileUpload{
     height:60px;
@@ -45,6 +52,7 @@ button{
 }
 #dropdownButton{
   width: 100%;
+  margin: 2%;
 }
 #main1{
   display:none;
@@ -72,10 +80,10 @@ input{
     font-size: larger;
     box-shadow: 5px 0px 20px rgba(248, 247, 247, 0.144);
     outline-style: none;
-    animation-name: animate2;
-    animation-duration: 3s;
+    /* animation-name: animate2;
+    animation-duration: 3s; */
     border-radius:3px;
-    animation-timing-function: ease-out;
+    /* animation-timing-function: ease-out; */
 }
 #submitbtn{
     text-align: center;
@@ -102,7 +110,7 @@ input{
   color:white;
   text-align: center;
 }
-#Xcolumns button{
+#Xcolumns {
   padding:2% 0px;
   width:150px;
   margin:2%;
@@ -114,7 +122,7 @@ input{
   color:white;
   text-align: center;
 }
-#Ycolumns button{
+#Ycolumns {
   width:150px;
   padding:2% 0px;
   margin:2%;
@@ -150,12 +158,17 @@ input{
   .nav{
     height:35px;
     display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding:2px 5px;
+    justify-content: space-between;
     margin-bottom:5px;
-    border:1px solid rgba(226, 212, 212, 0.075) ;
+    border:1px solid rgba(0, 0, 0, 0.075) ;
     }
+    .navLightMode{
+      height:35px;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom:5px;
+      border:1px solid rgba(199, 183, 183, 0.075) ;
+      }
       
     .Logo{
       color: white;
@@ -168,7 +181,7 @@ input{
     background-image: linear-gradient(45deg,#ee0979  ,#ff6a00 );
     }
 .navItem{
-    cursor: pointer;
+  cursor: pointer;
   float:left;
   font-size: 16px;
   font-weight: 80;
@@ -247,6 +260,18 @@ input{
     margin-right:20px;
     border-bottom:1px solid white;
   }
+#navItems{
+  padding: 2px 5px;
+  display:flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+#themeToggle{
+ padding:2px;
+}
+#toggleImg{
+cursor: pointer;
+}
 /* navbar section */
 
 
@@ -258,7 +283,16 @@ input{
   justify-content: flex-start;
   /* align-items: center; */
   padding:2px 5px;
-  border: 1px solid rgba(226, 212, 212, 0.075) ;
+  border: 1px solid rgba(0, 0, 0, 0.075) ;
+}
+.subNavDarkMode{
+  margin-top:5px;
+  height:35px;
+  display: flex;
+  justify-content: flex-start;
+  /* align-items: center; */
+  padding:2px 5px;
+  border: 1px solid rgba(202, 185, 185, 0.075) ;
 }
 /* sub navbar */
 /* main body section */
@@ -268,6 +302,12 @@ input{
   grid-template-columns: 20% 80%;
   }
   .data-visualization-section{
+    
+    border:1px solid rgba(0, 0, 0, 0.075) ;
+
+    
+  }
+  .data-visualization-section-darkMode{
     
     border: 1px solid rgba(226, 212, 212, 0.075) ;
     
@@ -279,9 +319,6 @@ input{
   }
 /* main body section */
 
-button{
-  border: none;
-}
 /* chartsection */
 .chartItem{
   height:380px;
@@ -406,7 +443,7 @@ border-style: none;
 display:none;
 text-align:center;
 }
-#temp button{
+#temp {
   margin:2%;
   padding:10px 25px;
   text-align: center;

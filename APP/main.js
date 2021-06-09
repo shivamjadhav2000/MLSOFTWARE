@@ -2,13 +2,16 @@ let X=[]
 let Y=[]
 let cols
 let fpath=''
-// //general helperfunction 
+ //general helperfunction 
 function handleToggle(){
-  
   var element = document.body;
+  document.getElementById("navCont").classList.toggle("navLightMode")
+  document.getElementById("subNavCont").classList.toggle("subNavDarkMode")
+  document.getElementById("dataBody").classList.toggle("data-visualization-section-darkMode")
   var anchorTemp = document.getElementsByTagName("a")
-  var navbarHover =document.getElementsByTagName("h6")
-
+  var navbarHover =document.getElementsByTagName("p")
+  var FileUploadModal=document.getElementById("FileUploadModal")
+  FileUploadModal.classList.toggle("bg-dark")
   var targetTable=document.getElementById("targetTable")
   document.getElementById("dropdownButton").classList.toggle("btn-dark")
   targetTable.classList.toggle("table-dark")
@@ -17,8 +20,13 @@ function handleToggle(){
      anchorTemp[i].classList.toggle("myanchorToggle")
    }
    for(var j=0;j<navbarHover.length;j++){
-    navbarHover[j].classList.toggle("navItemDark")
-   }
+     if(navbarHover[j].className==="navItem"){
+    navbarHover[j].className="navItemDark"
+     }
+     else {
+      navbarHover[j].className="navItem"
+     }
+  }
 
 }
 
@@ -41,15 +49,14 @@ function handlecolums(){
     let ctx4 = document.getElementById('myChart3').getContext('2d');
     let targetDropdown=document.querySelector("#targetDropdown")
 
-
     fpath=inputf
     eel.main(inputf)((r)=>{
         if(r){
             let rows=r[0]
             let cols=r[1]
             let NumericalValues = r[2]
-            console.log("noOfNumericalValues,",NumericalValues)
             let CategoricalValues = r[3]
+            let formattedCorrelationMatrix=r[4]
             //filling radial graph
             const data = {
                 labels: [
@@ -92,7 +99,7 @@ function handlecolums(){
                 var BoxPlotoptions = {
                     series: [
                     {
-                      name: 'box',
+                      // name: 'box',
                       type: 'boxPlot',
                       data: [
                         {
@@ -115,43 +122,7 @@ function handlecolums(){
                  
                   };
                  var HeatMapOptions = {
-                  series: [{
-                  name: 'Metric1',
-                  data: [11,22, 5,7,11,4]
-                },
-                {
-                  name: 'Metric2',
-                  data: [11,53,78,32,46,12]
-                },
-                {
-                  name: 'Metric3',
-                  data: [11,53,78,32,46,12]
-                },
-                {
-                  name: 'Metric4',
-                  data: [34,56,2,7,5,2]
-                },
-                {
-                  name: 'Metric5',
-                  data: [1,5,2,9,0,1]
-                },
-                {
-                  name: 'Metric6',
-                  data: [1,32,3,4,5,3]
-                },
-                {
-                  name: 'Metric7',
-                  data: [1,32,3,4,5,3]
-                },
-                {
-                  name: 'Metric8',
-                  data: [1,5,2,9,0,1]
-                },
-                {
-                  name: 'Metric9',
-                  data: [1,32,3,4,5,3]
-                }
-                ],
+                  series: formattedCorrelationMatrix,
                   chart: {
                   height: 350,
                   type: 'heatmap',

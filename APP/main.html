@@ -20,15 +20,19 @@
     <title>preprocess</title>
   </head>
   <body class="mainBODY">
-    <div class="nav">
-      <a href="index.html" class="myanchor"><p class="Logo">Logo Here</p></a>
-      <a href="index.html" class="myanchor"><p class="Active">Dashboard</p></a>
-      <p class="navItem" >vizualization</p>
-      <p class="navItem">Documentation</p>
-      <button onclick="handleToggle()">change mode</button>   
+    <div class="nav" id="navCont">
+      <div id="navItems">
+        <a href="index.html" class="myanchor"><h6 class="Logo">Logo Here</h6></a>
+        <a href="index.html" class="myanchor"><p class="navItem">Dashboard</p></a>
+        <p class="navItem" >vizualization</p>
+        <p class="navItem">Documentation</h6>
+      </div>
+       <div id="themeToggle">
+        <img id="toggleImg" onclick="handleToggle()" src="assests/half-moon.png" alt="dark" width=28 height=28>   
+       </div> 
    </div>
-   <div class="subNav">
-    <a href="main.html" class="myanchor"><p class="Active">preprocess</p></a>
+   <div class="subNav" id="subNavCont">
+    <a href="main.html" class="myanchor" ><p id="Active">preprocess</p></a>
     <a href="Algorithm.html" class="myanchor"> <p class="navItem">Algorithm</p></a>
    <a href="dummy.html" class="myanchor"> <p class="navItem">reviewAndAnalysis</p></a>
   </div>
@@ -49,21 +53,21 @@
           <!-- Modal -->
           <div class="modal fade " id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
           <div class="modal-dialog " role="document">
-          <div class="modal-content bg-dark bg-gradient">
+          <div id="FileUploadModal" class="modal-content bg-light bg-gradient">
           <div class="modal-header">
           <h5 class="modal-title text-light"  id="exampleModalLongTitle">Modal title</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
           </button>
           </div>
-          <div class="modal-body">
+          <div class="modal-body ">
           <div id="inputPathCont">
             <input type='text' id="inputFile" placeholder="enter path for dataset"/>
             <!-- <button onclick="handlecolums()" id="submitbtn">extract columns</button> -->
           </div>
           <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button"  class="btn btn-primary " data-dismiss="modal" aria-label="Close" onclick="handlecolums()" id="submitbtn">Save changes</button>
+          <button type="button"  class="btn btn-light " data-dismiss="modal" aria-label="Close" onclick="handlecolums()" id="submitbtn">Save changes</button>
           </div>
           </div>
           </div>
@@ -75,7 +79,7 @@
         </div>
       </div>
      
-      <div class="data-visualization-section">
+      <div class="data-visualization-section" id="dataBody">
           <div class="ChartsArea">
             <div class="chartItem">
               <div id="myChart1"></div>

@@ -10,6 +10,11 @@ myFeatures=None
 0 : file path doesnt exist
 1 : file type errors
 """
+def heat_map(columns, corr):
+    ans = []
+    for idx, value in enumerate(corr):
+        ans.append({'name' : columns[idx], 'data' : [{'x' : x[0], 'y' : x[1]} for x in list(zip(columns, value))]})
+    return ans
 
 eel.init("APP")
 @eel.expose
@@ -18,13 +23,16 @@ def main(file_pth):
     data = check_for_errors(file_pth)
     global myDataFrame
     myDataFrame=data
+    correlationmatrix=myDataFrame.corr().values.tolist()
+    correlationmatrixKeys=list(myDataFrame.corr().to_dict().keys())
+    formattedCorrelationMatrix=heat_map(correlationmatrixKeys,correlationmatrix)
     columns = list(data.columns)
     global myFeatures
     myFeatures=columns
     column_dtypes = np.array(data.dtypes).astype(str).tolist()
     categorical = [columns[idx] for idx,tp in enumerate(column_dtypes) if tp=='object']
     numerical =   [columns[idx] for idx,tp in enumerate(column_dtypes) if tp=='int64'] 
-    return np.array(data.head(10)).tolist(), columns, numerical, categorical
+    return np.array(data.head(10)).tolist(), columns, numerical, categorical,formattedCorrelationMatrix
 
 
 def check_for_errors(file_pth):
@@ -64,6 +72,11 @@ def check_for_errors(file_pth):
 
 @eel.expose
 def GetFeatureValues(featureName):
+    global myFeatures
+    global myDataFrame
     if featureName in myFeatures:
-        return list(myDataFrame[featureName])
+        mask = [3, 4, 1, 6, 7]
+        info = np.array(list(myDataFrame[featureName].describe()))[mask]
+        info[2] = np.median(myDataFrame[featureName])
+        return info.tolist()
 eel.start("main.html",size=(1000,700))

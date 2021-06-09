@@ -1,0 +1,48 @@
+[{
+                  name: 'User ID',
+                  data: [{
+                    x:'User ID',
+                    y:1.0
+                  },
+                  {
+                    x:'Age',
+                    y:-0.0007211041525486256
+                  },
+                  {
+                    x:'EstimatedSalary',
+                    y:0.07109731639296084
+                  },
+                  {
+                    x:'Purchased',
+                    y:0.007120180635727913
+                  }
+                ]
+                },
+                {
+                  name: 'Metric2',
+                  data: [11,53,78,32,46,12]
+                },
+                {
+                  name: 'Metric3',
+                  data: [11,53,78,32,46,12]
+                },
+                {
+                  name: 'Metric4',
+                  data: [34,56,2,7,5,2]
+                },
+                {
+                  name: 'Metric5',
+                  data: [1,5,2,9,0,1]
+                }
+                ]
+
+
+
+                [{name:"x1",data:[{x:"x1",y:11},{x:"x2",y:33}]},     {},       {}]
+
+def GetFeatureValues(featureName):
+    if featureName in myFeatures:
+        mask = [3, 4, 1, 6, 7]
+        info = np.array(list(myDataFrame[featureName].describe()))[mask]
+        info[2] = np.median(myDataFrame[featureName])
+        return info
