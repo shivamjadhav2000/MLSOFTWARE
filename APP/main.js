@@ -37,16 +37,27 @@ function handleToggle(){
 //about chart.js
 
 
-
+//File reupload Cleaning
+function handleFileUploadCleaning(){
+  document.querySelector("#myChart3").innerHTML=""
+  document.getElementById("THEAD").innerHTML=""
+  document.getElementById("TBODY").innerHTML=""
+  document.querySelector("#myChart1").innerHTML=""
+  document.querySelector("#myChart2").innerHTML=""
+  document.querySelector("#targetDropdown").innerHTML=""
+}
 
 
 
 //control display of dynamic columns rendering get data from python as all columns 
-function handlecolums(){
+function handleFileUpload(){
+  handleFileUploadCleaning()
+    document.getElementById("data-visualization-section-Cont").className=""
+
     let inputf=document.getElementById("inputFile").value
     let THEAD=document.getElementById("THEAD")
     let TBODY=document.getElementById("TBODY")
-    let ctx4 = document.getElementById('myChart3').getContext('2d');
+    // let ctx4 = document.getElementById('myChart3').getContext('2d');
     let targetDropdown=document.querySelector("#targetDropdown")
 
     fpath=inputf
@@ -56,28 +67,39 @@ function handlecolums(){
             let cols=r[1]
             let NumericalValues = r[2]
             let CategoricalValues = r[3]
+            let totalValues=r[2].length+r[3].length
             let formattedCorrelationMatrix=r[4]
-            //filling radial graph
-            const data = {
-                labels: [
-                  'NumericalValues',
-                  'CategoricalValues'
-                  ],
-                datasets: [{
-                  label: 'features',
-                  data: [NumericalValues.length,CategoricalValues.length],
-                  backgroundColor: [
-                    'rgb(255, 99, 132)',
-                    'rgb(54, 162, 235)',
-                  ],
-                  hoverOffset: 4
-                }]
-              };
-            const myChart4 =new Chart(ctx4,{
-            type: 'doughnut',
-            data: data
-            }
-            )
+            var options = {
+              series: [(NumericalValues.length/totalValues)*100,(CategoricalValues.length/totalValues)*100],
+              chart: {
+              height: 350,
+              type: 'radialBar',
+            },
+            plotOptions: {
+              radialBar: {
+                dataLabels: {
+                  name: {
+                    fontSize: '22px',
+                  },
+                  value: {
+                    fontSize: '16px',
+                  },
+                  total: {
+                    show: true,
+                    label: 'Total',
+                    formatter: function () {
+                      return totalValues
+                    },
+
+                    
+                  }
+                }
+              }
+            },
+            labels:['NumericalValues','CategoricalValues'] 
+            };
+            var chart = new ApexCharts(document.querySelector("#myChart3"), options);
+            chart.render();
             let theadcontent=`<tr><th scope="col">SNO</th>`
             let tbodycontent=``
             cols.forEach((i,idx)=>{
@@ -138,7 +160,6 @@ function handlecolums(){
                 var chart1 = new ApexCharts(document.querySelector("#myChart1"), BoxPlotoptions);
                 chart1.render();
                 var chart2 = new ApexCharts(document.querySelector("#myChart2"), HeatMapOptions);
-                console.log(document.querySelector("#myChart2"),"chart2=",chart2)
                 chart2.render();
 
                 let temp =``
@@ -154,6 +175,7 @@ function handlecolums(){
                 targetDropdown.innerHTML=temp
 
             })
+            document.getElementById("dropdownContainer").className=""
         }
     
     })

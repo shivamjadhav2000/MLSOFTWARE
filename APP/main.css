@@ -1,3 +1,6 @@
+.hidden{
+  display: none;
+}
 /* //anchor tags */
 .myanchor{
   color:rgb(8, 8, 8);
