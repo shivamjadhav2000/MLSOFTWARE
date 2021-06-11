@@ -13,19 +13,24 @@
 
     <title>dashboard</title>
 </head>
-<body style="margin: 0px;padding: 10px;">
-  <div class="nav">
-    <a href="index.html"><p class="Logo">Logo Here</p></a>
-    <a href="index.html"><p class="Active">Dashboard</p></a>
-    <p class="navItem">vizualization</p>
-    <p class="navItem">Documentation</p>   
+<body class="mainBODY">
+  <div class="nav" id="navCont">
+    <div id="navItems">
+      <a href="index.html" class="myanchor"><h6 class="Logo">GO ML</h6></a>
+      <a href="index.html" class="myanchor"><p id="Active">Dashboard</p></a>
+      <p class="navItem" >vizualization</p>
+      <p class="navItem">Documentation</h6>
+    </div>
+     <div id="themeToggle">
+      <img id="toggleImg" onclick="handleToggle()" src="assests/half-moon.png" alt="dark" width=28 height=28>   
+     </div> 
  </div>
     <div class="mainSection">
-         <div class="SummaryAboutSOftw">
+         <div class="SummaryAboutSOftw" id="section1">
               <h1>SUMMARY ABOUT THE SOFTWARE</h1>
          </div>
-         <div class="sideBarSection">
-          <a href="main.html"> <h1>EXPLORE</h1></a> 
+         <div class="sideBarSection" id="section2">
+          <a href="main.html" class="myanchor"> <h1>EXPLORE</h1></a> 
               <h1>CODE FAQ</h1>
          </div>
     </div>
@@ -34,4 +39,31 @@
 
     </div>
 </body>
+<script>
+  function handleToggle(){
+  var element = document.body;
+  element.classList.toggle("dark-mode");
+  document.getElementById("section1").classList.toggle("SummaryAboutSOftwDark")
+  document.getElementById("section2").classList.toggle("sideBarSectionDark")
+
+  document.getElementById("navCont").classList.toggle("navLightMode")
+  let toggleImg=document.getElementById("toggleImg").src.split("/")
+  toggleImg=toggleImg[toggleImg.length-1]
+  document.getElementById("toggleImg").src=toggleImg==="half-moon.png"?"assests/sunny.png":"assests/half-moon.png"
+  var anchorTemp = document.getElementsByTagName("a")
+  var navbarHover =document.getElementsByTagName("p")
+   for(let i=0;i<anchorTemp.length;i++){
+     anchorTemp[i].classList.toggle("myanchorToggle")
+   }
+   for(var j=0;j<navbarHover.length;j++){
+     if(navbarHover[j].className==="navItem"){
+    navbarHover[j].className="navItemDark"
+     }
+     else {
+      navbarHover[j].className="navItem"
+     }
+  }
+
+}
+</script>
 </html>

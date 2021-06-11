@@ -1,9 +1,10 @@
- //general helperfunction 
- function handleToggle(){
-  
+function handleToggle(){
   var element = document.body;
   document.getElementById("navCont").classList.toggle("navLightMode")
   document.getElementById("subNavCont").classList.toggle("subNavDarkMode")
+  let toggleImg=document.getElementById("toggleImg").src.split("/")
+  toggleImg=toggleImg[toggleImg.length-1]
+  document.getElementById("toggleImg").src=toggleImg==="half-moon.png"?"assests/sunny.png":"assests/half-moon.png"
   var anchorTemp = document.getElementsByTagName("a")
   var navbarHover =document.getElementsByTagName("p")
    element.classList.toggle("dark-mode");

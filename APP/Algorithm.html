@@ -14,7 +14,7 @@
   <body class="mainBODY">
     <div class="nav" id="navCont">
       <div id="navItems">
-        <a href="index.html" class="myanchor"><h6 class="Logo">Logo Here</h6></a>
+        <a href="index.html" class="myanchor"><h6 class="Logo">GO ML</h6></a>
         <a href="index.html" class="myanchor"><p class="navItem">Dashboard</p></a>
         <p class="navItem" >vizualization</p>
         <p class="navItem">Documentation</h6>
@@ -24,46 +24,46 @@
        </div> 
    </div>
    <div class="subNav" id="subNavCont">
-    <a href="main.html" class="myanchor"><p class="navItem">preprocess</p></a>
+    <a href="main.html" class="myanchor" ><p class="navItem">preprocess</p></a>
     <a href="Algorithm.html" class="myanchor"> <p id="Active">Algorithm</p></a>
    <a href="dummy.html" class="myanchor"> <p class="navItem">reviewAndAnalysis</p></a>
   </div>
+  <div>
     <form class="form" onsubmit="return false;"><br>
-          <div class="FormContainer">
-                    <div class="Container">
-                         <div class="childCont">
-                            <p class="headLine">Algorithm</p>
-                            <label><input type="radio" class="TypeRadio" name="Algorithm" value="LogisticRegression"/>
-                            Logistic Regression
-                            </label>
-                            <label><input type="radio" class="TypeRadio" name="Algorithm" value="SupportVectorMachine" />
-                            Support Vector Machine
-                            </label>
-                            <label><input type="radio" class="TypeRadio" name= "Algorithm" value="KNN"/>
-                            K nearest neighbour
-                            </label>
-                            <label><input type="radio" class="TypeRadio" name="Algorithm" value="NaiveBayes"/>
-                            Naive Bayes
-                            </label>
-                          </div>
+      <div class="FormContainer">
+                <div class="Container">
+                     <div class="childCont">
+                        <p class="headLine">Algorithm</p>
+                        <label><input type="radio" class="TypeRadio" name="Algorithm" value="LogisticRegression"/>
+                        Logistic Regression
+                        </label>
+                        <label><input type="radio" class="TypeRadio" name="Algorithm" value="SupportVectorMachine" />
+                        Support Vector Machine
+                        </label>
+                        <label><input type="radio" class="TypeRadio" name= "Algorithm" value="KNN"/>
+                        K nearest neighbour
+                        </label>
+                        <label><input type="radio" class="TypeRadio" name="Algorithm" value="NaiveBayes"/>
+                        Naive Bayes
+                        </label>
                       </div>
+                  </div>
 
-            </div> 
-            <div class="FormContainer">
-              <div id="buildCont"> 
-                <label id="buildContChild">
-                      <button id="Submit" type="submit"  onclick="build()" >
-                        <img src="build.png" id="buildImg" width="50" height="50">
-                      </button>
-                      Build
-                </label>
-               </div>
-              <button class="vizualize" type="submit" onclick="vizualize()">visualize</button>
-            </div>
-        </form>
-   <div id="temp" style="display:none;text-align: center;">
-        
-   </div>
+        </div> 
+        <div class="FormContainer">
+          <div id="buildCont"> 
+            <label id="buildContChild">
+                  <button id="Submit" type="submit"  onclick="build()" >
+                    <img src="build.png" id="buildImg" width="50" height="50">
+                  </button>
+                  Build
+            </label>
+           </div>
+          <button class="vizualize" type="submit" onclick="vizualize()">visualize</button>
+        </div>
+    </form>
+  </div>
+    
    <script src="js/main.js"></script>
   </body>
   
