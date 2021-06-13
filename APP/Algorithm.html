@@ -7,6 +7,11 @@
       name="description"
       content="Web site created using create-react-app"
     />
+    <link rel="stylesheet" href="Bootstrap/bootstrap.min.css" >
+    <script src="Bootstrap/slim.min.js" ></script>
+    <script src="Bootstrap/popper.min.js" ></script>
+    <script src="Bootstrap/bootstrap.min.js" ></script>
+    <script src="apexcharts/apexchart.js"></script>
     <link rel="stylesheet" href="Algorithm.css" />
     <script src="/eel.js"></script>
     <title>SNFLOW</title>
@@ -15,54 +20,82 @@
     <div class="nav" id="navCont">
       <div id="navItems">
         <a href="index.html" class="myanchor"><h6 class="Logo">GO ML</h6></a>
-        <a href="index.html" class="myanchor"><p class="navItem">Dashboard</p></a>
-        <p class="navItem" >vizualization</p>
-        <p class="navItem">Documentation</h6>
+        <a href="index.html" class="myanchor"><span class="navItem">Dashboard</span></a>
+        <a href="#" class="myanchor"><span class="navItem" >vizualization</span></a>
+        <a href="#" class="myanchor"><span class="navItem">Documentation</span></a>
       </div>
        <div id="themeToggle">
         <img id="toggleImg" onclick="handleToggle()" src="assests/half-moon.png" alt="dark" width=28 height=28>   
        </div> 
    </div>
    <div class="subNav" id="subNavCont">
-    <a href="main.html" class="myanchor" ><p class="navItem">preprocess</p></a>
-    <a href="Algorithm.html" class="myanchor"> <p id="Active">Algorithm</p></a>
-   <a href="dummy.html" class="myanchor"> <p class="navItem">reviewAndAnalysis</p></a>
+    <a href="main.html" class="myanchor" ><span class="navItem">preprocess</span></a>
+    <a href="Algorithm.html" class="myanchor"> <span id="Active">Algorithm</span></a>
+   <a href="dummy.html" class="myanchor"> <span class="navItem">reviewAndAnalysis</span></a>
   </div>
-  <div>
-    <form class="form" onsubmit="return false;"><br>
-      <div class="FormContainer">
-                <div class="Container">
-                     <div class="childCont">
-                        <p class="headLine">Algorithm</p>
-                        <label><input type="radio" class="TypeRadio" name="Algorithm" value="LogisticRegression"/>
-                        Logistic Regression
-                        </label>
-                        <label><input type="radio" class="TypeRadio" name="Algorithm" value="SupportVectorMachine" />
-                        Support Vector Machine
-                        </label>
-                        <label><input type="radio" class="TypeRadio" name= "Algorithm" value="KNN"/>
-                        K nearest neighbour
-                        </label>
-                        <label><input type="radio" class="TypeRadio" name="Algorithm" value="NaiveBayes"/>
-                        Naive Bayes
-                        </label>
-                      </div>
-                  </div>
-
-        </div> 
-        <div class="FormContainer">
-          <div id="buildCont"> 
-            <label id="buildContChild">
-                  <button id="Submit" type="submit"  onclick="build()" >
-                    <img src="build.png" id="buildImg" width="50" height="50">
-                  </button>
-                  Build
+  <div class="mainContainer">
+    <form onsubmit="handleAlgo(event)">
+      <div class="Container shadow-lg p-3 mb-5 bg-white rounded">
+            <div class="AlgorithmLabel" ><h6 class="AlgorithmIcon" ><img src="assests/Regression.png" width="25" /></h6>Regression</div>
+            <img style="margin-left:16%" src="assests/curve-arrow.png" width="20" height="20" alt="" />
+            <div class="childCont">
+              <label><input type="radio" class="TypeRadio" name="Algorithm" value="RL"/>
+                Linear  Regression
+              </label>
+              <label><input type="radio" class="TypeRadio" name="Algorithm" value="RR" />
+                Ridge Regression
+              </label>
+              <label><input type="radio" class="TypeRadio" name= "Algorithm" value="RP"/>
+                Polynomial Regression
+              </label>
+            </div>
+            <div class="AlgorithmLabel" ><h6 class="AlgorithmIcon" ><img src="assests/classification.png" width="25" /></h6>Classification</div>
+            <img style="margin-left:16%" src="assests/curve-arrow.png" width="20" height="20" alt="" />
+            <div class="childCont">
+            <label><input type="radio" class="TypeRadio" name="Algorithm" value="CL"/>
+              Logistic   Regression
             </label>
-           </div>
-          <button class="vizualize" type="submit" onclick="vizualize()">visualize</button>
+            <label><input type="radio" class="TypeRadio" name="Algorithm" value="CS" />
+              Support Vector Machine
+            </label>
+            <label><input type="radio" class="TypeRadio" name= "Algorithm" value="CK"/>
+              K Nearest Neigbour
+            </label>
+            </div>
+            <div class="AlgorithmLabel" ><h6 class="AlgorithmIcon" ><img src="assests/clustering.png" width="25" /></h6>Clustering</div>
+
+            <img style="margin-left:16%" src="assests/curve-arrow.png" width="20" height="20" alt="" />
+  
+            <div class="childCont">
+            <label><input type="radio" class="TypeRadio" name="Algorithm" value="K"/>
+              KMeans Clustering
+            </label>   
+            </div>
+            <div style="text-align: right;">
+              <button type="submit" class="btn btn-light ">Proceed</button>
+            </div>
         </div>
-    </form>
-  </div>
+      </form> 
+      <div class="Container1" id="targetData">
+        <div class="synopsisHead ">
+            <img src="assests/LinearReg.png"  width="auto" height="200" />
+            <div>
+              <h1>Linear Regression</h1>
+              <p> linear regression is a linear approach to modelling the relationship between a scalar response and one or more explanatory variables.
+                The case of one explanatory variable is called simple linear regression.
+                for more than one, the process is called multiple linear regression</p>
+            </div>
+            
+        </div>
+        <div class="modelTrainingSection">
+          <div class="modelBase">
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!-- <button onclick="dummyTesting1()">testAlgo</button> -->
     
    <script src="js/main.js"></script>
   </body>
