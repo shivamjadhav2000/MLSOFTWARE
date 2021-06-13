@@ -1,6 +1,8 @@
 function handleToggle(){
   var element = document.body;
   document.getElementById("navCont").classList.toggle("navLightMode")
+  document.getElementById("modelBase").classList.toggle("modelBaseDark")
+
   document.getElementById("subNavCont").classList.toggle("subNavDarkMode")
   let toggleImg=document.getElementById("toggleImg").src.split("/")
   toggleImg=toggleImg[toggleImg.length-1]
@@ -28,5 +30,6 @@ function dummyTesting1(){
 }
 function handleAlgo(event){
   event.preventDefault()
-  console.log(event.target.elements.Algorithm.value)
+  console.log(event.target.Algorithm.value)
+  
 }

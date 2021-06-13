@@ -76,21 +76,25 @@
             </div>
         </div>
       </form> 
-      <div class="Container1" id="targetData">
+      <div class="Container1 " id="targetData">
         <div class="synopsisHead ">
-            <img src="assests/LinearReg.png"  width="auto" height="200" />
+            <div class="synopsisImgCont"><img src="assests/LinearReg.png"  width="140" height="140" /></div>
             <div>
               <h1>Linear Regression</h1>
               <p> linear regression is a linear approach to modelling the relationship between a scalar response and one or more explanatory variables.
                 The case of one explanatory variable is called simple linear regression.
                 for more than one, the process is called multiple linear regression</p>
+                <var>y</var> = <var>m</var><var>x</var> + <var>b</var>
             </div>
             
         </div>
-        <div class="modelTrainingSection">
-          <div class="modelBase">
-
-          </div>
+        <div class="modelTrainingSection shadow-lg  mb-5  rounded">
+          <div class="modelBase" id="modelBase">
+            
+            <label for="customRange3" data-toggle="tooltip" data-placement="top" title="the learning rate is a tuning parameter in an optimization algorithm that determines the step size at each iteration while moving toward a minimum of a loss function">
+              Learning Rate<input type="text" placeholder="enter Learning Rate range from 0-1" />
+            </label>
+            </div>
 
         </div>
       </div>
