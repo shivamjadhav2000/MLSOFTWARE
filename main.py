@@ -3,6 +3,11 @@ import numpy as np
 import pandas as pd
 import os
 from sklearn.preprocessing import StandardScaler, LabelEncoder, OneHotEncoder
+from new_brain.regression import LinearRegression
+from new_brain.classification import LogisticRegression
+from new_brain.classification import KNN
+from new_brain.clustering import KMeans
+from new_brain.classification import SVC
 
 myDataFrame=None
 myFeatures=None
@@ -92,7 +97,6 @@ def get_user_choices(choices): #choices = [] ==>> list of all choices numerical 
     global CHOICES
     CHOICES = choices
     preprocessing_data()
-    print(train_data)
     return train_data.tolist()
 
 def preprocessing_data():
@@ -112,5 +116,23 @@ def preprocessing_data():
 
     global train_data
     train_data = pd.concat([num_data, cat_data], axis=1).values
+    
+@eel.expose
+def dummyTesting():
+  ob=SVC()
+  print("started")
+  ob.fit(np.array(myDataFrame.iloc[:,2:4].values),np.array(myDataFrame.iloc[:,4].values))
+  kk=ob.get_parameters()
+  print("ended")
+  print(kk)
+  return kk
+## helper function to get meta data from availaible dataset
+
+@eel.expose
+def getMetaData(Algo):
+    global CHOICES
+    print("hello","algo=",Algo)
+    if Algo=='RL':
+        return {'datasetSize':len(train_data),'totalSelectedFeatures':CHOICES}
 
 eel.start("main.html",size=(1000,700))

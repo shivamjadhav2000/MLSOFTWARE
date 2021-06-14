@@ -14,10 +14,40 @@ class LogisticRegression(BaseEstimator):
         self.num_features = None
         self.num_samples = None
 
-    def __call__(self, X):
+    def __call__(self, X, y):
+        num_samples = X.shape[0]
+        num_features = X.shape[1]
+        num_classes = np.unique(y).size
+        avg = None
+        y = y.reshape((-1, 1))
+
         Z = np.matmul(self.W, X.T) + self.B
-        A = self.activation(Z).argmax(axis=0)
-        return A
+        A = self.activation(Z)
+
+        loss = self.loss_metric(self.one_hot(y), A)
+
+        y = y.ravel()
+        A = A.argmax(axis=0).ravel()
+
+        score = self.score_metric(y, A)
+        precision = precision_score(y, A, average=avg).tolist()
+        recall = recall_score(y, A, average=avg).tolist()
+        f1 = f1_score(y, A, average=avg).tolist()
+        cf = confusion_matrix(y, A).tolist()
+
+        params = {
+        'num_samples' : num_samples,
+        'num_features' : num_features,
+        'num_classes' : num_classes,
+        'score' : score,
+        'loss' : loss,
+        'f1_score' : f1,
+        'precision' : precision,
+        'recall' : recall,
+        'confusion_matrix' : cf
+        }
+
+        return params
 
     def fit(self, X, Y):
         self.X_copy, self.Y_copy = X, Y
@@ -79,7 +109,7 @@ class LogisticRegression(BaseEstimator):
         return t / np.sum(t, axis=0)
 
     def one_hot(self, Y):
-        unq = len(np.unique(Y))
+        unq = np.max(Y)+1
         encd = np.zeros((unq, Y.size))
         encd[Y, np.arange(Y.size)] = 1
         Y = encd
@@ -106,10 +136,15 @@ class LogisticRegression(BaseEstimator):
             self.X = x_batches
             self.Y = y_batches
 
+    def predict(self, x):
+        Z = np.matmul(self.W, x.T) + self.B
+        A = self.activation(Z)
+        return A
+
     def get_parameters(self):
 
-        avg = 'binary' if np.unique(self.Y_copy).size==2 else None
-        y_pred = self(self.X_copy)
+        avg = None
+        y_pred = self.predict(self.X_copy).argmax(axis=0)
         precision = precision_score(self.Y_copy, y_pred.ravel(), average=avg)
         recall = recall_score(self.Y_copy, y_pred.ravel(), average=avg)
         f1 = f1_score(self.Y_copy, y_pred.ravel(), average=avg)
@@ -122,8 +157,8 @@ class LogisticRegression(BaseEstimator):
         'batch_size' : self.batch_size,
         'learning_rate' : self.lr,
         'epochs' : self.epochs,
-        'losses' : self.losses[-1],
-        'scores' : self.scores[-1],
+        'loss' : self.losses[-1],
+        'score' : self.scores[-1],
         'num_classes' : self.num_classes,
         'num_features' : self.num_features,
         'num_samples' : self.num_samples,

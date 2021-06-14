@@ -17,8 +17,37 @@ class SVC(BaseEstimator):
             'max_iter' : max_iter,
         }
 
-    def __call__(self, x):
-        return self.estimator.predict(self.X)
+    def __call__(self, x, y):
+
+        num_samples = x.shape[0]
+        num_features = x.shape[1]
+        num_classes = np.unique(y).size
+
+        preds =  self.estimator.predict(x)
+
+        score = accuracy_score(y, preds)
+        loss = (1 - score) * 10
+
+        avg = None
+
+        precision = precision_score(y, preds, average=avg).tolist()
+        recall = recall_score(y, preds, average=avg).tolist()
+        f1 = f1_score(y, preds, average=avg).tolist()
+        cf = confusion_matrix(y, preds).tolist()
+
+        params = {
+        'num_samples' : num_samples,
+        'num_features' : num_features,
+        'num_classes' : num_classes,
+        'score' : score,
+        'loss' : loss,
+        'f1_score' : f1,
+        'precision' : precision,
+        'recall' : recall,
+        'confusion_matrix' : cf
+        }
+
+        return params
 
     def fit(self, X, Y):
         self.X = X
@@ -33,14 +62,14 @@ class SVC(BaseEstimator):
         return loss
 
     def score_metric(self):
-        y_pred = self(self.X)
+        y_pred = self.estimator.predict(self.X)
         score = accuracy_score(self.y, y_pred)
         return score
 
     def get_parameters(self):
 
-        avg = 'binary' if np.unique(self.y).size==2 else None
-        y_pred = self(self.X)
+        avg = None
+        y_pred = self.estimator.predict(self.X)
         precision = precision_score(self.y, y_pred.ravel(), average=avg)
         recall = recall_score(self.y, y_pred.ravel(), average=avg)
         f1 = f1_score(self.y, y_pred.ravel(), average=avg)
@@ -53,7 +82,7 @@ class SVC(BaseEstimator):
         self.param_grid['score'] = self.scores
         self.param_grid['precision'] = precision.tolist()
         self.param_grid['recall'] = recall.tolist()
-        self.param_grid['f1'] = f1.tolist()
+        self.param_grid['f1_score'] = f1.tolist()
         self.param_grid['confusion_matrix'] = cf.tolist()
 
         return self.param_grid

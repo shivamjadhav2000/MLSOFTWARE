@@ -1,6 +1,10 @@
+let data=null
+
 function handleToggle(){
   var element = document.body;
   document.getElementById("navCont").classList.toggle("navLightMode")
+  document.getElementById("modelBase").classList.toggle("modelBaseDark")
+
   document.getElementById("subNavCont").classList.toggle("subNavDarkMode")
   let toggleImg=document.getElementById("toggleImg").src.split("/")
   toggleImg=toggleImg[toggleImg.length-1]
@@ -20,4 +24,22 @@ function handleToggle(){
      }
   }
 
+}
+function dummyTesting1(){
+  eel.dummyTesting()(r=>{
+    console.log(r)
+  })
+}
+function handleAlgo(event){
+  event.preventDefault()
+  eel.getMetaData(event.target.Algorithm.value)(r=>{
+    data=r
+    targetSelect=document.getElementsByClassName('custom-select')[0]
+    let temp=`<option selected>Select Dependent Variable</option>`
+    for(let i=0;i<data.totalSelectedFeatures.length;i++){
+      temp+=`<option>${data.totalSelectedFeatures[i]}</option>`
+    }
+    targetSelect.innerHTML=temp
+  })
+  
 }

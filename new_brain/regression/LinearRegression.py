@@ -13,6 +13,23 @@ class LinearRegression(BaseEstimator):
         self.num_features = None
         self.num_samples = None
 
+    def __call__(self, x, y):
+        preds = np.matmul(self.W, x.T) + self.B
+        preds = preds.ravel()
+        loss = self.loss_metric(y, preds)
+        score = self.score_metric(y, preds)
+        num_samples = x.shape[0]
+        num_features = x.shape[1]
+
+        params = {
+        'loss' : loss,
+        'score' : score,
+        'num_features' : self.num_features,
+        'num_samples' : self.num_samples,
+        }
+
+        return params
+
     def fit(self, X, Y):
         self.X = X.T
         self.Y = Y.reshape((1, -1))
@@ -96,5 +113,3 @@ class LinearRegression(BaseEstimator):
         }
 
         return params
-
-

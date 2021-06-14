@@ -14,12 +14,10 @@ class KNN(BaseEstimator):
     K : Hyper parameter for # of neighbours
     """
 
-    def __init__(self, neighbours=11, p=2, get_probs=False):
+    def __init__(self, neighbours=11, p=2):
         super(KNN, self).__init__()
         self.K = neighbours
         self.P = p
-        self.probs = get_probs
-        self.probabilities = []
         self.num_classes = None
         self.num_features = None
         self.num_samples = None
@@ -31,10 +29,9 @@ class KNN(BaseEstimator):
         self.num_samples = self.X.shape[0]
         self.num_classes = np.unique(self.Y).size
 
-    def __call__(self, X):
+    def __call__(self, X, y):
 
         predictions = []
-        self.probabilities = []
         for point in X:
 
             dist = np.power(self.X - point, self.P)
@@ -43,11 +40,33 @@ class KNN(BaseEstimator):
             preds = list(self.Y[preds])
             unq_pts = sorted(np.unique(self.Y))
             predictions.append(np.argmax([preds.count(i) for i in unq_pts]))
-            self.probabilities.append([preds.count(i) / self.K for i in unq_pts])
 
-        self.probabilities = np.array(self.probabilities) * 100
         predictions = np.array(predictions)
-        return predictions if not self.probs else self.probabilities
+        avg = None
+
+        num_samples = X.shape[0]
+        num_features = X.shape[1]
+        num_classes = np.unique(y).size
+        score = accuracy_score(y, predictions)
+        loss = self.loss_metric(y, predictions)
+        precision = precision_score(y, predictions, average=avg).tolist()
+        recall = recall_score(y, predictions, average=avg).tolist()
+        f1 = f1_score(y, predictions, average=avg).tolist()
+        cf = confusion_matrix(y, predictions).tolist()
+
+        params = {
+        'num_samples' : num_samples,
+        'num_features' : num_features,
+        'num_classes' : num_classes,
+        'score' : score,
+        'loss' : loss,
+        'f1_score' : f1,
+        'precision' : precision,
+        'recall' : recall,
+        'confusion_matrix' : cf
+        }
+
+        return params
 
     def get_probs(self):
         return self.probabilities
@@ -60,14 +79,29 @@ class KNN(BaseEstimator):
         return Y
 
     def loss_metric(self, y_true, y_pred):
-        m = y_pred.shape[1]
-        epsilon = 1e-6
-        cost = np.sum( np.sum( y_true * np.log( y_pred+epsilon), axis=0 ) )
-        return -cost/m
+        score = accuracy_score(y_true, y_pred)
+        loss = (1 - score) * 10
+        return loss
+
+    def predict(self, X):
+
+        predictions = []
+        for point in X:
+
+            dist = np.power(self.X - point, self.P)
+            dist = np.power(np.sum(dist, axis=1), 1/self.P)
+            preds = np.argsort(dist)[:self.K]
+            preds = list(self.Y[preds])
+            unq_pts = sorted(np.unique(self.Y))
+            predictions.append(np.argmax([preds.count(i) for i in unq_pts]))
+
+        predictions = np.array(predictions)
+
+        return predictions
 
     def get_parameters(self):
-        y_pred = self(self.X)
-        avg = 'binary' if np.unique(self.Y).size==2 else None
+        y_pred = self.predict(self.X)
+        avg = None
         score = accuracy_score(self.Y, y_pred.ravel())
         precision = precision_score(self.Y, y_pred.ravel(), average=avg)
         recall = recall_score(self.Y, y_pred.ravel(), average=avg)
@@ -92,15 +126,3 @@ class KNN(BaseEstimator):
         }
 
         return params
-
-from sklearn.datasets import load_iris
-from sklearn.preprocessing import StandardScaler
-data = load_iris()
-x = data.data
-y = data.target
-x = StandardScaler().fit_transform(x)
-lr = KNN()
-lr.fit(x, y)
-print(f"precision : {lr.get_parameters()['precision']}")
-print(f"recall : {lr.get_parameters()['recall']}")
-print(f"f1_score : {lr.get_parameters()['f1_score']}")
