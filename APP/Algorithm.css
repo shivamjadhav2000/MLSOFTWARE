@@ -1,3 +1,20 @@
+input{
+  text-decoration: none;
+  outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.212);
+  background-color: transparent;
+  width:100%;
+}
+.inputDark{
+  text-decoration: none;
+  outline: none;
+  border: 1px solid rgba(202, 185, 185, 0.075) ;
+  background-color: transparent;
+  width:100%;
+}
+select{
+  background-color: pink;
+}
 h6{
   display:inline;
 }
@@ -295,6 +312,11 @@ margin-bottom:10px ;
   padding-top: 0; */
 
 }
+.Container1Dark{
+  margin-left:10px ;
+  border: 1px solid rgba(202, 185, 185, 0.075) ;
+  height: 93%;
+}
 .IMGSec{
   margin-right:20px
 }
@@ -337,11 +359,4 @@ margin-bottom:10px ;
   padding-bottom:0px ;
   display: grid;
   grid-template-columns:20% 50% ;
-}
-input{
-  text-decoration: none;
-  outline: none;
-  border: 1px solid rgba(0, 0, 0, 0.212);
-  background-color: transparent;
-  width:100%;
 }

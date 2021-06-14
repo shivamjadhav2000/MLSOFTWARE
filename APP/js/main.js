@@ -4,9 +4,13 @@ function handleToggle(){
   var element = document.body;
   document.getElementById("navCont").classList.toggle("navLightMode")
   document.getElementById("modelBase").classList.toggle("modelBaseDark")
-
+  document.getElementById("targetData").classList.toggle("Container1Dark")
   document.getElementById("subNavCont").classList.toggle("subNavDarkMode")
+  let inputs=document.getElementsByTagName("input")
   let toggleImg=document.getElementById("toggleImg").src.split("/")
+  for(let k=0;k<inputs.length;k++){
+    inputs[k].classList.toggle("inputDark")
+  }
   toggleImg=toggleImg[toggleImg.length-1]
   document.getElementById("toggleImg").src=toggleImg==="half-moon.png"?"assests/sunny.png":"assests/half-moon.png"
   var anchorTemp = document.getElementsByTagName("a")
