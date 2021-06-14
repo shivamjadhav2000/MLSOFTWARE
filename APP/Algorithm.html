@@ -89,38 +89,38 @@
             </div>
         </div>
         <div class="modelTrainingSection">
-          <form class="modelBase" id="modelBase">
+          <form class="modelBase" id="modelBase" onsubmit="handleAlgoSubmit()">
             <div class="modelBaseSection1">
               <label for="customRange3" data-toggle="tooltip" data-placement="top" title="the learning rate is a tuning parameter in an optimization algorithm that determines the step size at each iteration while moving toward a minimum of a loss function">
                 Learning Rate</label>
-                <input type="text" placeholder="enter Learning Rate range from 0-1" /> 
+                <input type="text" placeholder="enter Learning Rate range from 0-1" name="lr" minlength="1" maxlength="4" /> 
             </div> 
             <div class="modelBaseSection1">
               <label for="customRange3" data-toggle="tooltip" data-placement="top" title="the learning rate is a tuning parameter in an optimization algorithm that determines the step size at each iteration while moving toward a minimum of a loss function">
                 epochs </label>
-                <input type="text" placeholder="enter epochs  range from 1-1000" /> 
+                <input type="text" placeholder="enter epochs  range from 1-1000" name="epochs" minlength="1" maxlength="1000"/> 
             </div> 
             <div class="modelBaseSection1">
               <label for="customRange3" data-toggle="tooltip" data-placement="top" title="the learning rate is a tuning parameter in an optimization algorithm that determines the step size at each iteration while moving toward a minimum of a loss function">
                 lambd-Regularization</label>
-                <input type="text" placeholder="enter lambd-Regularization range from 0-1" /> 
+                <input type="text" placeholder="enter lambd-Regularization range from 0-1" name="lambd" minlength="1" maxlength="4" /> 
             </div>
             <div class="modelBaseSection1">
               <label for="customRange3" data-toggle="tooltip" data-placement="top" title="the learning rate is a tuning parameter in an optimization algorithm that determines the step size at each iteration while moving toward a minimum of a loss function">
                 Batch size</label>
-                <input type="text" placeholder="enter Batch size range from 0-1" /> 
+                <input type="text" placeholder="enter Batch size range from 0-1" name="batch_size" minlength="1" /> 
             </div>  
 
             <div class="modelBaseSection1">
               <label for="customRange3" data-toggle="tooltip" data-placement="top" title="the learning rate is a tuning parameter in an optimization algorithm that determines the step size at each iteration while moving toward a minimum of a loss function">
                 Target variable</label>
-                <select class="custom-select">
+                <select class="custom-select bg-transparent" name="Y">
                   
                 </select>            
               </div>  
-              <div style="text-align: left;margin-left:15px ;">
-                <label><img src="assests/build.png" width="50" height="50"></label>
-                <button type="submit" class="btn btn-success" disabled>Proceed</button>
+              <div style="text-align: left;margin:30px 10px;">
+                <button type="button"  onclick="handleBuildSpin()" ><img src="assests/build.png" id="BuildImg" width="50" height="50"></button> <label>Build</label>
+
               </div>
           </form>
 

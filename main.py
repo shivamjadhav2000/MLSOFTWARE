@@ -3,11 +3,7 @@ import numpy as np
 import pandas as pd
 import os
 from sklearn.preprocessing import StandardScaler, LabelEncoder, OneHotEncoder
-from new_brain.regression import LinearRegression
-from new_brain.classification import LogisticRegression
-from new_brain.classification import KNN
-from new_brain.clustering import KMeans
-from new_brain.classification import SVC
+from brain_utils import run
 
 myDataFrame=None
 myFeatures=None
@@ -117,15 +113,18 @@ def preprocessing_data():
     global train_data
     train_data = pd.concat([num_data, cat_data], axis=1).values
     
+## main build function
 @eel.expose
-def dummyTesting():
-  ob=SVC()
-  print("started")
-  ob.fit(np.array(myDataFrame.iloc[:,2:4].values),np.array(myDataFrame.iloc[:,4].values))
-  kk=ob.get_parameters()
-  print("ended")
-  print(kk)
-  return kk
+def build(params,algorithm,y=0):
+    train_results, test_results=run(train_data,params,algorithm)
+    return (train_results, test_results)
+
+
+
+
+
+
+
 ## helper function to get meta data from availaible dataset
 
 @eel.expose

@@ -6,6 +6,7 @@ from new_brain.classification import (
 from new_brain.regression import LinearRegression
 from new_brain.clustering import KMeans
 from sklearn.model_selection import train_test_split
+import numpy as np
 
 ## Trains, Tests and returns results of the user datas
 def run(data, params, algorithm, y=1):

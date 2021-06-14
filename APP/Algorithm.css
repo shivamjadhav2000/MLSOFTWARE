@@ -12,9 +12,7 @@ input{
   background-color: transparent;
   width:100%;
 }
-select{
-  background-color: pink;
-}
+
 h6{
   display:inline;
 }
@@ -36,7 +34,12 @@ h6{
   text-decoration: none;
 
 }
-
+.spinner{
+  animation-name: spin;
+  animation-duration: 5000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear; 
+}
 button{
   cursor: pointer;
   background: transparent;
@@ -65,6 +68,7 @@ text-decoration: none;
 @-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
 @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
 @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
 
 /* body {background-color: powderblue;} */
 .mainBODY {

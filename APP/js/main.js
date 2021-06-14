@@ -1,5 +1,7 @@
 let data=null
-
+let ChosenAlgorithm=''
+let AlgorithmParamsData={}
+let TargetVariable=''
 function handleToggle(){
   var element = document.body;
   document.getElementById("navCont").classList.toggle("navLightMode")
@@ -34,10 +36,34 @@ function dummyTesting1(){
     console.log(r)
   })
 }
+function sleep (time) {
+  return new Promise((resolve) => setTimeout(resolve, time));
+}
+async function handleBuildSpin(){
+ let BuildImg= document.getElementById("BuildImg")
+ AlgorithmParamsData["lr"]=parseFloat(document.forms['modelBase'].elements['lr'].value);
+ AlgorithmParamsData["lambda"]=parseFloat(document.forms['modelBase'].elements['lambd'].value);
+ AlgorithmParamsData["epochs"]=parseInt(document.forms['modelBase'].elements['epochs'].value);
+ AlgorithmParamsData["batch_size"]=parseInt(document.forms['modelBase'].elements['batch_size'].value);
+ TargetVariable=document.forms['modelBase'].elements['Y'].value;
+
+ console.log("value=",AlgorithmParamsData)
+ BuildImg.className="spinner"
+ eel.build(AlgorithmParamsData,ChosenAlgorithm,TargetVariable)((r)=>{
+   console.log(r)
+   BuildImg.className=""
+
+ })
+
+
+}
+
 function handleAlgo(event){
   event.preventDefault()
-  eel.getMetaData(event.target.Algorithm.value)(r=>{
+  ChosenAlgorithm=event.target.Algorithm.value
+  eel.getMetaData(ChosenAlgorithm)(r=>{
     data=r
+    document.getElementsByName("batch_size")[0].placeholder=`enter Batch size range between 1-${data.datasetSize}`
     targetSelect=document.getElementsByClassName('custom-select')[0]
     let temp=`<option selected>Select Dependent Variable</option>`
     for(let i=0;i<data.totalSelectedFeatures.length;i++){
