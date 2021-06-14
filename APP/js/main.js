@@ -6,7 +6,7 @@ function handleToggle(){
   toggleImg=toggleImg[toggleImg.length-1]
   document.getElementById("toggleImg").src=toggleImg==="half-moon.png"?"assests/sunny.png":"assests/half-moon.png"
   var anchorTemp = document.getElementsByTagName("a")
-  var navbarHover =document.getElementsByTagName("p")
+  var navbarHover =document.getElementsByTagName("span")
    element.classList.toggle("dark-mode");
    for(let i=0;i<anchorTemp.length;i++){
      anchorTemp[i].classList.toggle("myanchorToggle")

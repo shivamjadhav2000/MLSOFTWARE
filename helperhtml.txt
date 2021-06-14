@@ -46,3 +46,15 @@
                                 <lable><input class="TypeText" type="text" name="ip3"/>iterations</lable>
                            </div>
                         </div>
+
+                         <div class="FormContainer">
+          <div id="buildCont"> 
+            <label id="buildContChild">
+                  <button id="Submit" type="submit"  onclick="build()" >
+                    <img src="build.png" id="buildImg" width="50" height="50">
+                  </button>
+                  Build
+            </label>
+           </div>
+          <button class="vizualize" type="submit" onclick="vizualize()">visualize</button>
+        </div>
