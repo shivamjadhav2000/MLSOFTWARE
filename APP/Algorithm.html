@@ -35,38 +35,38 @@
    <a href="dummy.html" class="myanchor"> <span class="navItem">reviewAndAnalysis</span></a>
   </div>
   <div class="mainContainer">
-    <form onsubmit="handleAlgo(event)">
+    <form onsubmit="handleAlgorithmFormDisplay(event)">
       <div class="Container shadow-lg p-3 mb-5 bg-white rounded">
             <div class="AlgorithmLabel" ><h6 class="AlgorithmIcon" ><img src="assests/Regression.png" width="25" /></h6>Regression</div>
             <img style="margin-left:16%" src="assests/curve-arrow.png" width="20" height="20" alt="" />
             <div class="childCont">
-              <label><input type="radio" class="TypeRadio" name="Algorithm" value="RL" onchange="handleAlgorithmFormDisplay('RL')"/>
+              <label><input type="radio" class="TypeRadio" name="Algorithm" value="RL" />
                 Linear  Regression
               </label>
-              <label><input type="radio" class="TypeRadio" name="Algorithm" value="RR" onchange="handleAlgorithmFormDisplay('RR')"/>
+              <label><input type="radio" class="TypeRadio" name="Algorithm" value="RR" />
                 Ridge Regression
               </label>
-              <label><input type="radio" class="TypeRadio" name= "Algorithm" value="RP" onchange="handleAlgorithmFormDisplay('RP')"/>
+              <label><input type="radio" class="TypeRadio" name= "Algorithm" value="RP" />
                 Polynomial Regression
               </label>
             </div>
             <div class="AlgorithmLabel" ><h6 class="AlgorithmIcon" ><img src="assests/classification.png" width="25" /></h6>Classification</div>
             <img style="margin-left:16%" src="assests/curve-arrow.png" width="20" height="20" alt="" />
             <div class="childCont">
-            <label><input type="radio" class="TypeRadio" name="Algorithm" value="CL" onchange="handleAlgorithmFormDisplay('CL')">
+            <label><input type="radio" class="TypeRadio" name="Algorithm" value="CL" >
               Logistic   Regression
             </label>
-            <label><input type="radio" class="TypeRadio" name="Algorithm" value="CS" onchange="handleAlgorithmFormDisplay('CS')"/>
+            <label><input type="radio" class="TypeRadio" name="Algorithm" value="CS" />
               Support Vector Machine
             </label>
-            <label><input type="radio" class="TypeRadio" name= "Algorithm" value="CK" onchange="handleAlgorithmFormDisplay('CK')"/>
+            <label><input type="radio" class="TypeRadio" name= "Algorithm" value="CK" />
               K Nearest Neigbour
             </label>
             </div>
             <div class="AlgorithmLabel" ><h6 class="AlgorithmIcon" ><img src="assests/clustering.png" width="25" /></h6>Clustering</div>
             <img style="margin-left:16%" src="assests/curve-arrow.png" width="20" height="20" alt="" />
             <div class="childCont">
-            <label><input type="radio" class="TypeRadio" name="Algorithm" value="K" onchange="handleAlgorithmFormDisplay('K')"/>
+            <label><input type="radio" class="TypeRadio" name="Algorithm" value="K" />
               KMeans Clustering
             </label>   
             </div>
@@ -115,7 +115,7 @@
                   <select class="custom-select bg-transparent" name="Y"> 
                   </select>            
                 </div>  
-                <div style="text-align: left;margin:30px 10px;display: grid;grid-template-columns: 20% 80%;">
+                <div style="text-align: left;margin:30px 10px;display: grid;grid-template-columns: 30% 70%;">
                   <label><button type="button"  onclick="handleBuildSpin()" ><img src="assests/build.png" id="BuildImg" width="50" height="50"></button>Build</label>
                   <div class="alert alert-success" role="alert">
                     Traing is successfull

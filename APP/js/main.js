@@ -48,31 +48,33 @@ async function handleBuildSpin(){
  AlgorithmParamsData["batch_size"]=parseInt(document.forms['modelBase'].elements['batch_size'].value);
  TargetVariable=document.forms['modelBase'].elements['Y'].value;
 
- console.log("value=",AlgorithmParamsData)
  BuildImg.className="spinner"
  eel.build(ChosenAlgorithm,AlgorithmParamsData,TargetVariable)((r)=>{
-   console.log(r)
    BuildImg.className=""
 
  })
 
 
 }
- function handleAlgorithmFormDisplay(Algo){
-   console.log(Algo)
-   let l=['RL','RR','RP','CL','CS','CK','K']
+//  function handleAlgorithmFormDisplay(Algo){
+//    let l=['RL','RR','RP','CL','CS','CK','K']
+//    for(let i=0;i<l.length;i++){
+//      document.getElementById(l[i]).className='hide'
+//    }
+//    document.getElementById(Algo).className='show'
+
+
+//  }
+
+function handleAlgorithmFormDisplay(event){
+  event.preventDefault()
+  let l=['RL','RR','RP','CL','CS','CK','K']
+  ChosenAlgorithm=event.target.Algorithm.value
    for(let i=0;i<l.length;i++){
      document.getElementById(l[i]).className='hide'
-     console.log(document.getElementById(l[i]).className)
    }
-   document.getElementById(Algo).className='show'
+   document.getElementById(ChosenAlgorithm).className='show'
 
-
- }
-
-function handleAlgo(event){
-  event.preventDefault()
-  ChosenAlgorithm=event.target.Algorithm.value
   eel.getMetaData(ChosenAlgorithm)(r=>{
     data=r
     document.getElementsByName("batch_size")[0].placeholder=`enter Batch size range between 1-${data.datasetSize}`

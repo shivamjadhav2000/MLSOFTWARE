@@ -180,7 +180,6 @@ function handleFileUpload(){
 }
 function handleBoxPlot(featureName){
     eel.GetFeatureValues(featureName)((res)=>{
-        console.log(res)
         var options = {
             series: [
             {
