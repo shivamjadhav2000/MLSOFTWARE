@@ -2,10 +2,11 @@ let data=null
 let ChosenAlgorithm=''
 let AlgorithmParamsData={}
 let TargetVariable=''
+
 function handleToggle(){
   var element = document.body;
   document.getElementById("navCont").classList.toggle("navLightMode")
-  document.getElementById("modelBase").classList.toggle("modelBaseDark")
+  // document.getElementById("modelBase").classList.toggle("modelBaseDark")
   document.getElementById("targetData").classList.toggle("Container1Dark")
   document.getElementById("subNavCont").classList.toggle("subNavDarkMode")
   let inputs=document.getElementsByTagName("input")
@@ -42,14 +43,14 @@ function sleep (time) {
 async function handleBuildSpin(){
  let BuildImg= document.getElementById("BuildImg")
  AlgorithmParamsData["lr"]=parseFloat(document.forms['modelBase'].elements['lr'].value);
- AlgorithmParamsData["lambda"]=parseFloat(document.forms['modelBase'].elements['lambd'].value);
+ AlgorithmParamsData["lambd"]=parseFloat(document.forms['modelBase'].elements['lambd'].value);
  AlgorithmParamsData["epochs"]=parseInt(document.forms['modelBase'].elements['epochs'].value);
  AlgorithmParamsData["batch_size"]=parseInt(document.forms['modelBase'].elements['batch_size'].value);
  TargetVariable=document.forms['modelBase'].elements['Y'].value;
 
  console.log("value=",AlgorithmParamsData)
  BuildImg.className="spinner"
- eel.build(AlgorithmParamsData,ChosenAlgorithm,TargetVariable)((r)=>{
+ eel.build(ChosenAlgorithm,AlgorithmParamsData,TargetVariable)((r)=>{
    console.log(r)
    BuildImg.className=""
 
@@ -57,6 +58,17 @@ async function handleBuildSpin(){
 
 
 }
+ function handleAlgorithmFormDisplay(Algo){
+   console.log(Algo)
+   let l=['RL','RR','RP','CL']
+   for(let i=0;i<l.length;i++){
+     document.getElementById(l[i]).className='hide'
+     console.log(document.getElementById(l[i]).className)
+   }
+   document.getElementById(Algo).className='show'
+
+
+ }
 
 function handleAlgo(event){
   event.preventDefault()

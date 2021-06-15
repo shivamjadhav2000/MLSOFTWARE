@@ -61,8 +61,9 @@ function handleFileUpload(){
             let cols=r[1]
             let NumericalValues = r[2]
             let CategoricalValues = r[3]
+            let CCC=["Gender","Purchased","Age","EstimatedSalary"]
             let totalValues=r[2].length+r[3].length
-            eel.get_user_choices(cols)(r=>{console.log("r from main in main.js",r)})
+            eel.get_user_choices(CCC)(r=>{console.log("r from main in main.js",r)})
             let formattedCorrelationMatrix=r[4]
             var options = {
               series: [(NumericalValues.length/totalValues)*100,(CategoricalValues.length/totalValues)*100],

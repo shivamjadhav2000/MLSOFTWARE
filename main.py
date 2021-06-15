@@ -3,11 +3,12 @@ import numpy as np
 import pandas as pd
 import os
 from sklearn.preprocessing import StandardScaler, LabelEncoder, OneHotEncoder
-from brain_utils import run
+from brain_utils import split_data, run
 
 myDataFrame=None
 myFeatures=None
-train_data = None
+DataFrame = None
+X, Y = None, None
 CHOICES = None
 categorical = None
 numerical = None
@@ -35,7 +36,6 @@ def main(file_pth):
     correlationmatrixKeys=list(myDataFrame.corr().to_dict().keys())
     formattedCorrelationMatrix=heat_map(correlationmatrixKeys,correlationmatrix)
     columns = list(data.columns)
-
     myFeatures=columns
     column_dtypes = np.array(data.dtypes).astype(str).tolist()
     categorical = [columns[idx] for idx,tp in enumerate(column_dtypes) if tp=='object']
@@ -93,7 +93,8 @@ def get_user_choices(choices): #choices = [] ==>> list of all choices numerical 
     global CHOICES
     CHOICES = choices
     preprocessing_data()
-    return train_data.tolist()
+    global DataFrame
+    return True
 
 def preprocessing_data():
     global numerical
@@ -107,31 +108,46 @@ def preprocessing_data():
     num_data = myDataFrame[new_nums]
 
     num_data = pd.DataFrame(data=StandardScaler().fit_transform(num_data), columns=num_data.columns)
-    cat_data = data.aggregate(LabelEncoder().fit_transform)
+    cat_data = data[new_cats].aggregate(LabelEncoder().fit_transform)
     cat_data = pd.DataFrame(data=StandardScaler().fit_transform(cat_data), columns=cat_data.columns)
 
-    global train_data
-    train_data = pd.concat([num_data, cat_data], axis=1).values
-    
+    global DataFrame
+    DataFrame = pd.concat([num_data, cat_data], axis=1)
 ## main build function
 @eel.expose
-def build(params,algorithm,y=0):
-    train_results, test_results=run(train_data,params,algorithm)
-    return (train_results, test_results)
+def build(algorithm, params=None, target_feature=0):
+    global DataFrame
+    # if DataFrame:
+    global CHOICES
+    global X
+    global Y
+    X = DataFrame.loc[:, CHOICES].values
+    ## For Supervised Learning (i.e, with Y)
+    if target_feature:
+        target_feature = CHOICES.pop(CHOICES.index(target_feature))
+        Y = DataFrame.loc[:, target_feature].values.ravel()#.astype(int)
+        data = split_data(X, y=Y)
+        train_results, test_results = run(data, params, algorithm)
+        compared_results = dict()
+        for key in test_results.keys():
+            compared_results[key] = (train_results[key], test_results[key])
 
+        return compared_results, train_results, test_results
 
+    ## For Unsupervised Learning (i.e, without Y)
+    else:
+        data = split_data(X)
 
-
-
-
+    # else:
+    #     return('No DataFrame')
 
 ## helper function to get meta data from availaible dataset
 
 @eel.expose
 def getMetaData(Algo):
     global CHOICES
-    print("hello","algo=",Algo)
+    global DataFrame
     if Algo=='RL':
-        return {'datasetSize':len(train_data),'totalSelectedFeatures':CHOICES}
+        return {'datasetSize':len(DataFrame),'totalSelectedFeatures':CHOICES}
 
 eel.start("main.html",size=(1000,700))

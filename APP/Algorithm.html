@@ -40,20 +40,20 @@
             <div class="AlgorithmLabel" ><h6 class="AlgorithmIcon" ><img src="assests/Regression.png" width="25" /></h6>Regression</div>
             <img style="margin-left:16%" src="assests/curve-arrow.png" width="20" height="20" alt="" />
             <div class="childCont">
-              <label><input type="radio" class="TypeRadio" name="Algorithm" value="RL"/>
+              <label><input type="radio" class="TypeRadio" name="Algorithm" value="RL" onchange="handleAlgorithmFormDisplay('RL')"/>
                 Linear  Regression
               </label>
-              <label><input type="radio" class="TypeRadio" name="Algorithm" value="RR" />
+              <label><input type="radio" class="TypeRadio" name="Algorithm" value="RR" onchange="handleAlgorithmFormDisplay('RR')"/>
                 Ridge Regression
               </label>
-              <label><input type="radio" class="TypeRadio" name= "Algorithm" value="RP"/>
+              <label><input type="radio" class="TypeRadio" name= "Algorithm" value="RP" onchange="handleAlgorithmFormDisplay('RP')"/>
                 Polynomial Regression
               </label>
             </div>
             <div class="AlgorithmLabel" ><h6 class="AlgorithmIcon" ><img src="assests/classification.png" width="25" /></h6>Classification</div>
             <img style="margin-left:16%" src="assests/curve-arrow.png" width="20" height="20" alt="" />
             <div class="childCont">
-            <label><input type="radio" class="TypeRadio" name="Algorithm" value="CL"/>
+            <label><input type="radio" class="TypeRadio" name="Algorithm" value="CL" onchange="handleAlgorithmFormDisplay('CL')">
               Logistic   Regression
             </label>
             <label><input type="radio" class="TypeRadio" name="Algorithm" value="CS" />
@@ -78,53 +78,199 @@
         </div>
       </form> 
       <div class="Container1 " id="targetData">
-        <div class="synopsisHead ">
-          <div class="synopsisImgCont"><img src="assests/LinearReg.png"  width="120" height="120" /></div>
-            <div>
-              <h3>Linear Regression</h3>
-              <p> linear regression is a linear approach to modelling the relationship between a scalar response and one or more explanatory variables.
-                The case of one explanatory variable is called simple linear regression.
-                for more than one, the process is called multiple linear regression.</p>
-                <var>y</var> = <var>m</var><var>x</var> + <var>b</var>
-            </div>
-        </div>
-        <div class="modelTrainingSection">
-          <form class="modelBase" id="modelBase" onsubmit="handleAlgoSubmit()">
-            <div class="modelBaseSection1">
-              <label for="customRange3" data-toggle="tooltip" data-placement="top" title="the learning rate is a tuning parameter in an optimization algorithm that determines the step size at each iteration while moving toward a minimum of a loss function">
-                Learning Rate</label>
-                <input type="text" placeholder="enter Learning Rate range from 0-1" name="lr" minlength="1" maxlength="4" /> 
-            </div> 
-            <div class="modelBaseSection1">
-              <label for="customRange3" data-toggle="tooltip" data-placement="top" title="the learning rate is a tuning parameter in an optimization algorithm that determines the step size at each iteration while moving toward a minimum of a loss function">
-                epochs </label>
-                <input type="text" placeholder="enter epochs  range from 1-1000" name="epochs" minlength="1" maxlength="1000"/> 
-            </div> 
-            <div class="modelBaseSection1">
-              <label for="customRange3" data-toggle="tooltip" data-placement="top" title="the learning rate is a tuning parameter in an optimization algorithm that determines the step size at each iteration while moving toward a minimum of a loss function">
-                lambd-Regularization</label>
-                <input type="text" placeholder="enter lambd-Regularization range from 0-1" name="lambd" minlength="1" maxlength="4" /> 
-            </div>
-            <div class="modelBaseSection1">
-              <label for="customRange3" data-toggle="tooltip" data-placement="top" title="the learning rate is a tuning parameter in an optimization algorithm that determines the step size at each iteration while moving toward a minimum of a loss function">
-                Batch size</label>
-                <input type="text" placeholder="enter Batch size range from 0-1" name="batch_size" minlength="1" /> 
-            </div>  
-
-            <div class="modelBaseSection1">
-              <label for="customRange3" data-toggle="tooltip" data-placement="top" title="the learning rate is a tuning parameter in an optimization algorithm that determines the step size at each iteration while moving toward a minimum of a loss function">
-                Target variable</label>
-                <select class="custom-select bg-transparent" name="Y">
-                  
-                </select>            
-              </div>  
-              <div style="text-align: left;margin:30px 10px;">
-                <button type="button"  onclick="handleBuildSpin()" ><img src="assests/build.png" id="BuildImg" width="50" height="50"></button> <label>Build</label>
-
+        <div id="RL" class="hide">
+          <div class="synopsisHead ">
+            <div class="synopsisImgCont"><img src="assests/LinearReg.png"  width="120" height="120" /></div>
+              <div>
+                <h3>Linear Regression</h3>
+                <p> linear regression is a linear approach to modelling the relationship between a scalar response and one or more explanatory variables.
+                  The case of one explanatory variable is called simple linear regression.
+                  for more than one, the process is called multiple linear regression.</p>
+                  <var>y</var> = <var>m</var><var>x</var> + <var>b</var>
               </div>
-          </form>
-
+          </div>
+          <div class="modelTrainingSection">
+            <form class="modelBase" id="modelBase" onsubmit="handleAlgoSubmit()">
+              <div class="modelBaseSection1">
+                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="the learning rate is a tuning parameter in an optimization algorithm that determines the step size at each iteration while moving toward a minimum of a loss function">
+                  Learning Rate</label>
+                  <input type="text" placeholder="enter Learning Rate range from 0.001-0.003" name="lr" minlength="5" maxlength="5" autocomplete="off"/> 
+              </div> 
+              <div class="modelBaseSection1">
+                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="the learning rate is a tuning parameter in an optimization algorithm that determines the step size at each iteration while moving toward a minimum of a loss function">
+                  epochs </label>
+                  <input type="text" placeholder="enter epochs  range from 1-1000" name="epochs" minlength="1" maxlength="1000"autocomplete="off"/> 
+              </div> 
+              <div class="modelBaseSection1">
+                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="the learning rate is a tuning parameter in an optimization algorithm that determines the step size at each iteration while moving toward a minimum of a loss function">
+                  lambd-Regularization</label>
+                  <input type="text" placeholder="enter lambd-Regularization range from 0-1" name="lambd" minlength="1" maxlength="4" autocomplete="off" /> 
+              </div>
+              <div class="modelBaseSection1">
+                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="the learning rate is a tuning parameter in an optimization algorithm that determines the step size at each iteration while moving toward a minimum of a loss function">
+                  Batch size</label>
+                  <input type="text" placeholder="enter Batch size range from 0-1" name="batch_size" minlength="1" autocomplete="off" /> 
+              </div>  
+  
+              <div class="modelBaseSection1">
+                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="the learning rate is a tuning parameter in an optimization algorithm that determines the step size at each iteration while moving toward a minimum of a loss function">
+                  Target variable</label>
+                  <select class="custom-select bg-transparent" name="Y">
+                    
+                  </select>            
+                </div>  
+                <div style="text-align: left;margin:30px 10px;">
+                  <button type="button"  onclick="handleBuildSpin()" ><img src="assests/build.png" id="BuildImg" width="50" height="50"></button> <label>Build</label>
+  
+                </div>
+            </form>
+          </div>
         </div>
+        <div id="RR" class="hide">
+          <div class="synopsisHead ">
+            <div class="synopsisImgCont"><img src="assests/RidgeReg.png"  width="120" height="120" /></div>
+              <div>
+                <h3>Ridge Regression</h3>
+                <p> Ridge Regression is a technique for analyzing multiple regression data that suffer from multicollinearity.
+                  By adding a degree of bias to the regression estimates, ridge regression reduces the standard errors.
+                   It is hoped that the net effect will be to give estimates that are more reliable.</p>
+                  <var>y</var> = <var>m</var><var>x</var> + <var>b</var>
+              </div>
+          </div>
+          <div class="modelTrainingSection">
+            <form class="modelBase" id="modelBase" onsubmit="handleAlgoSubmit()">
+              <div class="modelBaseSection1">
+                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="the learning rate is a tuning parameter in an optimization algorithm that determines the step size at each iteration while moving toward a minimum of a loss function">
+                  Learning Rate</label>
+                  <input type="text" placeholder="enter Learning Rate range from 0.001-0.003" name="lr" minlength="5" maxlength="5" autocomplete="off"/> 
+              </div> 
+              <div class="modelBaseSection1">
+                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="the learning rate is a tuning parameter in an optimization algorithm that determines the step size at each iteration while moving toward a minimum of a loss function">
+                  epochs </label>
+                  <input type="text" placeholder="enter epochs  range from 1-1000" name="epochs" minlength="1" maxlength="1000"autocomplete="off"/> 
+              </div> 
+              <div class="modelBaseSection1">
+                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="the learning rate is a tuning parameter in an optimization algorithm that determines the step size at each iteration while moving toward a minimum of a loss function">
+                  lambd-Regularization</label>
+                  <input type="text" placeholder="enter lambd-Regularization range from 0-1" name="lambd" minlength="1" maxlength="4" autocomplete="off" /> 
+              </div>
+              <div class="modelBaseSection1">
+                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="the learning rate is a tuning parameter in an optimization algorithm that determines the step size at each iteration while moving toward a minimum of a loss function">
+                  Batch size</label>
+                  <input type="text" placeholder="enter Batch size range from 0-1" name="batch_size" minlength="1" autocomplete="off" /> 
+              </div>  
+  
+              <div class="modelBaseSection1">
+                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="the learning rate is a tuning parameter in an optimization algorithm that determines the step size at each iteration while moving toward a minimum of a loss function">
+                  Target variable</label>
+                  <select class="custom-select bg-transparent" name="Y">
+                    
+                  </select>            
+                </div>  
+                <div style="text-align: left;margin:30px 10px;">
+                  <button type="button"  onclick="handleBuildSpin()" ><img src="assests/build.png" id="BuildImg" width="50" height="50"></button> <label>Build</label>
+  
+                </div>
+            </form>
+          </div>
+        </div>
+        <div id="RP" class="hide">
+          <div class="synopsisHead ">
+            <div class="synopsisImgCont"><img src="assests/PolynomialReg.png"  width="120" height="120" /></div>
+              <div>
+                <h3>Polynomial Regression</h3>
+                <p> In statistics, polynomial regression is a form of regression analysis in which the 
+                  relationship between the independent variable x and the dependent variable y is modelled 
+                  as an nth degree polynomial in x.</p>
+                  <var>y <sup>n</sup></var> = <var>m</var><var>x</var> <sup>n</sup> + <var>b</var><sup>n</sup>
+              </div>
+          </div>
+          <div class="modelTrainingSection">
+            <form class="modelBase" id="modelBase" onsubmit="handleAlgoSubmit()">
+              <div class="modelBaseSection1">
+                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="the learning rate is a tuning parameter in an optimization algorithm that determines the step size at each iteration while moving toward a minimum of a loss function">
+                  Learning Rate</label>
+                  <input type="text" placeholder="enter Learning Rate range from 0.001-0.003" name="lr" minlength="5" maxlength="5" autocomplete="off"/> 
+              </div> 
+              <div class="modelBaseSection1">
+                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="the learning rate is a tuning parameter in an optimization algorithm that determines the step size at each iteration while moving toward a minimum of a loss function">
+                  epochs </label>
+                  <input type="text" placeholder="enter epochs  range from 1-1000" name="epochs" minlength="1" maxlength="1000"autocomplete="off"/> 
+              </div> 
+              <div class="modelBaseSection1">
+                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="the learning rate is a tuning parameter in an optimization algorithm that determines the step size at each iteration while moving toward a minimum of a loss function">
+                  lambd-Regularization</label>
+                  <input type="text" placeholder="enter lambd-Regularization range from 0-1" name="lambd" minlength="1" maxlength="4" autocomplete="off" /> 
+              </div>
+              <div class="modelBaseSection1">
+                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="the learning rate is a tuning parameter in an optimization algorithm that determines the step size at each iteration while moving toward a minimum of a loss function">
+                  Batch size</label>
+                  <input type="text" placeholder="enter Batch size range from 0-1" name="batch_size" minlength="1" autocomplete="off" /> 
+              </div>  
+  
+              <div class="modelBaseSection1">
+                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="the learning rate is a tuning parameter in an optimization algorithm that determines the step size at each iteration while moving toward a minimum of a loss function">
+                  Target variable</label>
+                  <select class="custom-select bg-transparent" name="Y">
+                    
+                  </select>            
+                </div>  
+                <div style="text-align: left;margin:30px 10px;">
+                  <button type="button"  onclick="handleBuildSpin()" ><img src="assests/build.png" id="BuildImg" width="50" height="50"></button> <label>Build</label>
+  
+                </div>
+            </form>
+          </div>
+        </div>
+        <div id="CL" class="hide">
+          <div class="synopsisHead ">
+            <div class="synopsisImgCont"><img src="assests/LinearReg.png"  width="120" height="120" /></div>
+              <div>
+                <h3>Logistic Regression</h3>
+                <p> linear regression is a linear approach to modelling the relationship between a scalar response and one or more explanatory variables.
+                  The case of one explanatory variable is called simple linear regression.
+                  for more than one, the process is called multiple linear regression.</p>
+                  <var>y</var> = <var>m</var><var>x</var> + <var>b</var>
+              </div>
+          </div>
+          <div class="modelTrainingSection">
+            <form class="modelBase" id="modelBase" onsubmit="handleAlgoSubmit()">
+              <div class="modelBaseSection1">
+                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="the learning rate is a tuning parameter in an optimization algorithm that determines the step size at each iteration while moving toward a minimum of a loss function">
+                  Learning Rate</label>
+                  <input type="text" placeholder="enter Learning Rate range from 0.001-0.003" name="lr" minlength="5" maxlength="5" autocomplete="off"/> 
+              </div> 
+              <div class="modelBaseSection1">
+                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="the learning rate is a tuning parameter in an optimization algorithm that determines the step size at each iteration while moving toward a minimum of a loss function">
+                  epochs </label>
+                  <input type="text" placeholder="enter epochs  range from 1-1000" name="epochs" minlength="1" maxlength="1000"autocomplete="off"/> 
+              </div> 
+              <div class="modelBaseSection1">
+                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="the learning rate is a tuning parameter in an optimization algorithm that determines the step size at each iteration while moving toward a minimum of a loss function">
+                  lambd-Regularization</label>
+                  <input type="text" placeholder="enter lambd-Regularization range from 0-1" name="lambd" minlength="1" maxlength="4" autocomplete="off" /> 
+              </div>
+              <div class="modelBaseSection1">
+                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="the learning rate is a tuning parameter in an optimization algorithm that determines the step size at each iteration while moving toward a minimum of a loss function">
+                  Batch size</label>
+                  <input type="text" placeholder="enter Batch size range from 0-1" name="batch_size" minlength="1" autocomplete="off" /> 
+              </div>  
+  
+              <div class="modelBaseSection1">
+                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="the learning rate is a tuning parameter in an optimization algorithm that determines the step size at each iteration while moving toward a minimum of a loss function">
+                  Target variable</label>
+                  <select class="custom-select bg-transparent" name="Y">
+                    
+                  </select>            
+                </div>  
+                <div style="text-align: left;margin:30px 10px;">
+                  <button type="button"  onclick="handleBuildSpin()" ><img src="assests/build.png" id="BuildImg" width="50" height="50"></button> <label>Build</label>
+  
+                </div>
+            </form>
+          </div>
+        </div>
+        
       </div>
       
     </div>

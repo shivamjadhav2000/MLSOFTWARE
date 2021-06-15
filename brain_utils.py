@@ -69,5 +69,5 @@ def split_data(X, test_size=.2, y=0):
         return (X_train, X_test)
 
     else:
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, stratify=y)
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size)
         return (X_train, X_test, y_train, y_test)
