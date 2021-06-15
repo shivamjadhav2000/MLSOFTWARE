@@ -60,7 +60,7 @@ async function handleBuildSpin(){
 }
  function handleAlgorithmFormDisplay(Algo){
    console.log(Algo)
-   let l=['RL','RR','RP','CL']
+   let l=['RL','RR','RP','CL','CS','CK','K']
    for(let i=0;i<l.length;i++){
      document.getElementById(l[i]).className='hide'
      console.log(document.getElementById(l[i]).className)

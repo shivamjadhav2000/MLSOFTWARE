@@ -56,19 +56,17 @@
             <label><input type="radio" class="TypeRadio" name="Algorithm" value="CL" onchange="handleAlgorithmFormDisplay('CL')">
               Logistic   Regression
             </label>
-            <label><input type="radio" class="TypeRadio" name="Algorithm" value="CS" />
+            <label><input type="radio" class="TypeRadio" name="Algorithm" value="CS" onchange="handleAlgorithmFormDisplay('CS')"/>
               Support Vector Machine
             </label>
-            <label><input type="radio" class="TypeRadio" name= "Algorithm" value="CK"/>
+            <label><input type="radio" class="TypeRadio" name= "Algorithm" value="CK" onchange="handleAlgorithmFormDisplay('CK')"/>
               K Nearest Neigbour
             </label>
             </div>
             <div class="AlgorithmLabel" ><h6 class="AlgorithmIcon" ><img src="assests/clustering.png" width="25" /></h6>Clustering</div>
-
             <img style="margin-left:16%" src="assests/curve-arrow.png" width="20" height="20" alt="" />
-  
             <div class="childCont">
-            <label><input type="radio" class="TypeRadio" name="Algorithm" value="K"/>
+            <label><input type="radio" class="TypeRadio" name="Algorithm" value="K" onchange="handleAlgorithmFormDisplay('K')"/>
               KMeans Clustering
             </label>   
             </div>
@@ -97,31 +95,31 @@
                   <input type="text" placeholder="enter Learning Rate range from 0.001-0.003" name="lr" minlength="5" maxlength="5" autocomplete="off"/> 
               </div> 
               <div class="modelBaseSection1">
-                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="the learning rate is a tuning parameter in an optimization algorithm that determines the step size at each iteration while moving toward a minimum of a loss function">
+                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="An epoch is a term used in machine learning and indicates the number of passes of the entire training dataset the machine learning algorithm has completed.">
                   epochs </label>
                   <input type="text" placeholder="enter epochs  range from 1-1000" name="epochs" minlength="1" maxlength="1000"autocomplete="off"/> 
               </div> 
               <div class="modelBaseSection1">
-                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="the learning rate is a tuning parameter in an optimization algorithm that determines the step size at each iteration while moving toward a minimum of a loss function">
+                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="The lambda parameter controls the amount of regularization applied to the model. A non-negative value represents a shrinkage parameter, which multiplies P(α,β) in the objective. The larger lambda is, the more the coefficients are shrunk toward zero (and each other)">
                   lambd-Regularization</label>
                   <input type="text" placeholder="enter lambd-Regularization range from 0-1" name="lambd" minlength="1" maxlength="4" autocomplete="off" /> 
               </div>
               <div class="modelBaseSection1">
-                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="the learning rate is a tuning parameter in an optimization algorithm that determines the step size at each iteration while moving toward a minimum of a loss function">
+                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="Batch size is a term used in machine learning and refers to the number of training examples utilized in one iteration. The batch size can be one of three options: ... Usually, a number that can be divided into the total dataset size. stochastic mode: where the batch size is equal to one.">
                   Batch size</label>
                   <input type="text" placeholder="enter Batch size range from 0-1" name="batch_size" minlength="1" autocomplete="off" /> 
               </div>  
-  
               <div class="modelBaseSection1">
-                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="the learning rate is a tuning parameter in an optimization algorithm that determines the step size at each iteration while moving toward a minimum of a loss function">
+                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="target variable AKA Dependent variables are nothing but the variable which holds the phenomena which we are studying.">
                   Target variable</label>
-                  <select class="custom-select bg-transparent" name="Y">
-                    
+                  <select class="custom-select bg-transparent" name="Y"> 
                   </select>            
                 </div>  
-                <div style="text-align: left;margin:30px 10px;">
-                  <button type="button"  onclick="handleBuildSpin()" ><img src="assests/build.png" id="BuildImg" width="50" height="50"></button> <label>Build</label>
-  
+                <div style="text-align: left;margin:30px 10px;display: grid;grid-template-columns: 20% 80%;">
+                  <label><button type="button"  onclick="handleBuildSpin()" ><img src="assests/build.png" id="BuildImg" width="50" height="50"></button>Build</label>
+                  <div class="alert alert-success" role="alert">
+                    Traing is successfull
+                  </div>
                 </div>
             </form>
           </div>
@@ -145,31 +143,28 @@
                   <input type="text" placeholder="enter Learning Rate range from 0.001-0.003" name="lr" minlength="5" maxlength="5" autocomplete="off"/> 
               </div> 
               <div class="modelBaseSection1">
-                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="the learning rate is a tuning parameter in an optimization algorithm that determines the step size at each iteration while moving toward a minimum of a loss function">
+                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="An epoch is a term used in machine learning and indicates the number of passes of the entire training dataset the machine learning algorithm has completed.">
                   epochs </label>
                   <input type="text" placeholder="enter epochs  range from 1-1000" name="epochs" minlength="1" maxlength="1000"autocomplete="off"/> 
               </div> 
               <div class="modelBaseSection1">
-                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="the learning rate is a tuning parameter in an optimization algorithm that determines the step size at each iteration while moving toward a minimum of a loss function">
+                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="The lambda parameter controls the amount of regularization applied to the model. A non-negative value represents a shrinkage parameter, which multiplies P(α,β) in the objective. The larger lambda is, the more the coefficients are shrunk toward zero (and each other)">
                   lambd-Regularization</label>
                   <input type="text" placeholder="enter lambd-Regularization range from 0-1" name="lambd" minlength="1" maxlength="4" autocomplete="off" /> 
               </div>
               <div class="modelBaseSection1">
-                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="the learning rate is a tuning parameter in an optimization algorithm that determines the step size at each iteration while moving toward a minimum of a loss function">
+                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="Batch size is a term used in machine learning and refers to the number of training examples utilized in one iteration. The batch size can be one of three options: ... Usually, a number that can be divided into the total dataset size. stochastic mode: where the batch size is equal to one.">
                   Batch size</label>
                   <input type="text" placeholder="enter Batch size range from 0-1" name="batch_size" minlength="1" autocomplete="off" /> 
               </div>  
-  
               <div class="modelBaseSection1">
-                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="the learning rate is a tuning parameter in an optimization algorithm that determines the step size at each iteration while moving toward a minimum of a loss function">
+                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="target variable AKA Dependent variables are nothing but the variable which holds the phenomena which we are studying.">
                   Target variable</label>
-                  <select class="custom-select bg-transparent" name="Y">
-                    
+                  <select class="custom-select bg-transparent" name="Y">  
                   </select>            
                 </div>  
                 <div style="text-align: left;margin:30px 10px;">
                   <button type="button"  onclick="handleBuildSpin()" ><img src="assests/build.png" id="BuildImg" width="50" height="50"></button> <label>Build</label>
-  
                 </div>
             </form>
           </div>
@@ -193,44 +188,43 @@
                   <input type="text" placeholder="enter Learning Rate range from 0.001-0.003" name="lr" minlength="5" maxlength="5" autocomplete="off"/> 
               </div> 
               <div class="modelBaseSection1">
-                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="the learning rate is a tuning parameter in an optimization algorithm that determines the step size at each iteration while moving toward a minimum of a loss function">
+                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="An epoch is a term used in machine learning and indicates the number of passes of the entire training dataset the machine learning algorithm has completed.">
                   epochs </label>
                   <input type="text" placeholder="enter epochs  range from 1-1000" name="epochs" minlength="1" maxlength="1000"autocomplete="off"/> 
               </div> 
               <div class="modelBaseSection1">
-                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="the learning rate is a tuning parameter in an optimization algorithm that determines the step size at each iteration while moving toward a minimum of a loss function">
+                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="The lambda parameter controls the amount of regularization applied to the model. A non-negative value represents a shrinkage parameter, which multiplies P(α,β) in the objective. The larger lambda is, the more the coefficients are shrunk toward zero (and each other)">
                   lambd-Regularization</label>
                   <input type="text" placeholder="enter lambd-Regularization range from 0-1" name="lambd" minlength="1" maxlength="4" autocomplete="off" /> 
               </div>
               <div class="modelBaseSection1">
-                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="the learning rate is a tuning parameter in an optimization algorithm that determines the step size at each iteration while moving toward a minimum of a loss function">
+                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="Batch size is a term used in machine learning and refers to the number of training examples utilized in one iteration. The batch size can be one of three options: ... Usually, a number that can be divided into the total dataset size. stochastic mode: where the batch size is equal to one.">
                   Batch size</label>
                   <input type="text" placeholder="enter Batch size range from 0-1" name="batch_size" minlength="1" autocomplete="off" /> 
               </div>  
-  
               <div class="modelBaseSection1">
-                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="the learning rate is a tuning parameter in an optimization algorithm that determines the step size at each iteration while moving toward a minimum of a loss function">
+                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="target variable AKA Dependent variables are nothing but the variable which holds the phenomena which we are studying.">
                   Target variable</label>
-                  <select class="custom-select bg-transparent" name="Y">
-                    
+                  <select class="custom-select bg-transparent" name="Y">   
                   </select>            
                 </div>  
                 <div style="text-align: left;margin:30px 10px;">
                   <button type="button"  onclick="handleBuildSpin()" ><img src="assests/build.png" id="BuildImg" width="50" height="50"></button> <label>Build</label>
-  
                 </div>
             </form>
           </div>
         </div>
         <div id="CL" class="hide">
           <div class="synopsisHead ">
-            <div class="synopsisImgCont"><img src="assests/LinearReg.png"  width="120" height="120" /></div>
+            <div class="synopsisImgCont"><img src="assests/LogisticReg.png"  width="120" height="120" /></div>
               <div>
                 <h3>Logistic Regression</h3>
-                <p> linear regression is a linear approach to modelling the relationship between a scalar response and one or more explanatory variables.
-                  The case of one explanatory variable is called simple linear regression.
-                  for more than one, the process is called multiple linear regression.</p>
-                  <var>y</var> = <var>m</var><var>x</var> + <var>b</var>
+                <p> Logistic regression is a statistical model that in its basic form uses a logistic function to 
+                  model a binary dependent variable, although many more complex extensions exist. 
+                  In regression analysis, logistic regression (or logit regression) is estimating the parameters of a 
+                  logistic model (a form of binary regression)</p>
+                  <!-- <var>y</var> = <var>m</var><var>x</var> + <var>b</var>
+                  <var>f(Y)</var> -->
               </div>
           </div>
           <div class="modelTrainingSection">
@@ -241,36 +235,142 @@
                   <input type="text" placeholder="enter Learning Rate range from 0.001-0.003" name="lr" minlength="5" maxlength="5" autocomplete="off"/> 
               </div> 
               <div class="modelBaseSection1">
-                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="the learning rate is a tuning parameter in an optimization algorithm that determines the step size at each iteration while moving toward a minimum of a loss function">
+                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="An epoch is a term used in machine learning and indicates the number of passes of the entire training dataset the machine learning algorithm has completed.">
                   epochs </label>
                   <input type="text" placeholder="enter epochs  range from 1-1000" name="epochs" minlength="1" maxlength="1000"autocomplete="off"/> 
               </div> 
               <div class="modelBaseSection1">
-                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="the learning rate is a tuning parameter in an optimization algorithm that determines the step size at each iteration while moving toward a minimum of a loss function">
+                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="The lambda parameter controls the amount of regularization applied to the model. A non-negative value represents a shrinkage parameter, which multiplies P(α,β) in the objective. The larger lambda is, the more the coefficients are shrunk toward zero (and each other)">
                   lambd-Regularization</label>
                   <input type="text" placeholder="enter lambd-Regularization range from 0-1" name="lambd" minlength="1" maxlength="4" autocomplete="off" /> 
               </div>
               <div class="modelBaseSection1">
-                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="the learning rate is a tuning parameter in an optimization algorithm that determines the step size at each iteration while moving toward a minimum of a loss function">
+                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="Batch size is a term used in machine learning and refers to the number of training examples utilized in one iteration. The batch size can be one of three options: ... Usually, a number that can be divided into the total dataset size. stochastic mode: where the batch size is equal to one.">
                   Batch size</label>
                   <input type="text" placeholder="enter Batch size range from 0-1" name="batch_size" minlength="1" autocomplete="off" /> 
               </div>  
-  
               <div class="modelBaseSection1">
-                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="the learning rate is a tuning parameter in an optimization algorithm that determines the step size at each iteration while moving toward a minimum of a loss function">
+                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="target variable AKA Dependent variables are nothing but the variable which holds the phenomena which we are studying.">
                   Target variable</label>
-                  <select class="custom-select bg-transparent" name="Y">
-                    
+                  <select class="custom-select bg-transparent" name="Y">                 
                   </select>            
                 </div>  
                 <div style="text-align: left;margin:30px 10px;">
                   <button type="button"  onclick="handleBuildSpin()" ><img src="assests/build.png" id="BuildImg" width="50" height="50"></button> <label>Build</label>
-  
                 </div>
             </form>
           </div>
         </div>
-        
+        <div id="CS" class="hide">
+          <div class="synopsisHead ">
+            <div class="synopsisImgCont"><img src="assests/SVM.png"  width="140" height="140" /></div>
+              <div>
+                <h3>Support Vector Machine</h3>
+                <p> “Support Vector Machine” (SVM) is a supervised machine learning algorithm which can be used for both classification or regression challenges.
+                  Support Vectors are simply the co-ordinates of individual observation. The SVM classifier is a frontier which best segregates the two classes 
+                   (hyper-plane/ line).</p>
+                  <!-- <var>y</var> = <var>m</var><var>x</var> + <var>b</var>
+                  <var>f(Y)</var> -->
+              </div>
+          </div>
+          <div class="modelTrainingSection">
+            <form class="modelBase" id="modelBase" onsubmit="handleAlgoSubmit()">
+              <div class="modelBaseSection1">
+                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="target variable AKA Dependent variables are nothing but the variable which holds the phenomena which we are studying.">
+                  Kernel</label>
+                  <select class="custom-select bg-transparent" name="kernel">   
+                    <option>rbf</option>
+                    <option>sigmoid</option>
+                    <option>polynomial</option>
+                  </select>            
+                </div> 
+              <div class="modelBaseSection1">
+                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="An epoch is a term used in machine learning and indicates the number of passes of the entire training dataset the machine learning algorithm has completed.">
+                  epoch </label>
+                  <input type="text" placeholder="enter degree range from 1-1000" name="epoch" minlength="1" maxlength="4"autocomplete="off"/> 
+              </div> 
+              <div class="modelBaseSection1">
+                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="The lambda parameter controls the amount of regularization applied to the model. A non-negative value represents a shrinkage parameter, which multiplies P(α,β) in the objective. The larger lambda is, the more the coefficients are shrunk toward zero (and each other)">
+                  degree</label>
+                  <input type="text" placeholder="enter degree range from 1-n" name="degree" minlength="1" maxlength="5" autocomplete="off" /> 
+              </div>
+              <div class="modelBaseSection1">
+                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="Batch size is a term used in machine learning and refers to the number of training examples utilized in one iteration. The batch size can be one of three options: ... Usually, a number that can be divided into the total dataset size. stochastic mode: where the batch size is equal to one.">
+                  Batch size</label>
+                  <input type="text" placeholder="enter Batch size range from 0-1" name="batch_size" minlength="1" autocomplete="off" /> 
+              </div>  
+              <div class="modelBaseSection1">
+                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="target variable AKA Dependent variables are nothing but the variable which holds the phenomena which we are studying.">
+                  Target variable</label>
+                  <select class="custom-select bg-transparent" name="Y">                 
+                  </select>            
+                </div>  
+                <div style="text-align: left;margin:30px 10px;">
+                  <button type="button"  onclick="handleBuildSpin()" ><img src="assests/build.png" id="BuildImg" width="50" height="50"></button> <label>Build</label>
+                </div>
+            </form>
+          </div>
+        </div>
+        <div id="CK" class="hide">
+          <div class="synopsisHead ">
+            <div class="synopsisImgCont"><img src="assests/KNN.png"  width="120" height="120" /></div>
+              <div>
+                <h3>K Nearest Neigbour</h3>
+                <p> The k-nearest neighbors (KNN) algorithm is a simple, easy-to-implement supervised machine learning algorithm 
+                  that can be used to solve both classification and regression problems. </p>
+              </div>
+          </div>
+          <div class="modelTrainingSection">
+            <form class="modelBase" id="modelBase" onsubmit="handleAlgoSubmit()">
+              <div class="modelBaseSection1">
+                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="An epoch is a term used in machine learning and indicates the number of passes of the entire training dataset the machine learning algorithm has completed.">
+                  N number of neighbors  </label>
+                  <input type="text" placeholder="enter degree range from 1-1000" name="K" minlength="1" maxlength="4"autocomplete="off"/> 
+              </div> 
+              <div class="modelBaseSection1">
+                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="Batch size is a term used in machine learning and refers to the number of training examples utilized in one iteration. The batch size can be one of three options: ... Usually, a number that can be divided into the total dataset size. stochastic mode: where the batch size is equal to one.">
+                  Minkowski Distance</label>
+                  <input type="text" placeholder="Minkowski Distance  - [1 - n]" name="P" minlength="1" autocomplete="off" /> 
+              </div>    
+                <div style="text-align: left;margin:30px 10px;">
+                  <button type="button"  onclick="handleBuildSpin()" ><img src="assests/build.png" id="BuildImg" width="50" height="50"></button> <label>Build</label>
+                </div>
+            </form>
+          </div>
+        </div>
+        <div id="K" class="hide">
+          <div class="synopsisHead ">
+            <div class="synopsisImgCont"><img src="assests/kmeans.png"  width="120" height="120" /></div>
+              <div>
+                <h3>K Means Clustering</h3>
+                <p> The k-nearest neighbors (KNN) algorithm is a simple, easy-to-implement supervised machine learning algorithm 
+                  that can be used to solve both classification and regression problems. </p>
+              </div>
+          </div>
+          <div class="modelTrainingSection">
+            <form class="modelBase" id="modelBase" onsubmit="handleAlgoSubmit()">
+               
+              <div class="modelBaseSection1">
+                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="An epoch is a term used in machine learning and indicates the number of passes of the entire training dataset the machine learning algorithm has completed.">
+                  max_iters </label>
+                  <input type="text" placeholder="enter degree range from 1-1000" name="max_iters" minlength="1" maxlength="4"autocomplete="off"/> 
+              </div> 
+              <div class="modelBaseSection1">
+                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="An epoch is a term used in machine learning and indicates the number of passes of the entire training dataset the machine learning algorithm has completed.">
+                  number of clusters </label>
+                  <input type="text" placeholder="enter degree range from 1-1000" name="K" minlength="1" maxlength="4"autocomplete="off"/> 
+              </div> 
+              <div class="modelBaseSection1">
+                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="Batch size is a term used in machine learning and refers to the number of training examples utilized in one iteration. The batch size can be one of three options: ... Usually, a number that can be divided into the total dataset size. stochastic mode: where the batch size is equal to one.">
+                  number of trials</label>
+                  <input type="text" placeholder="Minkowski Distance  - [1 - n]" name="trials" minlength="1" autocomplete="off" /> 
+              </div>    
+                <div style="text-align: left;margin:30px 10px;">
+                  <button type="button"  onclick="handleBuildSpin()" ><img src="assests/build.png" id="BuildImg" width="50" height="50"></button> <label>Build</label>
+                </div>
+            </form>
+          </div>
+        </div>
       </div>
       
     </div>
