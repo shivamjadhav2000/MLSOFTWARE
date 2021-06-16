@@ -127,12 +127,13 @@ def preprocessing_data(target=0, algo='C'):
 ## main build function
 @eel.expose
 def build(algorithm, params=None, target_feature=0):
-
+    print("inside build algo=",algorithm,"params=",params)
     global DataFrame
     global CHOICES
     global X
     global Y
     global build_stat
+    print("parms = ",params,"algorithm = ",algorithm,"target_features = ",target_feature)
     ## For Supervised Learning (i.e, with Y)
     if target_feature != 0:
         if build_stat:
@@ -149,7 +150,6 @@ def build(algorithm, params=None, target_feature=0):
         compared_results = dict()
         for key in test_results.keys():
             compared_results[key] = (train_results[key], test_results[key])
-        print(compared_results)
 
         return compared_results, train_results, test_results
 

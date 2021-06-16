@@ -40,21 +40,22 @@ function sleep (time) {
   return new Promise((resolve) => setTimeout(resolve, time));
 }
 async function handleBuildSpinR(Algo){
-  if(Algo!='RL'){
-    AlgorithmParamsData["degree"]=3
-  }
+  AlgorithmParamsData={}
  let BuildImg= document.getElementById(`BuildImg${Algo}`)
  let targetForm=document.forms[`modelBase${Algo}`]
  let lr=targetForm.elements['lr'].value
  let lambd=targetForm.elements['lambd'].value
  let epochs=targetForm.elements['epochs'].value
  let batch_size=targetForm.elements[`batch_size${Algo}`].value
+ if(Algo!='RL'){
+   let degree=targetForm.elements['degree'].value
+  AlgorithmParamsData["degree"]=degree.length?parseInt(degree):3
+}
  AlgorithmParamsData["lr"]=lr.length?parseFloat(lr):parseFloat('0.001');
  AlgorithmParamsData["lambd"]=lambd.length?parseFloat(lambd):parseFloat('0.2');
  AlgorithmParamsData["epochs"]=epochs.length?parseInt(epochs):parseInt('100');
  AlgorithmParamsData["batch_size"]=batch_size.length?parseInt(batch_size):parseInt('24');
  console.log(AlgorithmParamsData)
-//  AlgorithmParamsData["degree"]=3
  TargetVariable=document.forms[`modelBase${Algo}`].elements['Y'].value;
  BuildImg.className="spinner"
  eel.build(ChosenAlgorithm,AlgorithmParamsData,TargetVariable)((r)=>{
@@ -63,36 +64,62 @@ async function handleBuildSpinR(Algo){
     console.log(r)
  })
 }
-async function handleBuildSpinCL(){
+async function handleBuildSpinK(Algo){
+  AlgorithmParamsData={}
+  let BuildImg= document.getElementById(`BuildImg${Algo}`)
+  let targetForm=document.forms[`modelBase${Algo}`]
+  let degree=targetForm.elements['degree'].value
+  let K=targetForm.elements['K'].value
+  let trials =targetForm.elements['trials'].value
+  let max_iters=targetForm.elements['max_iters'].value
+  AlgorithmParamsData["K"]=K.length?parseInt(K):3
+  AlgorithmParamsData["trials"]=trials.length?parseInt(trials):3
+  AlgorithmParamsData["max_iters"]=max_iters.length?parseInt(max_iters):1
+  AlgorithmParamsData["degree"]=degree.length?parseInt(degree):3
 
-  let BuildImg= document.getElementById("BuildImg2")
-  let lr=document.forms['modelBaseCL'].elements['lr'].value
-  let lambd=document.forms['modelBaseCL'].elements['lambd'].value
-  let epochs=document.forms['modelBaseCL'].elements['epochs'].value
-  let batch_size=document.forms['modelBaseCL'].elements['batch_sizeCL'].value
-  AlgorithmParamsData["lr"]=lr.length?parseFloat(lr):parseFloat('0.001');
-  AlgorithmParamsData["lambd"]=lambd.length?parseFloat(lambd):parseFloat('0.2');
-  AlgorithmParamsData["epochs"]=epochs.length?parseInt(epochs):parseInt('100');
-  AlgorithmParamsData["batch_size"]=batch_size.length?parseInt(batch_size):parseInt('24');
-  AlgorithmParamsData["degree"]=3
- //  AlgorithmParamsData["degree"]=3
-  TargetVariable=document.forms['modelBaseCL'].elements['Y'].value;
-  BuildImg.className="spinner"
-  eel.build(ChosenAlgorithm,AlgorithmParamsData,TargetVariable)((r)=>{
-    console.log("hiiii")
-    console.log(r)
+  eel.build(ChosenAlgorithm,AlgorithmParamsData,TargetVariable=0)((r)=>{
+    console.log("build responsce=",r)
     BuildImg.className=""
   })
+
+
+}
+async function handleBuildSpinC(Algo){
+  AlgorithmParamsData={}
+  let BuildImg= document.getElementById(`BuildImg${Algo}`)
+  let targetForm=document.forms[`modelBase${Algo}`]
+  let degree=targetForm.elements['degree'].value
+  BuildImg.className="spinner"
+  if(Algo==='CK'){
+  let K=targetForm.elements['K'].value
+  let P=targetForm.elements['P'].value
+  AlgorithmParamsData["K"]=K.length?parseInt(K):9;
+  AlgorithmParamsData["P"]=P.length?parseInt(P):2;
+  AlgorithmParamsData["degree"]= degree.length?parseInt(degree):3
+}
+  else if(Algo==='CS'){
+    console.log("inside cs")
+    AlgorithmParamsData={}
+    let C=targetForm.elements['C'].value
+    let kernel =targetForm.elements['kernel'].value
+    let gamma =targetForm.elements['gamma'].value
+    let class_weight =targetForm.elements['class_weight'].value
+    let max_iters =targetForm.elements['max_iters'].value
+    AlgorithmParamsData["C"]=C.length?parseInt(C):1
+    AlgorithmParamsData["kernel"]=kernel.length?kernel:'rbf'
+    AlgorithmParamsData["gamma"]=gamma.length?gamma:'scale'
+    AlgorithmParamsData["class_weight"]=class_weight.length?class_weight:'None'
+    AlgorithmParamsData["degree"]= degree.length?parseInt(degree):3
+    AlgorithmParamsData["max_iters"]=max_iters.length?parseInt(max_iters):1
+    
+  }
+  eel.build(ChosenAlgorithm,AlgorithmParamsData,TargetVariable=0)((r)=>{
+    console.log("build responsce=",r)
+    BuildImg.className=""
+  })
+  
  }
-//  function handleAlgorithmFormDisplay(Algo){
-//    let l=['RL','RR','RP','CL','CS','CK','K']
-//    for(let i=0;i<l.length;i++){
-//      document.getElementById(l[i]).className='hide'
-//    }
-//    document.getElementById(Algo).className='show'
 
-
-//  }
 
 function handleAlgorithmFormDisplay(event){
   event.preventDefault()
@@ -102,17 +129,18 @@ function handleAlgorithmFormDisplay(event){
      document.getElementById(l[i]).className='hide'
    }
    document.getElementById(ChosenAlgorithm).className='show'
+  if (ChosenAlgorithm==='RL' || ChosenAlgorithm==='RR' || ChosenAlgorithm==='RP' || ChosenAlgorithm==='CL' ){
+    eel.getMetaData(ChosenAlgorithm)(r=>{
+      data=r
+      document.getElementsByName(`batch_size${ChosenAlgorithm}`)[0].placeholder=`enter Batch size range between 1-${data.datasetSize}`
+      targetSelect=document.getElementById(`Select${ChosenAlgorithm}`)
+      let temp=`<option selected>Select Dependent Variable</option>`
+      for(let i=0;i<data.totalSelectedFeatures.length;i++){
+        temp+=`<option>${data.totalSelectedFeatures[i]}</option>`
+      }
+      targetSelect.innerHTML=temp
+    })
+  }
   
-
-  eel.getMetaData(ChosenAlgorithm)(r=>{
-    data=r
-    document.getElementsByName(`batch_size${ChosenAlgorithm}`)[0].placeholder=`enter Batch size range between 1-${data.datasetSize}`
-    targetSelect=document.getElementById(`Select${ChosenAlgorithm}`)
-    let temp=`<option selected>Select Dependent Variable</option>`
-    for(let i=0;i<data.totalSelectedFeatures.length;i++){
-      temp+=`<option>${data.totalSelectedFeatures[i]}</option>`
-    }
-    targetSelect.innerHTML=temp
-  })
 
 }
