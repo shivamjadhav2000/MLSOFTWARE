@@ -12,6 +12,7 @@ X, Y = None, None
 CHOICES = None
 categorical = None
 numerical = None
+build_stat = True
 """
 0 : file path doesnt exist
 1 : file type errors
@@ -69,11 +70,6 @@ def check_for_errors(file_pth):
     This part of code checks for for NaN values in the dataset.
     """
 
-    # columns_mask = list(data.isna().sum() == len(data))
-    # data_columns = data.columns
-    # masked_columns = data_columns[columns_mask]
-    # data.drop(labels=masked_columns, axis=1, inplace=True)
-
     data.dropna(axis=1, inplace=True)
 
     return data
@@ -91,63 +87,88 @@ def GetFeatureValues(featureName):
 @eel.expose
 def get_user_choices(choices): #choices = [] ==>> list of all choices numerical union categoricals
     global CHOICES
-    CHOICES = choices
-    preprocessing_data()
     global DataFrame
+    CHOICES = choices
+    # preprocessing_data()
     return True
 
-def preprocessing_data():
+def preprocessing_data(target=0, algo='C'):
     global numerical
     global categorical
     global CHOICES
-    data = myDataFrame[CHOICES]
+    global DataFrame
+    global myDataFrame
+
     new_cats = [cat for cat in CHOICES if cat in categorical]
     new_nums = [num for num in CHOICES if num in numerical]
-
     cat_data = myDataFrame[new_cats]
     num_data = myDataFrame[new_nums]
 
-    num_data = pd.DataFrame(data=StandardScaler().fit_transform(num_data), columns=num_data.columns)
-    cat_data = data[new_cats].aggregate(LabelEncoder().fit_transform)
-    cat_data = pd.DataFrame(data=StandardScaler().fit_transform(cat_data), columns=cat_data.columns)
+    if target != 0:
+        # target = new_cats.pop(new_cats.index(target)) if target in new_cats else new_nums.pop(new_nums.index(target))
+        num_data = pd.DataFrame(data=StandardScaler().fit_transform(num_data), columns=num_data.columns)
+        cat_data = myDataFrame[new_cats].aggregate(LabelEncoder().fit_transform)
+        cat_data = pd.DataFrame(data=StandardScaler().fit_transform(cat_data), columns=cat_data.columns)
+        DataFrame = pd.concat([num_data, cat_data], axis=1)
+        target_feature = target
 
-    global DataFrame
-    DataFrame = pd.concat([num_data, cat_data], axis=1)
+        if algo=='R':
+            target = myDataFrame[target_feature].values.reshape((-1, 1))
+            target = StandardScaler().fit_transform(target)
+            DataFrame[target_feature] = target
+
+        elif algo=='C':
+            target = myDataFrame[target_feature].values.reshape((-1,1))
+            DataFrame[target_feature] = target.astype(int)
+
+    else:
+        DataFrame = pd.DataFrame(data=StandardScaler().fit_transform(myDataFrame[CHOICES]), columns=CHOICES)
+
 ## main build function
 @eel.expose
 def build(algorithm, params=None, target_feature=0):
+
     global DataFrame
-    # if DataFrame:
     global CHOICES
     global X
     global Y
-    X = DataFrame.loc[:, CHOICES].values
+    global build_stat
     ## For Supervised Learning (i.e, with Y)
-    if target_feature:
-        target_feature = CHOICES.pop(CHOICES.index(target_feature))
-        Y = DataFrame.loc[:, target_feature].values.ravel()#.astype(int)
+    if target_feature != 0:
+        if build_stat:
+            preprocessing_data(target_feature, list(algorithm)[0])
+
+        ch = CHOICES.copy()
+        y_choices = ch.pop(ch.index(target_feature))
+        x_choices = ch
+        X = DataFrame.loc[:, x_choices].values
+        Y = DataFrame.loc[:, y_choices].values.ravel()
+
         data = split_data(X, y=Y)
         train_results, test_results = run(data, params, algorithm)
         compared_results = dict()
         for key in test_results.keys():
             compared_results[key] = (train_results[key], test_results[key])
+        print(compared_results)
 
         return compared_results, train_results, test_results
 
     ## For Unsupervised Learning (i.e, without Y)
     else:
-        data = split_data(X)
+        if build_stat:
+            build_stat = False
+            preprocessing_data()
+        X = DataFrame.values
 
-    # else:
-    #     return('No DataFrame')
 
 ## helper function to get meta data from availaible dataset
 
 @eel.expose
 def getMetaData(Algo):
     global CHOICES
-    global DataFrame
-    if Algo=='RL':
-        return {'datasetSize':len(DataFrame),'totalSelectedFeatures':CHOICES}
+    global myDataFrame
+    if Algo=='RL' or Algo=='RR' or Algo=="RP" or Algo=="CL":
+        return {'datasetSize':len(myDataFrame),'totalSelectedFeatures':CHOICES}
+
 
 eel.start("main.html",size=(1000,700))
