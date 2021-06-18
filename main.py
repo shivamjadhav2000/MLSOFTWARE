@@ -138,20 +138,26 @@ def build(algorithm, params=None, target_feature=0):
     global build_stat
     print("Algorithm=",algorithm,"\n","traning started!!!")
     ## For Supervised Learning (i.e, with Y)
+    algorithm = list(algorithm)
     if target_feature != 0:
         if build_stat:
             build_stat = False
-            preprocessing_data(target_feature, list(algorithm)[0])
+            preprocessing_data(target_feature, algorithm[0])
 
         ch = CHOICES.copy()
         y_choices = ch.pop(ch.index(target_feature))
         x_choices = ch
         X = DataFrame.loc[:, x_choices].values
-        Y = DataFrame.loc[:, y_choices].values.ravel()
+
+        if algorithm[0] == 'C':
+            Y = DataFrame.loc[:, y_choices].values.ravel().astype(int)
+        else:
+            Y = DataFrame.loc[:, y_choices].values.ravel()
 
         data = split_data(X, y=Y, algorithm=algorithm)
         train_results, test_results = run(data, params, algorithm)
         compared_results = dict()
+
         for key in test_results.keys():
             compared_results[key] = (train_results[key], test_results[key])
         print("training finished!!!")

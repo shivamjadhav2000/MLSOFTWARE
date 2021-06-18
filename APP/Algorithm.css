@@ -314,13 +314,25 @@ margin-bottom:10px ;
 .Container1{
   margin-left:10px ;
   border: 1px solid rgba(0, 0, 0, 0.212) ;
-  height: 95%;
+  height:600px;
 }
 .Container1Dark{
   margin-left:10px ;
   border: 1px solid rgba(202, 185, 185, 0.075) ;
-  height: 93%;
+  height:600px;
 }
+.BuildImgCont{
+  position: absolute;
+  bottom: 0px;
+  width:100%;
+  text-align: left;
+  margin:0px 10px; 
+  margin-bottom:5px;
+  display: grid;
+  grid-template-columns: 30% 70%;  
+  
+}
+
 .IMGSec{
   margin-right:20px
 }
@@ -333,9 +345,11 @@ margin-bottom:10px ;
 }
 .modelBase{
   border-radius: 4px;
+  height: 385px;
+    position: relative;
   /* background-color:#fffffff1;  */
-  /* border : 1px solid rgba(0, 0, 0, 0.212) ; */
-  width: 100%;
+  width: 90%;
+
 }
 .modelBase > label{
   width:80%;
@@ -354,8 +368,8 @@ margin-bottom:10px ;
   align-items: center;
 }
 .modelBaseSection1{
-  padding: 2%;
-  padding-bottom:0px ;
+  padding:0px 2%;
+  padding-bottom: 8px;
   display: grid;
   grid-template-columns:30% 50% ;
 }

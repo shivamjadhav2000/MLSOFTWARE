@@ -47,6 +47,9 @@ async function handleBuildSpinR(Algo){
  let lambd=targetForm.elements['lambd'].value
  let epochs=targetForm.elements['epochs'].value
  let batch_size=targetForm.elements[`batch_size${Algo}`].value
+ let trainingStatusTarget=document.getElementById(`trainingStatusTarget${Algo}`)
+ trainingStatusTarget.className="alert alert-danger"
+ trainingStatusTarget.innerHTML="Traing is started"
  if(Algo!='RL'){
    let degree=targetForm.elements['degree'].value
   AlgorithmParamsData["degree"]=degree.length?parseInt(degree):3
@@ -61,6 +64,8 @@ async function handleBuildSpinR(Algo){
  BuildImg.className="spinner"
  eel.build(ChosenAlgorithm,AlgorithmParamsData,TargetVariable)((r)=>{
    BuildImg.className=""
+   trainingStatusTarget.className="alert alert-success"
+   trainingStatusTarget.innerHTML="Traing is successfull"
    console.log("build responsce for Algorithm =",Algo,"res=",r)
  })
 }
@@ -72,6 +77,9 @@ async function handleBuildSpinK(Algo){
   let K=targetForm.elements['K'].value
   let trials =targetForm.elements['trials'].value
   let max_iters=targetForm.elements['max_iters'].value
+  let trainingStatusTarget=document.getElementById(`trainingStatusTarget${Algo}`)
+  trainingStatusTarget.className="alert alert-danger"
+  trainingStatusTarget.innerHTML="Traing is started"
   AlgorithmParamsData["K"]=K.length?parseInt(K):3
   AlgorithmParamsData["trials"]=trials.length?parseInt(trials):3
   AlgorithmParamsData["max_iters"]=max_iters.length?parseInt(max_iters):1
@@ -80,6 +88,8 @@ async function handleBuildSpinK(Algo){
   eel.build(ChosenAlgorithm,AlgorithmParamsData,TargetVariable=0)((r)=>{
     console.log("build responsce for algorithm =",Algo,"res=",r)
     BuildImg.className=""
+    trainingStatusTarget.className="alert alert-success"
+    trainingStatusTarget.innerHTML="Traing is successfull"
   })
 
 
@@ -90,6 +100,9 @@ async function handleBuildSpinC(Algo){
   let targetForm=document.forms[`modelBase${Algo}`]
   let degree=targetForm.elements['degree'].value
   BuildImg.className="spinner"
+  let trainingStatusTarget=document.getElementById(`trainingStatusTarget${Algo}`)
+  trainingStatusTarget.className="alert alert-danger"
+  trainingStatusTarget.innerHTML="Traing is started"
   if(Algo==='CK'){
   let K=targetForm.elements['K'].value
   let P=targetForm.elements['P'].value
@@ -117,6 +130,8 @@ async function handleBuildSpinC(Algo){
   eel.build(ChosenAlgorithm,AlgorithmParamsData,TargetVariable)((r)=>{
     console.log("build responsce for algorithm =",Algo,"res=",r)
     BuildImg.className=""
+    trainingStatusTarget.className="alert alert-success"
+    trainingStatusTarget.innerHTML="Traing is successfull"
   })
 
  }
@@ -149,9 +164,9 @@ function handleAlgorithmFormDisplay(event){
       data=r
       // document.getElementsByName(`batch_size${ChosenAlgorithm}`)[0].placeholder=`enter Batch size range between 1-${data.datasetSize}`
       targetSelect=document.getElementById(`Select${ChosenAlgorithm}`)
-      let temp=`<option selected>Select Dependent Variable</option>`
+      let temp=`<option value="">Open this select menu</option>`
       for(let i=0;i<data.totalSelectedFeatures.length;i++){
-        temp+=`<option>${data.totalSelectedFeatures[i]}</option>`
+        temp+=`<option value=${data.totalSelectedFeatures[i]}>${data.totalSelectedFeatures[i]}</option>`
       }
       targetSelect.innerHTML=temp
   })

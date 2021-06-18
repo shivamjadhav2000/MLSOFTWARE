@@ -39,19 +39,17 @@
     <div class="Container">
             <div>
                   <div class="FileUploadCont">
-                  <button id='FileUpload'  data-toggle="modal" data-target="#exampleModalLong">UPLOADFILE</button>
+                  <button id='FileUpload'  data-toggle="modal" data-target="#FileUploadModal">UPLOADFILE</button>
                   </div>
-                  <!-- Button trigger modal -->
-                  <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                  <div id="featureSelectionCont" class="hidden" style="border: 1px solid rgba(0, 0, 0, 0.212) ;">
+                  <button type="button" class="btn btn-light dropdown-toggle" style="width:100%" data-toggle="modal" data-target="#featureSelectionModal">
                   feature Selection
-                  </button> -->
-
-                  
-                        
-                        <div class="chartItem ">
-                          <div id="myChart3" ></div>
-                        </div>
-                      </div>
+                  </button>
+                  </div>
+                  <div class="chartItem ">
+                    <div id="myChart3" ></div>
+                  </div>
+                </div>
             
           
      <div class="hidden" id="data-visualization-section-Cont">
@@ -89,16 +87,16 @@
       </div>
       </div>
     </div>
-    <!-- modal 1 -->
-    <div class="modal fade " id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+
+    <div class="modal fade " id="FileUploadModal" tabindex="-1" role="dialog" aria-labelledby="FileUploadModalTitle" aria-hidden="true">
       <div class="modal-dialog " role="document">
       <div id="FileUploadModal" class="modal-content bg-light bg-gradient">
-      <div class="modal-header">
-      <h5 class="modal-title text-light"  id="exampleModalLongTitle">Modal title</h5>
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-      </button>
-      </div>
+        <!-- <div class="modal-header">
+          <h5 class="modal-title" id="FileUploadModalTitle">dataset</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          </button>
+          </div> -->
       <div class="modal-body ">
       <div id="inputPathCont">
       <input type='text' id="inputFile" placeholder="enter path for dataset"/>
@@ -113,23 +111,28 @@
       </div>
       <!-- modal 1 -->
      <!-- modal 2 -->
-      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal fade" id="featureSelectionModal"   tabindex="-1" role="dialog" aria-labelledby="featureSelectionModalTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
+      <div class="modal-content" style="width: 70%;">
       <div class="modal-header">
-      <h5 class="modal-title" id="exampleModalCenterTitle">feature Selection</h5>
+      <h5 class="modal-title" id="featureSelectionModalTitle">feature Selection</h5>
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
       <span aria-hidden="true">&times;</span>
       </button>
       </div>
       <div class="modal-body" >
-      <form  onsubmit="handleFeatureSelection(event)">
-      <div style="height:200px;overflow-y: scroll;">
-      <h1>body...</h1>
+      <form >
+      <div style="max-height:200px;overflow-y: auto;" id="targetCheckBox">
+        <div class="form-check ">
+          <input class="form-check-input " style="width:20px;height:20px" type="checkbox" value="77777" id="defaultCheck1">
+          <label class="form-check-label" for="defaultCheck1" style="font-size: larger;">
+            Default checkbox
+          </label>
+        </div>
       </div>
       <div class="modal-footer" >
       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      <button type="submit" class="btn btn-primary">Save changes</button>
+      <button type="submit" class="btn btn-primary" data-dismiss="modal" aria-label="Close" onclick="handleFeatureSelection(event)">Save changes</button>
       </div>  
       </form> 
       </div>

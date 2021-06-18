@@ -6,8 +6,11 @@ let fpath=''
 
 function handleFeatureSelection(event){
   event.preventDefault()
- let ck=document.querySelectorAll('input[type="checkbox"]:checked')
-  console.log(ck[0].value,ck[1].value)
+  let checkboxList=[]
+document.querySelectorAll('input[type="checkbox"]:checked').forEach((i,idx)=>{
+  checkboxList.push(i.value)
+})
+eel.get_user_choices(checkboxList)(r=>{console.log("r from main in main.js",r)})
 }
  function handleToggle(){
   var element = document.body;
@@ -54,12 +57,19 @@ function handleFileUploadCleaning(){
 function handleFileUpload(){
   handleFileUploadCleaning()
     document.getElementById("data-visualization-section-Cont").className=""
-
+    // display: flex;justify-content: center;align-items: center;  
+    let featureSelectionCont=document.getElementById("featureSelectionCont")
+    featureSelectionCont.className="hidden"
     let inputf=document.getElementById("inputFile").value
     let THEAD=document.getElementById("THEAD")
     let TBODY=document.getElementById("TBODY")
     // let ctx4 = document.getElementById('myChart3').getContext('2d');
     let targetDropdown=document.querySelector("#targetDropdown")
+    let targetCheckBox=document.querySelector("#targetCheckBox")
+    // <div class="custom-control custom-checkbox">
+    //       <input type="checkbox" class="custom-control-input" id="customCheck1">
+    //       <label class="custom-control-label" for="customCheck1">Check this custom checkbox</label>
+    //     </div>
 
     fpath=inputf
     eel.main(inputf)((r)=>{
@@ -68,10 +78,9 @@ function handleFileUpload(){
             let cols=r[1]
             let NumericalValues = r[2]
             let CategoricalValues = r[3]
-            let CCC=["Gender","Purchased","Age","EstimatedSalary"]
             let totalValues=r[2].length+r[3].length
-            eel.get_user_choices(CCC)(r=>{console.log("r from main in main.js",r)})
             let formattedCorrelationMatrix=r[4]
+            featureSelectionCont.className=""
             var options = {
               series: [(NumericalValues.length/totalValues)*100,(CategoricalValues.length/totalValues)*100],
               chart: {
@@ -101,6 +110,17 @@ function handleFileUpload(){
             },
             labels:['NumericalValues','CategoricalValues']
             };
+            //targetCheckBox pushing feature names
+            let targetCheckBoxdata=``
+            cols.forEach((i,idx)=>{
+              targetCheckBoxdata+=`<div class="form-check ">
+              <input class="form-check-input " style="width:20px;height:20px" type="checkbox" value=${i} id="defaultCheck${idx+1}">
+              <label class="form-check-label" for="defaultCheck${idx+1}" style="font-size: larger;padding-left:8px">
+                ${i}
+              </label>
+            </div>`
+            })
+            targetCheckBox.innerHTML=targetCheckBoxdata
             var chart = new ApexCharts(document.querySelector("#myChart3"), options);
             chart.render();
             let theadcontent=`<tr><th scope="col">SNO</th>`
@@ -169,7 +189,7 @@ function handleFileUpload(){
                   },
                   series: formattedCorrelationMatrix,
                   chart: {
-                  height: 375,
+                  height: 360,
                   type: 'heatmap',
                 },
                 dataLabels: {

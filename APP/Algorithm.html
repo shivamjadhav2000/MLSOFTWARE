@@ -109,22 +109,22 @@
                   Batch size</label>
                   <input type="text" placeholder="enter Batch size range from 0-1" name="batch_sizeRL" minlength="1" autocomplete="off" />
               </div>
-              <div class="modelBaseSection1">
-                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="target variable AKA Dependent variables are nothing but the variable which holds the phenomena which we are studying.">
-                  Target variable</label>
-                  <select class="custom-select bg-transparent" id="SelectRL" name="Y">
-                  </select>
-                </div>
-                <div style="text-align: left;margin:30px 10px;display: grid;grid-template-columns: 30% 70%;">
-                  <label><button type="button"  onclick="handleBuildSpinR('RL')" ><img src="assests/build.png" id="BuildImgRL" width="50" height="50"></button>Build</label>
-                  <div class="alert alert-success" role="alert">
-                    Traing is successfull
+                <div class="modelBaseSection1">
+                  <label for="customRange3" data-toggle="tooltip" data-placement="top" title="target variable AKA Dependent variables are nothing but the variable which holds the phenomena which we are studying.">
+                    Target variable</label>
+                    <select class="custom-select bg-transparent" id="SelectRL" name="Y" >
+                    </select>
                   </div>
+              
+                <div class="BuildImgCont">
+                    <label><button type="button"  onclick="handleBuildSpinR('RL')" ><img src="assests/build.png" id="BuildImgRL" width="50" height="50"></button>Build</label>
+                    <div id="trainingStatusTargetRL" role="alert">
+                    </div>
                 </div>
             </form>
           </div>
         </div>
-        <div id="RR" class="hide">
+        <div id="RR" class="hide ">
           <div class="synopsisHead">
             <div class="synopsisImgCont"><img src="assests/RidgeReg.png"  width="120" height="120" /></div>
               <div>
@@ -165,12 +165,14 @@
               <div class="modelBaseSection1">
                 <label for="customRange3" data-toggle="tooltip" data-placement="top" title="target variable AKA Dependent variables are nothing but the variable which holds the phenomena which we are studying.">
                   Target variable</label>
-                  <select class="custom-select bg-transparent" id="SelectRR" name="Y">
+                  <select class="custom-select bg-transparent" id="SelectRR" name="Y" required>
                   </select>
                 </div>
-                <div style="text-align: left;margin:30px 10px;">
-                  <button type="button"  onclick="handleBuildSpinR('RR')" ><img src="assests/build.png" id="BuildImgRR" width="50" height="50"></button> <label>Build</label>
-                </div>
+                <div class="BuildImgCont">
+                  <label><button type="button"  onclick="handleBuildSpinR('RR')" ><img src="assests/build.png" id="BuildImgRR" width="50" height="50"></button>Build</label>
+                  <div  id="trainingStatusTargetRR" role="alert">
+                  </div>
+              </div>
             </form>
           </div>
         </div>
@@ -218,9 +220,11 @@
                   <select class="custom-select bg-transparent" id="SelectRP" name="Y">
                   </select>
                 </div>
-                <div style="text-align: left;margin:30px 10px;">
-                  <button type="button"  onclick="handleBuildSpinR('RP')" ><img src="assests/build.png" id="BuildImgRP" width="50" height="50"></button> <label>Build</label>
-                </div>
+                <div class="BuildImgCont">
+                  <label><button type="button"  onclick="handleBuildSpinR('RP')" ><img src="assests/build.png" id="BuildImgRP" width="50" height="50"></button>Build</label>
+                  <div  id="trainingStatusTargetRP" role="alert">
+                  </div>
+              </div>
             </form>
           </div>
         </div>
@@ -270,9 +274,12 @@
                   <select class="custom-select bg-transparent" id="SelectCL" name="Y">
                   </select>
                 </div>
-                <div style="text-align: left;margin:30px 10px;">
-                  <button type="button"  onclick="handleBuildSpinR('CL')" ><img src="assests/build.png" id="BuildImgCL" width="50" height="50"></button> <label>Build</label>
-                </div>
+                <div class="BuildImgCont">
+                  <label><button type="button"  onclick="handleBuildSpinR('CL')" ><img src="assests/build.png" id="BuildImgCL" width="50" height="50"></button>Build</label>
+                  <div id="trainingStatusTargetCL" role="alert">
+                    
+                  </div>
+              </div>
             </form>
           </div>
         </div>
@@ -337,8 +344,11 @@
                       max_iters </label>
                       <input type="text" placeholder="enter degree range from 1-1000" name="max_iters" minlength="1" maxlength="4"autocomplete="off"/>
                   </div>
-                <div style="text-align: left;margin:30px 10px;">
-                  <button type="button"  onclick="handleBuildSpinC('CS')" ><img src="assests/build.png" id="BuildImgCS" width="50" height="50"></button> <label>Build</label>
+                  <div class="BuildImgCont">
+                    <label><button type="button"  onclick="handleBuildSpinC('CS')" ><img src="assests/build.png" id="BuildImgCS" width="50" height="50"></button>Build</label>
+                    <div  id="trainingStatusTargetCS" role="alert">
+                      
+                    </div>
                 </div>
             </form>
           </div>
@@ -375,9 +385,11 @@
                   <select class="custom-select bg-transparent" id="SelectCK" name="Y">
                   </select>
                 </div>
-                <div style="text-align: left;margin:30px 10px;">
-                  <button type="button"  onclick="handleBuildSpinC('CK')" ><img src="assests/build.png" id="BuildImgCK" width="50" height="50"></button> <label>Build</label>
-                </div>
+                <div class="BuildImgCont">
+                  <label><button type="button"  onclick="handleBuildSpinC('CK')" ><img src="assests/build.png" id="BuildImgCK" width="50" height="50"></button>Build</label>
+                  <div id="trainingStatusTargetCK" role="alert">
+                  </div>
+              </div>
             </form>
           </div>
         </div>
@@ -413,9 +425,11 @@
                   degree </label>
                   <input type="text" placeholder="enter degree  range from 1-10" name="degree" minlength="1" maxlength="2"autocomplete="off"/>
               </div>
-                <div style="text-align: left;margin:30px 10px;">
-                  <button type="button"  onclick="handleBuildSpinK('K')" ><img src="assests/build.png" id="BuildImgK" width="50" height="50"></button> <label>Build</label>
+              <div class="BuildImgCont">
+                <label><button type="button"  onclick="handleBuildSpinK('K')" ><img src="assests/build.png" id="BuildImgK" width="50" height="50"></button>Build</label>
+                <div id="trainingStatusTargetK" role="alert">
                 </div>
+            </div>
             </form>
           </div>
         </div>
