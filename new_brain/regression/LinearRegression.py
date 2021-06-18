@@ -44,7 +44,7 @@ class LinearRegression(BaseEstimator):
         self.B = np.random.random((1, 1)) * 0.01
 
     def optimize(self):
-        for i in range(self.epochs):
+        for _ in range(self.epochs):
             losses, scores = [], []
             for X, Y in zip(self.X, self.Y):
                 Z = np.matmul(self.W, X) + self.B
@@ -66,6 +66,7 @@ class LinearRegression(BaseEstimator):
 
             self.losses.append(np.mean(loss))
             self.scores.append(np.mean(score))
+
     def score_metric(self, y_true, y_pred):
         score = r2_score(y_true.ravel(), y_pred.ravel())
         return score

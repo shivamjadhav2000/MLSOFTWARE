@@ -15,6 +15,28 @@ class KMeans:
         self.best_idx = None
         self.min_loss = None
 
+    def __call__(self, X, Y=None):
+        cost = []
+        distances = np.zeros((X.shape[0], self.K))
+        for trail in range(self.trials):
+
+            for i in range(self.K):
+                temp = np.square(X - self.centroids[trail, i, :]).sum(axis=1)
+                dist = np.sqrt(temp)
+                distances[:, i] = dist
+
+            clusters = np.argmin(self.distances, axis=1)
+
+            cost.append(self.loss_metric(self.X, self.centroids[trail], self.K))
+
+        cost = np.array(cost)
+        best_idx = cost.argmin()
+        params = {
+        'min_loss' : cost[best_idx],
+        'loss_per_trial' : cost,
+        }
+        return params
+
     def fit(self, X):
         self.X = X
         self.M = self.X.shape[0]

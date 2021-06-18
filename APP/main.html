@@ -37,70 +37,107 @@
    <a href="dummy.html" class="myanchor"> <span class="navItem">reviewAndAnalysis</span></a>
   </div>
     <div class="Container">
-      
-      <div>
-            <div class="FileUploadCont">
-                <button id='FileUpload'  data-toggle="modal" data-target="#exampleModalLong">UPLOADFILE</button>
-            </div>
-            <div id="dropdownContainer" class="hidden">
-              <div class="dropdown" id="dropdown">
-                <button type="button" class="btn btn-light dropdown-toggle" id="dropdownButton" data-toggle="dropdown">
-                    select feature
-                </button>
-                <div class="dropdown-menu" id="targetDropdown">
-                </div>
-              </div>
-            </div>
+            <div>
+                  <div class="FileUploadCont">
+                  <button id='FileUpload'  data-toggle="modal" data-target="#exampleModalLong">UPLOADFILE</button>
+                  </div>
+                  <!-- Button trigger modal -->
+                  <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                  feature Selection
+                  </button> -->
+
+                  
+                        
+                        <div class="chartItem ">
+                          <div id="myChart3" ></div>
+                        </div>
+                      </div>
             
-            <!-- Button trigger modal -->
-          <!-- Modal -->
-          <div class="modal fade " id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-          <div class="modal-dialog " role="document">
-          <div id="FileUploadModal" class="modal-content bg-light bg-gradient">
-          <div class="modal-header">
-          <h5 class="modal-title text-light"  id="exampleModalLongTitle">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-          </button>
-          </div>
-          <div class="modal-body ">
-          <div id="inputPathCont">
-            <input type='text' id="inputFile" placeholder="enter path for dataset"/>
-          </div>
-          <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button"  class="btn btn-light " data-dismiss="modal" aria-label="Close" onclick="handleFileUpload()" id="submitbtn">Save changes</button>
-          </div>
-          </div>
-          </div>
-          </div></div>
-        <div class="chartItem">
-          <div id="myChart3" ></div>
-        </div>
-      </div>
+          
      <div class="hidden" id="data-visualization-section-Cont">
       <div class="data-visualization-section" id="dataBody">
           <div class="ChartsArea">
             <div class="chartItem">
               <div id="myChart1"></div>
+              <div id="dropdownContainer" class="hidden">
+                <div class="dropright" id="dropdown">
+                  <button type="button" class="btn btn-light dropdown-toggle" id="dropdownButton" data-toggle="dropdown">
+                      select feature
+                  </button>
+                  <div class="dropdown-menu" id="targetDropdown">
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="chartItem">
               <div id="myChart2" ></div>
             </div>
           </div>
-          <div class="tableContainer">
-            <table id="targetTable" class="table table-striped table-light mb-0">
-              <thead id="THEAD">
-              </thead>
-              <tbody id="TBODY">
-              </tbody>
-            </table>
+          <div>
+            <p style="font-size: 24px;font-weight: 600;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;" >Dataset Preview</p>
+            <div class="tableContainer">
+              <table id="targetTable" class="table table-striped table-light mb-0">
+                <thead id="THEAD">
+                </thead>
+                <tbody id="TBODY">
+                </tbody>
+              </table>
+            </div>
           </div>
+          
           
       </div>
       </div>
     </div>
-    
+    <!-- modal 1 -->
+    <div class="modal fade " id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+      <div class="modal-dialog " role="document">
+      <div id="FileUploadModal" class="modal-content bg-light bg-gradient">
+      <div class="modal-header">
+      <h5 class="modal-title text-light"  id="exampleModalLongTitle">Modal title</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+      </button>
+      </div>
+      <div class="modal-body ">
+      <div id="inputPathCont">
+      <input type='text' id="inputFile" placeholder="enter path for dataset"/>
+      </div>
+      <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      <button type="button"  class="btn btn-light " data-dismiss="modal" aria-label="Close" onclick="handleFileUpload()" id="submitbtn">Save changes</button>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      <!-- modal 1 -->
+     <!-- modal 2 -->
+      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+      <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalCenterTitle">feature Selection</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+      </button>
+      </div>
+      <div class="modal-body" >
+      <form  onsubmit="handleFeatureSelection(event)">
+      <div style="height:200px;overflow-y: scroll;">
+      <h1>body...</h1>
+      </div>
+      <div class="modal-footer" >
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>  
+      </form> 
+      </div>
+
+      </div>
+      </div>
+      </div> 
+      <!-- modal 2 --> 
   
   </body>
 

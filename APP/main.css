@@ -1,6 +1,13 @@
 .hidden{
   display: none;
 }
+thead{
+  position: sticky; top: 0;background-color: white;
+}
+.theadDarkMode{
+  position: sticky; top: 0;background-color: rgb(0, 0, 0);
+
+}
 h6{
   display: inline;
 }
@@ -58,6 +65,7 @@ text-decoration: none;
   align-items: center;
 }
 #dropdownButton{
+  border: 1px solid rgba(0, 0, 0, 0.212) ;
   width: 100%;
   margin: 2%;
 }
@@ -262,16 +270,12 @@ cursor: pointer;
   display: grid;
   grid-template-columns: 20% 80%;
   }
-  .data-visualization-section{
-    
+  .data-visualization-section{ 
     border:1px solid rgba(0, 0, 0, 0.075) ;
-
     
   }
   .data-visualization-section-darkMode{
-    
     border: 1px solid rgba(226, 212, 212, 0.075) ;
-    
   }
   .ChartsArea{
     color:black;
@@ -283,7 +287,7 @@ cursor: pointer;
 
 /* chartsection */
 .chartItem{
-  height:380px;
+  height:425px;
   padding:2px;
   /* border: 1px solid rgba(226, 212, 212, 0.075); */
 }
@@ -292,7 +296,7 @@ cursor: pointer;
 /* tableContainer */
 .tableContainer{
   overflow-y:scroll;
-height:280px;
+height:200px;
 }
 /* tableContainer */
 

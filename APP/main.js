@@ -2,9 +2,16 @@ let X=[]
 let Y=[]
 let cols
 let fpath=''
- //general helperfunction 
-function handleToggle(){
+ //general helperfunction
+
+function handleFeatureSelection(event){
+  event.preventDefault()
+ let ck=document.querySelectorAll('input[type="checkbox"]:checked')
+  console.log(ck[0].value,ck[1].value)
+}
+ function handleToggle(){
   var element = document.body;
+  document.getElementsByTagName("thead")[0].classList.toggle("theadDarkMode")
   document.getElementById("navCont").classList.toggle("navLightMode")
   document.getElementById("subNavCont").classList.toggle("subNavDarkMode")
   document.getElementById("dataBody").classList.toggle("data-visualization-section-darkMode")
@@ -22,14 +29,14 @@ function handleToggle(){
    for(let i=0;i<anchorTemp.length;i++){
      anchorTemp[i].classList.toggle("myanchorToggle")
    }
-   for(var j=0;j<navbarHover.length;j++){
-     if(navbarHover[j].className==="navItem"){
-    navbarHover[j].className="navItemDark"
-     }
-     else {
-      navbarHover[j].className="navItem"
-     }
-  }
+  //  for(var j=0;j<navbarHover.length;j++){
+  //    if(navbarHover[j].className==="navItem"){
+  //   navbarHover[j].className="navItemDark"
+  //    }
+  //    else {
+  //     navbarHover[j].className="navItem"
+  //    }
+  // }
 
 }
 //about chart.js
@@ -43,7 +50,7 @@ function handleFileUploadCleaning(){
   document.querySelector("#myChart2").innerHTML=""
   document.querySelector("#targetDropdown").innerHTML=""
 }
-//control display of dynamic columns rendering get data from python as all columns 
+//control display of dynamic columns rendering get data from python as all columns
 function handleFileUpload(){
   handleFileUploadCleaning()
     document.getElementById("data-visualization-section-Cont").className=""
@@ -87,12 +94,12 @@ function handleFileUpload(){
                       return totalValues
                     },
 
-                    
+
                   }
                 }
               }
             },
-            labels:['NumericalValues','CategoricalValues'] 
+            labels:['NumericalValues','CategoricalValues']
             };
             var chart = new ApexCharts(document.querySelector("#myChart3"), options);
             chart.render();
@@ -111,7 +118,7 @@ function handleFileUpload(){
             theadcontent=theadcontent+`</tr>`
             THEAD.innerHTML=theadcontent
             TBODY.innerHTML=tbodycontent
-            
+
             eel.GetFeatureValues(NumericalValues[0])((res)=>{
                 featureName=NumericalValues[0]
                 var BoxPlotoptions = {
@@ -126,7 +133,7 @@ function handleFileUpload(){
                         }
                       ]
                     },
-                    
+
                   ],
                     chart: {
                     type: 'boxPlot',
@@ -137,20 +144,40 @@ function handleFileUpload(){
                     text: `BoxPlot -${featureName}`,
                     align: 'left'
                   }
-                 
+
                   };
                  var HeatMapOptions = {
+                  plotOptions: {
+                    heatmap: {
+                      colorScale: {
+                        ranges: [
+                          {
+                            from: -1,
+                            to: 0.5,
+                            color: '#008FFB',
+                            name: 'low',
+                          },
+                          {
+                            from: 0.6,
+                            to: 1,
+                            color: '#34d195',
+                            name: 'high',
+                          }
+                        ]
+                      }
+                    }
+                  },
                   series: formattedCorrelationMatrix,
                   chart: {
-                  height: 350,
+                  height: 375,
                   type: 'heatmap',
                 },
                 dataLabels: {
                   enabled: false
                 },
-                colors: ["#008FFB"],
+                colors: ['#008FFB', '#FEB019'],
                 title: {
-                  text: 'HeatMap Chart (Single color)'
+                  text: 'HeatMap Chart features Correlation'
                 },
                 };
                 var chart1 = new ApexCharts(document.querySelector("#myChart1"), BoxPlotoptions);
@@ -173,9 +200,9 @@ function handleFileUpload(){
             })
             document.getElementById("dropdownContainer").className=""
         }
-    
+
     })
-    
+
 
 }
 function handleBoxPlot(featureName){
@@ -192,7 +219,7 @@ function handleBoxPlot(featureName){
                 }
               ]
             },
-            
+
           ],
             chart: {
             type: 'boxPlot',
@@ -203,12 +230,12 @@ function handleBoxPlot(featureName){
             text: `BoxPlot -${featureName}`,
             align: 'left'
           }
-         
+
           };
-          document.querySelector("#myChart1").innerHTML=""  
+          document.querySelector("#myChart1").innerHTML=""
         var chart = new ApexCharts(document.querySelector("#myChart1"), options);
         chart.render();
-        
+
     })
 }
 
@@ -221,7 +248,7 @@ function build(){
             Algorithm=AlgorithmArray[i].value
         }
     }
-    
+
     if(X.length && Y.length && Algorithm.length){
         let element=document.getElementById("buildImg")
         element.style="-webkit-animation:spin 6s linear infinite;-moz-animation:spin 6s linear infinite;animation:spin 6s linear infinite;"
@@ -244,10 +271,10 @@ function build(){
              element.style=""
         })
     }
-    
-        
-    
-    
+
+
+
+
 }
 //handle vizualization
 function vizualize(){

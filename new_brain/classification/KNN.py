@@ -23,6 +23,7 @@ class KNN(BaseEstimator):
         self.num_samples = None
 
     def fit(self, X, Y):
+        print(Y.dtype)
         self.X = X
         self.Y = Y
         self.num_features = self.X.shape[1]
@@ -39,7 +40,7 @@ class KNN(BaseEstimator):
             preds = np.argsort(dist)[:self.K]
             preds = list(self.Y[preds])
             unq_pts = sorted(np.unique(self.Y))
-            predictions.append(np.argmax([preds.count(i) for i in unq_pts]))
+            predictions.append(np.argmax([preds.count(i) for i in unq_pts]).astype(int))
 
         predictions = np.array(predictions)
         avg = None
@@ -93,7 +94,7 @@ class KNN(BaseEstimator):
             preds = np.argsort(dist)[:self.K]
             preds = list(self.Y[preds])
             unq_pts = sorted(np.unique(self.Y))
-            predictions.append(np.argmax([preds.count(i) for i in unq_pts]))
+            predictions.append(np.argmax([preds.count(i) for i in unq_pts]).astype(int))
 
         predictions = np.array(predictions)
 

@@ -31,11 +31,11 @@ function handleToggle(){
   }
 
 }
-function dummyTesting1(){
-  eel.dummyTesting()(r=>{
-    console.log(r)
-  })
-}
+// function dummyTesting1(){
+//   eel.dummyTesting()(r=>{
+//     console.log(r)
+//   })
+// }
 function sleep (time) {
   return new Promise((resolve) => setTimeout(resolve, time));
 }
@@ -51,17 +51,17 @@ async function handleBuildSpinR(Algo){
    let degree=targetForm.elements['degree'].value
   AlgorithmParamsData["degree"]=degree.length?parseInt(degree):3
 }
+ AlgorithmParamsData['degree']=3
  AlgorithmParamsData["lr"]=lr.length?parseFloat(lr):parseFloat('0.001');
  AlgorithmParamsData["lambd"]=lambd.length?parseFloat(lambd):parseFloat('0.2');
  AlgorithmParamsData["epochs"]=epochs.length?parseInt(epochs):parseInt('100');
  AlgorithmParamsData["batch_size"]=batch_size.length?parseInt(batch_size):parseInt('24');
- console.log(AlgorithmParamsData)
+
  TargetVariable=document.forms[`modelBase${Algo}`].elements['Y'].value;
  BuildImg.className="spinner"
  eel.build(ChosenAlgorithm,AlgorithmParamsData,TargetVariable)((r)=>{
    BuildImg.className=""
-   console.log("hiiii")
-    console.log(r)
+   console.log("build responsce for Algorithm =",Algo,"res=",r)
  })
 }
 async function handleBuildSpinK(Algo){
@@ -76,9 +76,9 @@ async function handleBuildSpinK(Algo){
   AlgorithmParamsData["trials"]=trials.length?parseInt(trials):3
   AlgorithmParamsData["max_iters"]=max_iters.length?parseInt(max_iters):1
   AlgorithmParamsData["degree"]=degree.length?parseInt(degree):3
-
+  BuildImg.className="spinner"
   eel.build(ChosenAlgorithm,AlgorithmParamsData,TargetVariable=0)((r)=>{
-    console.log("build responsce=",r)
+    console.log("build responsce for algorithm =",Algo,"res=",r)
     BuildImg.className=""
   })
 
@@ -93,13 +93,14 @@ async function handleBuildSpinC(Algo){
   if(Algo==='CK'){
   let K=targetForm.elements['K'].value
   let P=targetForm.elements['P'].value
-  AlgorithmParamsData["K"]=K.length?parseInt(K):9;
-  AlgorithmParamsData["P"]=P.length?parseInt(P):2;
+  AlgorithmParamsData["neighbours"]=K.length?parseInt(K):9;
+  AlgorithmParamsData["p"]=P.length?parseInt(P):2;
+  TargetVariable=document.forms[`modelBase${Algo}`].elements['Y'].value;
   AlgorithmParamsData["degree"]= degree.length?parseInt(degree):3
 }
   else if(Algo==='CS'){
-    console.log("inside cs")
     AlgorithmParamsData={}
+    TargetVariable=document.forms[`modelBase${Algo}`].elements['Y'].value;
     let C=targetForm.elements['C'].value
     let kernel =targetForm.elements['kernel'].value
     let gamma =targetForm.elements['gamma'].value
@@ -110,14 +111,14 @@ async function handleBuildSpinC(Algo){
     AlgorithmParamsData["gamma"]=gamma.length?gamma:'scale'
     AlgorithmParamsData["class_weight"]=class_weight.length?class_weight:'None'
     AlgorithmParamsData["degree"]= degree.length?parseInt(degree):3
-    AlgorithmParamsData["max_iters"]=max_iters.length?parseInt(max_iters):1
-    
+    AlgorithmParamsData["max_iter"]=max_iters.length?parseInt(max_iters):-1
+
   }
-  eel.build(ChosenAlgorithm,AlgorithmParamsData,TargetVariable=0)((r)=>{
-    console.log("build responsce=",r)
+  eel.build(ChosenAlgorithm,AlgorithmParamsData,TargetVariable)((r)=>{
+    console.log("build responsce for algorithm =",Algo,"res=",r)
     BuildImg.className=""
   })
-  
+
  }
 
 
@@ -141,6 +142,20 @@ function handleAlgorithmFormDisplay(event){
       targetSelect.innerHTML=temp
     })
   }
-  
+
+  else if(ChosenAlgorithm === 'CS' || ChosenAlgorithm === 'CK')
+  {
+    eel.getMetaData(ChosenAlgorithm)(r=>{
+      data=r
+      // document.getElementsByName(`batch_size${ChosenAlgorithm}`)[0].placeholder=`enter Batch size range between 1-${data.datasetSize}`
+      targetSelect=document.getElementById(`Select${ChosenAlgorithm}`)
+      let temp=`<option selected>Select Dependent Variable</option>`
+      for(let i=0;i<data.totalSelectedFeatures.length;i++){
+        temp+=`<option>${data.totalSelectedFeatures[i]}</option>`
+      }
+      targetSelect.innerHTML=temp
+  })
+}
+
 
 }

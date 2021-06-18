@@ -122,21 +122,25 @@ def preprocessing_data(target=0, algo='C'):
             DataFrame[target_feature] = target.astype(int)
 
     else:
-        DataFrame = pd.DataFrame(data=StandardScaler().fit_transform(myDataFrame[CHOICES]), columns=CHOICES)
+        num_data = pd.DataFrame(data=StandardScaler().fit_transform(num_data), columns=num_data.columns)
+        cat_data = myDataFrame[new_cats].aggregate(LabelEncoder().fit_transform)
+        cat_data = pd.DataFrame(data=StandardScaler().fit_transform(cat_data), columns=cat_data.columns)
+        DataFrame = pd.concat([num_data, cat_data], axis=1)
+        DataFrame = pd.DataFrame(data=StandardScaler().fit_transform(DataFrame[CHOICES]), columns=CHOICES)
 
 ## main build function
 @eel.expose
 def build(algorithm, params=None, target_feature=0):
-    print("inside build algo=",algorithm,"params=",params)
     global DataFrame
     global CHOICES
     global X
     global Y
     global build_stat
-    print("parms = ",params,"algorithm = ",algorithm,"target_features = ",target_feature)
+    print("Algorithm=",algorithm,"\n","traning started!!!")
     ## For Supervised Learning (i.e, with Y)
     if target_feature != 0:
         if build_stat:
+            build_stat = False
             preprocessing_data(target_feature, list(algorithm)[0])
 
         ch = CHOICES.copy()
@@ -145,12 +149,12 @@ def build(algorithm, params=None, target_feature=0):
         X = DataFrame.loc[:, x_choices].values
         Y = DataFrame.loc[:, y_choices].values.ravel()
 
-        data = split_data(X, y=Y)
+        data = split_data(X, y=Y, algorithm=algorithm)
         train_results, test_results = run(data, params, algorithm)
         compared_results = dict()
         for key in test_results.keys():
             compared_results[key] = (train_results[key], test_results[key])
-
+        print("training finished!!!")
         return compared_results, train_results, test_results
 
     ## For Unsupervised Learning (i.e, without Y)
@@ -159,6 +163,13 @@ def build(algorithm, params=None, target_feature=0):
             build_stat = False
             preprocessing_data()
         X = DataFrame.values
+        data = split_data(X, algorithm=algorithm)
+        train_results, test_results = run(data, params, algorithm)
+        compared_results = dict()
+        for key in test_results.keys():
+            compared_results[key] = (train_results[key], test_results[key])
+        print("training finished!!!")
+        return compared_results, train_results, test_results
 
 
 ## helper function to get meta data from availaible dataset
@@ -167,7 +178,7 @@ def build(algorithm, params=None, target_feature=0):
 def getMetaData(Algo):
     global CHOICES
     global myDataFrame
-    if Algo=='RL' or Algo=='RR' or Algo=="RP" or Algo=="CL":
+    if Algo=='RL' or Algo=='RR' or Algo=="RP" or Algo=="CL" or Algo=='CS' or Algo=='CK':
         return {'datasetSize':len(myDataFrame),'totalSelectedFeatures':CHOICES}
 
 
