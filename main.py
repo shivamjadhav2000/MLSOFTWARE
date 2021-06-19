@@ -28,20 +28,23 @@ eel.init("APP")
 def main(file_pth):
     file_pth = file_pth[1:-1]
     data = check_for_errors(file_pth)
-    global myDataFrame
-    global myFeatures
-    global categorical
-    global numerical
-    myDataFrame=data
-    correlationmatrix=myDataFrame.corr().values.tolist()
-    correlationmatrixKeys=list(myDataFrame.corr().to_dict().keys())
-    formattedCorrelationMatrix=heat_map(correlationmatrixKeys,correlationmatrix)
-    columns = list(data.columns)
-    myFeatures=columns
-    column_dtypes = np.array(data.dtypes).astype(str).tolist()
-    categorical = [columns[idx] for idx,tp in enumerate(column_dtypes) if tp=='object']
-    numerical =   [columns[idx] for idx,tp in enumerate(column_dtypes) if tp=='int64']
-    return np.array(data.head(10)).tolist(), columns, numerical, categorical,formattedCorrelationMatrix
+    if type(data)==str:
+        return data
+    else:  
+        global myDataFrame
+        global myFeatures
+        global categorical
+        global numerical
+        myDataFrame=data
+        correlationmatrix=myDataFrame.corr().values.tolist()
+        correlationmatrixKeys=list(myDataFrame.corr().to_dict().keys())
+        formattedCorrelationMatrix=heat_map(correlationmatrixKeys,correlationmatrix)
+        columns = list(data.columns)
+        myFeatures=columns
+        column_dtypes = np.array(data.dtypes).astype(str).tolist()
+        categorical = [columns[idx] for idx,tp in enumerate(column_dtypes) if tp=='object']
+        numerical =   [columns[idx] for idx,tp in enumerate(column_dtypes) if tp=='int64']
+        return np.array(data.head(10)).tolist(), columns, numerical, categorical,formattedCorrelationMatrix
 
 
 def check_for_errors(file_pth):
@@ -49,10 +52,8 @@ def check_for_errors(file_pth):
     """
     This part of code checks for for any errors in loading or opening the dataset.
     """
-    error = -1
     if not os.path.exists(file_pth):
-        error = 0
-        return error
+        return "entered file path is invalid"
 
     file_type = os.path.split(file_pth)[-1].split('.')[-1]
 
@@ -63,8 +64,7 @@ def check_for_errors(file_pth):
         data = pd.read_excel(file_pth)
 
     else:
-        error = 1
-        return error
+        return "file type is not supported , only 'csv' and 'xlsx' are accepted "
 
     """
     This part of code checks for for NaN values in the dataset.

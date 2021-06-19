@@ -3,7 +3,9 @@ let Y=[]
 let cols
 let fpath=''
  //general helperfunction
-
+ function sleep (time) {
+  return new Promise((resolve) => setTimeout(resolve, time));
+}
 function handleFeatureSelection(event){
   event.preventDefault()
   let checkboxList=[]
@@ -22,24 +24,17 @@ eel.get_user_choices(checkboxList)(r=>{console.log("r from main in main.js",r)})
   toggleImg=toggleImg[toggleImg.length-1]
   document.getElementById("toggleImg").src=toggleImg==="half-moon.png"?"assests/sunny.png":"assests/half-moon.png"
   var anchorTemp = document.getElementsByTagName("a")
-  var navbarHover =document.getElementsByTagName("span")
-  var FileUploadModal=document.getElementById("FileUploadModal")
-  FileUploadModal.classList.toggle("bg-dark")
+  document.getElementById("FileUploadModal&&").classList.toggle("bg-dark")
+  document.getElementById("featureSelectionModal&&").classList.toggle("bg-dark")
   var targetTable=document.getElementById("targetTable")
   document.getElementById("dropdownButton").classList.toggle("btn-dark")
+  document.getElementById("featureSelectionbtn").classList.toggle("btn-dark")
   targetTable.classList.toggle("table-dark")
    element.classList.toggle("dark-mode");
    for(let i=0;i<anchorTemp.length;i++){
      anchorTemp[i].classList.toggle("myanchorToggle")
    }
-  //  for(var j=0;j<navbarHover.length;j++){
-  //    if(navbarHover[j].className==="navItem"){
-  //   navbarHover[j].className="navItemDark"
-  //    }
-  //    else {
-  //     navbarHover[j].className="navItem"
-  //    }
-  // }
+  
 
 }
 //about chart.js
@@ -54,11 +49,12 @@ function handleFileUploadCleaning(){
   document.querySelector("#targetDropdown").innerHTML=""
 }
 //control display of dynamic columns rendering get data from python as all columns
-function handleFileUpload(){
+ function handleFileUpload(){
   handleFileUploadCleaning()
-    document.getElementById("data-visualization-section-Cont").className=""
+    let FileUploadErrorTarget=document.getElementById("FileUploadErrorTarget")
     // display: flex;justify-content: center;align-items: center;  
     let featureSelectionCont=document.getElementById("featureSelectionCont")
+    featureSelectionCont.className='hidden'
     featureSelectionCont.className="hidden"
     let inputf=document.getElementById("inputFile").value
     let THEAD=document.getElementById("THEAD")
@@ -72,8 +68,17 @@ function handleFileUpload(){
     //     </div>
 
     fpath=inputf
-    eel.main(inputf)((r)=>{
-        if(r){
+    eel.main(inputf)(async (r)=>{
+      if(typeof(r)=='string'){
+        FileUploadErrorTarget.className=''
+        FileUploadErrorTarget.className="alert alert-danger"
+        FileUploadErrorTarget.innerHTML=r
+        await sleep(3000)
+        FileUploadErrorTarget.className='hidden'
+      }
+        else{
+          document.getElementById("data-visualization-section-Cont").className=""
+
             let rows=r[0]
             let cols=r[1]
             let NumericalValues = r[2]
@@ -114,7 +119,7 @@ function handleFileUpload(){
             let targetCheckBoxdata=``
             cols.forEach((i,idx)=>{
               targetCheckBoxdata+=`<div class="form-check ">
-              <input class="form-check-input " style="width:20px;height:20px" type="checkbox" value=${i} id="defaultCheck${idx+1}">
+              <input class="form-check-input " style="width:20px;height:20px" type="checkbox" value="${i}" id="defaultCheck${idx+1}">
               <label class="form-check-label" for="defaultCheck${idx+1}" style="font-size: larger;padding-left:8px">
                 ${i}
               </label>
