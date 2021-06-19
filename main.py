@@ -33,7 +33,7 @@ def main(file_pth):
     else:
         global myDataFrame
         global myFeatures
-        global categorical 
+        global categorical
         global numerical
         myDataFrame=data
         correlationmatrix=myDataFrame.corr().values.tolist()
@@ -89,7 +89,6 @@ def get_user_choices(choices): #choices = [] ==>> list of all choices numerical 
     global CHOICES
     global DataFrame
     CHOICES = choices
-    # preprocessing_data()
     return True
 
 def preprocessing_data(target=0, algo='C'):
@@ -153,9 +152,9 @@ def build(algorithm, params=None, target_feature=0):
     ## For Supervised Learning (i.e, with Y)
     algorithm = list(algorithm)
     if target_feature != 0:
-        # if build_stat:
-        #     build_stat = False
-        preprocessing_data(target_feature, algorithm[0])
+        if True:
+            build_stat = False
+            preprocessing_data(target_feature, algorithm[0])
 
         ch = CHOICES.copy()
         y_choices = ch.pop(ch.index(target_feature))
@@ -178,7 +177,7 @@ def build(algorithm, params=None, target_feature=0):
 
     ## For Unsupervised Learning (i.e, without Y)
     else:
-        if build_stat:
+        if True:
             build_stat = False
             preprocessing_data()
         X = DataFrame.values
