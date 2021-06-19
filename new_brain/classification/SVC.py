@@ -30,8 +30,8 @@ class SVC(BaseEstimator):
 
         avg = None
 
-        precision = precision_score(y, preds, average=avg).tolist()
-        recall = recall_score(y, preds, average=avg).tolist()
+        precision = precision_score(y, preds, average=avg, zero_division=1).tolist()
+        recall = recall_score(y, preds, average=avg, zero_division=1).tolist()
         f1 = f1_score(y, preds, average=avg).tolist()
         cf = confusion_matrix(y, preds).tolist()
 
@@ -70,8 +70,8 @@ class SVC(BaseEstimator):
 
         avg = None
         y_pred = self.estimator.predict(self.X)
-        precision = precision_score(self.y, y_pred.ravel(), average=avg)
-        recall = recall_score(self.y, y_pred.ravel(), average=avg)
+        precision = precision_score(self.y, y_pred.ravel(), average=avg, zero_division=1)
+        recall = recall_score(self.y, y_pred.ravel(), average=avg, zero_division=1)
         f1 = f1_score(self.y, y_pred.ravel(), average=avg)
         cf = confusion_matrix(self.y, y_pred.ravel())
 

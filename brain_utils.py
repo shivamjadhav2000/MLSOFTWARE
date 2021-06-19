@@ -64,6 +64,9 @@ def fit(X, y, params, algorithm, degree):
             if params['class_weight'] == 'None':
                 params['class_weight'] = None
 
+            if params['kernel'] == 'polynomial':
+                params['kernel'] = 'poly'
+
             obj = SVC(**params)
             obj.fit(X, y)
             return obj, obj.get_parameters()

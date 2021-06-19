@@ -1,5 +1,6 @@
 from new_brain.base import BaseEstimator
 from sklearn.metrics import precision_score, recall_score, f1_score, confusion_matrix
+from sklearn.preprocessing import OneHotEncoder
 from math import ceil
 import numpy as np
 
@@ -30,8 +31,8 @@ class LogisticRegression(BaseEstimator):
         A = A.argmax(axis=0).ravel()
 
         score = self.score_metric(y, A)
-        precision = precision_score(y, A, average=avg).tolist()
-        recall = recall_score(y, A, average=avg).tolist()
+        precision = precision_score(y, A, average=avg, zero_division=1).tolist()
+        recall = recall_score(y, A, average=avg, zero_division=1).tolist()
         f1 = f1_score(y, A, average=avg).tolist()
         cf = confusion_matrix(y, A).tolist()
 
@@ -52,11 +53,10 @@ class LogisticRegression(BaseEstimator):
     def fit(self, X, Y):
         self.X_copy, self.Y_copy = X, Y
         self.X = X.T
-        self.Y = Y.reshape((1, -1))
-        self.num_classes = np.unique(self.Y).size
+        self.Y = self.one_hot(Y)
+        self.num_classes = np.unique(Y).size
         self.num_features = self.X.shape[0]
         self.num_samples = self.X.shape[1]
-
         self.create_mini_batches()
 
         self.initialize()
@@ -71,7 +71,7 @@ class LogisticRegression(BaseEstimator):
             scores = []
             losses = []
             for X, Y in zip(self.X, self.Y):
-                Y = self.one_hot(Y)
+                Y = Y
                 Z = np.matmul(self.W, X) + self.B
                 A = self.activation(Z)
                 loss = self.loss_metric(Y, A)
@@ -109,11 +109,9 @@ class LogisticRegression(BaseEstimator):
         return t / np.sum(t, axis=0)
 
     def one_hot(self, Y):
-        unq = np.max(Y)+1
-        encd = np.zeros((unq, Y.size))
-        encd[Y, np.arange(Y.size)] = 1
-        Y = encd
-        return Y
+        Y = Y.reshape((-1, 1))
+        Y = OneHotEncoder(sparse=False).fit_transform(Y)
+        return Y.T
 
     def create_mini_batches(self):
         if self.batch_size is None:
@@ -145,8 +143,8 @@ class LogisticRegression(BaseEstimator):
 
         avg = None
         y_pred = self.predict(self.X_copy).argmax(axis=0)
-        precision = precision_score(self.Y_copy, y_pred.ravel(), average=avg)
-        recall = recall_score(self.Y_copy, y_pred.ravel(), average=avg)
+        precision = precision_score(self.Y_copy, y_pred.ravel(), average=avg, zero_division=1)
+        recall = recall_score(self.Y_copy, y_pred.ravel(), average=avg, zero_division=1)
         f1 = f1_score(self.Y_copy, y_pred.ravel(), average=avg)
         cf = confusion_matrix(self.Y_copy, y_pred.ravel())
 

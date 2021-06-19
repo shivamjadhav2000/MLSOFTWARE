@@ -50,8 +50,8 @@ class KNN(BaseEstimator):
         num_classes = np.unique(y).size
         score = accuracy_score(y, predictions)
         loss = self.loss_metric(y, predictions)
-        precision = precision_score(y, predictions, average=avg).tolist()
-        recall = recall_score(y, predictions, average=avg).tolist()
+        precision = precision_score(y, predictions, average=avg, zero_division=1).tolist()
+        recall = recall_score(y, predictions, average=avg, zero_division=1).tolist()
         f1 = f1_score(y, predictions, average=avg).tolist()
         cf = confusion_matrix(y, predictions).tolist()
 
@@ -104,12 +104,12 @@ class KNN(BaseEstimator):
         y_pred = self.predict(self.X)
         avg = None
         score = accuracy_score(self.Y, y_pred.ravel())
-        precision = precision_score(self.Y, y_pred.ravel(), average=avg)
-        recall = recall_score(self.Y, y_pred.ravel(), average=avg)
+        precision = precision_score(self.Y, y_pred.ravel(), average=avg, zero_division=1)
+        recall = recall_score(self.Y, y_pred.ravel(), average=avg, zero_division=1)
         f1 = f1_score(self.Y, y_pred.ravel(), average=avg)
         cf = confusion_matrix(self.Y, y_pred.ravel())
-
-        y_true, y_pred = self.one_hot(self.Y.reshape((1, -1))), self.one_hot(y_pred.reshape((1, -1)))
+        print(y_pred.shape, self.Y.shape)
+        y_true, y_pred = self.Y, y_pred
         loss = self.loss_metric(y_true, y_pred)
 
         params = {

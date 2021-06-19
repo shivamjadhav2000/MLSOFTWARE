@@ -30,10 +30,10 @@ def main(file_pth):
     data = check_for_errors(file_pth)
     if type(data)==str:
         return data
-    else:  
+    else:
         global myDataFrame
         global myFeatures
-        global categorical
+        global categorical 
         global numerical
         myDataFrame=data
         correlationmatrix=myDataFrame.corr().values.tolist()
@@ -43,7 +43,7 @@ def main(file_pth):
         myFeatures=columns
         column_dtypes = np.array(data.dtypes).astype(str).tolist()
         categorical = [columns[idx] for idx,tp in enumerate(column_dtypes) if tp=='object']
-        numerical =   [columns[idx] for idx,tp in enumerate(column_dtypes) if tp=='int64']
+        numerical =   [columns[idx] for idx,tp in enumerate(column_dtypes) if tp!='object']
         return np.array(data.head(10)).tolist(), columns, numerical, categorical,formattedCorrelationMatrix
 
 
@@ -101,15 +101,28 @@ def preprocessing_data(target=0, algo='C'):
 
     new_cats = [cat for cat in CHOICES if cat in categorical]
     new_nums = [num for num in CHOICES if num in numerical]
-    cat_data = myDataFrame[new_cats]
-    num_data = myDataFrame[new_nums]
+
+    if new_cats:
+        cat_data = myDataFrame[new_cats]
+    if new_nums:
+        num_data = myDataFrame[new_nums]
 
     if target != 0:
-        # target = new_cats.pop(new_cats.index(target)) if target in new_cats else new_nums.pop(new_nums.index(target))
-        num_data = pd.DataFrame(data=StandardScaler().fit_transform(num_data), columns=num_data.columns)
-        cat_data = myDataFrame[new_cats].aggregate(LabelEncoder().fit_transform)
-        cat_data = pd.DataFrame(data=StandardScaler().fit_transform(cat_data), columns=cat_data.columns)
-        DataFrame = pd.concat([num_data, cat_data], axis=1)
+        if new_nums:
+            num_data = pd.DataFrame(data=StandardScaler().fit_transform(num_data), columns=num_data.columns)
+        if new_cats:
+            cat_data = myDataFrame[new_cats].aggregate(LabelEncoder().fit_transform)
+            cat_data = pd.DataFrame(data=StandardScaler().fit_transform(cat_data), columns=cat_data.columns)
+
+        if new_cats and new_nums:
+            DataFrame = pd.concat([num_data, cat_data], axis=1)
+
+        elif new_cats and not new_nums:
+            DataFrame = cat_data
+
+        else:
+            DataFrame = num_data
+
         target_feature = target
 
         if algo=='R':
@@ -140,9 +153,9 @@ def build(algorithm, params=None, target_feature=0):
     ## For Supervised Learning (i.e, with Y)
     algorithm = list(algorithm)
     if target_feature != 0:
-        if build_stat:
-            build_stat = False
-            preprocessing_data(target_feature, algorithm[0])
+        # if build_stat:
+        #     build_stat = False
+        preprocessing_data(target_feature, algorithm[0])
 
         ch = CHOICES.copy()
         y_choices = ch.pop(ch.index(target_feature))
