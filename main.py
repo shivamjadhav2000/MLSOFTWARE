@@ -13,6 +13,10 @@ CHOICES = None
 categorical = None
 numerical = None
 build_stat = True
+ComparedResults = None
+TrainResults = None
+TestResults = None
+
 """
 0 : file path doesnt exist
 1 : file type errors
@@ -148,6 +152,9 @@ def build(algorithm, params=None, target_feature=0):
     global X
     global Y
     global build_stat
+    global ComparedResults
+    global TrainResults 
+    global TestResults 
     print("Algorithm=",algorithm,"\n","traning started!!!")
     ## For Supervised Learning (i.e, with Y)
     algorithm = list(algorithm)
@@ -173,6 +180,10 @@ def build(algorithm, params=None, target_feature=0):
         for key in test_results.keys():
             compared_results[key] = (train_results[key], test_results[key])
         print("training finished!!!")
+        ComparedResults=compared_results
+        TrainResults = train_results
+        TestResults = test_results
+
         return compared_results, train_results, test_results
 
     ## For Unsupervised Learning (i.e, without Y)
@@ -187,6 +198,9 @@ def build(algorithm, params=None, target_feature=0):
         for key in test_results.keys():
             compared_results[key] = (train_results[key], test_results[key])
         print("training finished!!!")
+        ComparedResults=compared_results
+        TrainResults = train_results
+        TestResults = test_results
         return compared_results, train_results, test_results
 
 
@@ -199,5 +213,9 @@ def getMetaData(Algo):
     if Algo=='RL' or Algo=='RR' or Algo=="RP" or Algo=="CL" or Algo=='CS' or Algo=='CK':
         return {'datasetSize':len(myDataFrame),'totalSelectedFeatures':CHOICES}
 
+## helper function to display results at review and analysis page
+@eel.expose
 
-eel.start("main.html",size=(1000,700))
+def getResults():
+    return {'ComparedResults':ComparedResults,'TrainResults':TrainResults,'TestResults':TestResults}
+eel.start("index.html",size=(1000,700))
