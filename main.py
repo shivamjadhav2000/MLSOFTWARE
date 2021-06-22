@@ -183,7 +183,7 @@ def build(algorithm, params=None, target_feature=0):
         ComparedResults=compared_results
         TrainResults = train_results
         TestResults = test_results
-
+        print("ComparedResults=",ComparedResults,"\n","TrainResults=",TrainResults,"\n","TestResults=",TestResults)
         return compared_results, train_results, test_results
 
     ## For Unsupervised Learning (i.e, without Y)
@@ -201,6 +201,7 @@ def build(algorithm, params=None, target_feature=0):
         ComparedResults=compared_results
         TrainResults = train_results
         TestResults = test_results
+        print("ComparedResults=",ComparedResults,"\n","TrainResults=",TrainResults,"\n","TestResults=",TestResults)
         return compared_results, train_results, test_results
 
 

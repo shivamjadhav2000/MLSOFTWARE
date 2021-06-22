@@ -1,6 +1,7 @@
 .hide{
     display: none;
   }
+  
   input{
     text-decoration: none;
     outline: none;
@@ -226,4 +227,8 @@
 #targetDisplay{
   display: grid;
   grid-template-columns: 40% 60%;
+}
+#targetStat{
+display:grid;
+grid-template-columns: 50% 50%;
 }
