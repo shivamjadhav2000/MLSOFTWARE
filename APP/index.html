@@ -43,7 +43,7 @@
         </div>
          <div class="sideBarSection" id="section2">
           <a href="main.html" class="myanchor"> <button type="button" class="btn btn-dark shadow p-3 mb-5  rounded" style="min-width:250px">EXPLORE</button></a> 
-          <button type="button" class="btn btn-outline-dark btn-dark shadow p-3 mb-5  rounded" style="min-width:250px">CODE FAQ</button>
+          <button type="button" class="btn btn-outline-dark btn-dark shadow p-3 mb-5  rounded " data-toggle="modal" data-target="#exampleModalLong" style="min-width:250px">CODE FAQ</button>
          </div>
     </div>
       <div class="DeveloperInfoSection">
@@ -119,6 +119,56 @@
         </div>
         
       </div>
+      <!-- Modal -->
+<div class="modal fade" id="exampleModalLong"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" >
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="width:100%">
+        <h4>1Q) What is the specified format of the dataset?</h4>
+        <p class="lead">1A) ML Desktop Application accepts datasets either in CSV(comma separated values) or XLSV(MS Excel) format.
+        </p> 
+        <h4>2Q) Do user require any prior knowledge in programming to use the software?
+        </h4>
+        <p class="lead">2A) No, the user does not require any prior knowledge in either programming or ML Application implementation
+          to use the software, but a little of knowledge is expected in choosing the algorithm for the appropriate
+          problem statement.</p>
+<h4>3Q) Which software is being used in the backend? Is it tensor flow or Sci-kit learn?
+</h4>
+<p class="lead">3A) No third party module or framework is being used in the backend to implement ML Algorithms. We have written
+  every algorithm from scratch using numpy module for vectorized array implementations. We created a module
+  named new_brain using python that contains our vanilla algorithms.</p>
+<h4>4Q) Does the software require any dependencies to run?
+</h4>
+<p class="lead">4A) No, it does not require any dependencies to run the software. We package all the modules required for the software
+  to run any environment. It is packaged into a executable file to run on any machine without any installation.</p>
+<h4>5Q) What if the user has zero knowledge about how to use the software?
+</h4>
+<p class="lead">5A) We built the software with a nice and user friendly dashboard the is easy to understand and use. All the options
+  structured in their respective tabs. Also algorithms are placed in a nice hierarchy.</p>
+<h4>6Q) How much storage is required to use the software?
+</h4>
+<p class="lead">6A) The software utilizes less 500mb of the hard disk space to run.
+</p>
+<h4>7Q) How many algorithms available in the software?
+</h4>
+<p class="lead">7A) A total of 7 algorithms are available in the software namely:</p>
+  <p class="lead">==> Linear, Polynomial and Ridge in Regression Algorithms.</p>
+  <p class="lead">==> Support Vector Classifier, Logistic Regression and K Nearest Neighbor's in Classification Algorithms</p>
+  <p class="lead">==> K Means clustering in the Clustering Algorithms.</p>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 <script>
   function handleToggle(){

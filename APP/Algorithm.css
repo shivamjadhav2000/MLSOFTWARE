@@ -357,7 +357,7 @@ margin-bottom:10px ;
 }
 
 .synopsisImgCont{
-  margin-top:8px;
+  margin-top:0px;
   margin-left: 8px;
   background-image: linear-gradient(45deg,#ee0979,#ff6a00);
   width:180px;

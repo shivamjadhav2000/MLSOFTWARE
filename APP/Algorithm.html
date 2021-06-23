@@ -302,12 +302,7 @@
                   Regularization parameter </label>
                   <input type="text" placeholder="enter Regularization parameter from 0-5" name="C" minlength="1" maxlength="4"autocomplete="off"/>
               </div>
-              <div class="modelBaseSection1">
-                <label for="customRange3" data-toggle="tooltip" data-placement="top" title="target variable AKA Dependent variables are nothing but the variable which holds the phenomena which we are studying.">
-                  Target variable</label>
-                  <select class="custom-select bg-transparent" id="SelectCS" name="Y">
-                  </select>
-                </div>
+              
               <div class="modelBaseSection1">
                 <label for="customRange3" data-toggle="tooltip" data-placement="top" title="target variable AKA Dependent variables are nothing but the variable which holds the phenomena which we are studying.">
                   Kernel</label>
@@ -344,6 +339,12 @@
                       max_iters </label>
                       <input type="text" placeholder="enter degree range from 1-1000" name="max_iters" minlength="1" maxlength="4"autocomplete="off"/>
                   </div>
+                  <div class="modelBaseSection1">
+                    <label for="customRange3" data-toggle="tooltip" data-placement="top" title="target variable AKA Dependent variables are nothing but the variable which holds the phenomena which we are studying.">
+                      Target variable</label>
+                      <select class="custom-select bg-transparent" id="SelectCS" name="Y">
+                      </select>
+                    </div>
                   <div class="BuildImgCont">
                     <label><button type="button"  onclick="handleBuildSpinC('CS')" ><img src="assests/build.png" id="BuildImgCS" width="50" height="50"></button>Build</label>
                     <div  id="trainingStatusTargetCS" role="alert">

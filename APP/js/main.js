@@ -164,7 +164,7 @@ function handleAlgorithmFormDisplay(event){
       data=r
       // document.getElementsByName(`batch_size${ChosenAlgorithm}`)[0].placeholder=`enter Batch size range between 1-${data.datasetSize}`
       targetSelect=document.getElementById(`Select${ChosenAlgorithm}`)
-      let temp=`<option value="">Open this select menu</option>`
+      let temp=`<option value="">Select Dependent Variable</option>`
       for(let i=0;i<data.totalSelectedFeatures.length;i++){
         temp+=`<option value=${data.totalSelectedFeatures[i]}>${data.totalSelectedFeatures[i]}</option>`
       }

@@ -46,6 +46,18 @@ let kmeansiterableParams=['min_loss','best_centroid','best_trial','K','max_iters
 let numClasses=null
 
 function handleDownload(inp){
+  if(typeof(inp)==='string'){
+    data={'name':inp,'data':trainResults[inp]}
+    eel.write_parameters(data,inp)(r=>{
+      document.getElementById('fileDownloadContent').innerHTML=
+      `<div class="alert alert-success" role="alert">${r.file_name} has been downloaded.</div>
+      <div class="alert alert-info" role="alert">
+   path ${r.file_path}
+ </div>
+      `
+     })
+  }
+  else{
    inp=inp.firstChild.innerHTML
    data={'name':inp,'data':trainResults[inp]}
     eel.write_parameters(data,inp)(r=>{
@@ -56,7 +68,7 @@ function handleDownload(inp){
 </div>
      `
     })
-}
+}}
 eel.getResults()(r=>{
     ComparedResults=r.ComparedResults
     trainResults=r.TrainResults
@@ -226,17 +238,18 @@ eel.getResults()(r=>{
   
           var chart = new ApexCharts(document.querySelector("#targetBarplot"), options);
           chart.render();
-          temp=``
+          temp=`<p class="lead">training Parameters </p>`
           kmeansiterableParams.forEach((i,idx)=>{
-         if(trainResults[i]==='object'){
-            temp+=`<div class="card">
+         if(typeof(trainResults[i])==="object"){
+           console.log(i,typeof(i))
+            temp+=`<div class="card" style="background-color:transparent">
             <div class="card-body" style="display:grid;grid-template-columns:50% 50%;">
-              <div>${i}  :</div><div><button data-toggle="modal" data-target="#downloadAlert" onclick='handleDownload(${i.toString()})' type="button" class="btn btn-warning">Download</button></div>
+              <div>${i}  :</div><div><button data-toggle="modal" data-target="#downloadAlert" onclick="handleDownload('${i}')" type="button" class="btn btn-warning">Download</button></div>
             </div>
           </div>`
          }
          else{
-          temp+=`<div class="card">
+          temp+=`<div class="card" style="background-color:transparent">
           <div class="card-body" style="display:grid;grid-template-columns:50% 50%;">
             <div>${i}  :</div><div>${trainResults[i]}</div>
           </div>
