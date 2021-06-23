@@ -111,27 +111,28 @@ def preprocessing_data(target=0, algo='C'):
 
     if new_cats:
         cat_data = myDataFrame[new_cats]
+
     if new_nums:
         num_data = myDataFrame[new_nums]
 
+
+    if new_cats and new_nums:
+        cat_data = myDataFrame[new_cats].aggregate(LabelEncoder().fit_transform)
+        DataFrame = pd.concat([num_data, cat_data], axis=1)
+        DataFrame = pd.DataFrame(StandardScaler().fit_transform(DataFrame.values), columns=DataFrame.columns)
+
+    if new_nums and not new_cats:
+        num_data = pd.DataFrame(data=StandardScaler().fit_transform(num_data), columns=num_data.columns)
+        DataFrame = num_data
+
+    if new_cats and not new_nums:
+        cat_data = myDataFrame[new_cats].aggregate(LabelEncoder().fit_transform)
+        cat_data = pd.DataFrame(data=StandardScaler().fit_transform(cat_data), columns=cat_data.columns)
+        DataFrame = cat_data
+
+
     if target != 0:
-        if new_nums:
-            num_data = pd.DataFrame(data=StandardScaler().fit_transform(num_data), columns=num_data.columns)
-        if new_cats:
-            cat_data = myDataFrame[new_cats].aggregate(LabelEncoder().fit_transform)
-            cat_data = pd.DataFrame(data=StandardScaler().fit_transform(cat_data), columns=cat_data.columns)
-
-        if new_cats and new_nums:
-            DataFrame = pd.concat([num_data, cat_data], axis=1)
-
-        elif new_cats and not new_nums:
-            DataFrame = cat_data
-
-        else:
-            DataFrame = num_data
-
         target_feature = target
-
         if algo=='R':
             target = myDataFrame[target_feature].values.reshape((-1, 1))
             target = StandardScaler().fit_transform(target)
@@ -141,12 +142,12 @@ def preprocessing_data(target=0, algo='C'):
             target = myDataFrame[target_feature].values.reshape((-1,1))
             DataFrame[target_feature] = target.astype(int)
 
-    else:
-        num_data = pd.DataFrame(data=StandardScaler().fit_transform(num_data), columns=num_data.columns)
-        cat_data = myDataFrame[new_cats].aggregate(LabelEncoder().fit_transform)
-        cat_data = pd.DataFrame(data=StandardScaler().fit_transform(cat_data), columns=cat_data.columns)
-        DataFrame = pd.concat([num_data, cat_data], axis=1)
-        DataFrame = pd.DataFrame(data=StandardScaler().fit_transform(DataFrame[CHOICES]), columns=CHOICES)
+    # else:
+    #     num_data = pd.DataFrame(data=StandardScaler().fit_transform(num_data), columns=num_data.columns)
+    #     cat_data = myDataFrame[new_cats].aggregate(LabelEncoder().fit_transform)
+    #     cat_data = pd.DataFrame(data=StandardScaler().fit_transform(cat_data), columns=cat_data.columns)
+    #     DataFrame = pd.concat([num_data, cat_data], axis=1)
+    #     DataFrame = pd.DataFrame(data=StandardScaler().fit_transform(DataFrame[CHOICES]), columns=CHOICES)
 
 ## main build function
 @eel.expose
@@ -158,8 +159,8 @@ def build(algorithm, params=None, target_feature=0):
     global Y
     global build_stat
     global ComparedResults
-    global TrainResults 
-    global TestResults 
+    global TrainResults
+    global TestResults
     MyAlgorithm=algorithm
     print("Algorithm=",algorithm,"\n","traning started!!!")
     ## For Supervised Learning (i.e, with Y)
@@ -243,6 +244,7 @@ def write_parameters(parameters):
     'file_name' : 'parameters.txt',
     'file_path' : save_path
     }
+    print('params=',params)
     return params
 
 eel.start("index.html",size=(1000,700))

@@ -1,6 +1,10 @@
-.hide{
-    display: none;
-  }
+.trainingItem{
+  /* line-height: 17px; */
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+}
+
+
 td{
   margin:50%
 }
@@ -223,10 +227,10 @@ td{
     justify-content: flex-start;
     /* align-items: center; */
     padding:2px 5px;
-    border: 1px solid rgba(202, 185, 185, 0.075) ;
+    border: 1px solid rgba(236, 154, 154, 0.075) ;
   }
   /* sub navbar */
-#targetDisplay{
+#targetDisplayMain{
   display: grid;
   grid-template-columns: 40% 60%;
 }
@@ -234,3 +238,10 @@ td{
 display:grid;
 grid-template-columns: 50% 50%;
 }
+#kmeansTargetDisplay{
+  padding:2%;
+}
+#targetBarplot{
+  padding:2%;
+}
+

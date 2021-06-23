@@ -4,23 +4,32 @@ let targetDisplay=document.getElementById('targetDisplay')
 let kmeansTargetDisplay=document.getElementById('kmeansTargetDisplay')
 let trainCont1=document.getElementById('trainCont1')
 let testCont1=document.getElementById('testCont1')
-targetDisplay.className="hide"
-kmeansTargetDisplay.className="hide"
-trainCont1.className="hide"
-testCont1.className="hide"
+targetDisplay.style.display="none"
+kmeansTargetDisplay.style.display="none"
+trainCont1.style.display="none"
+testCont1.style.display="none"
 let myAlgorithm=null
 targetStat=document.getElementById('targetStat')
 let trainingParameters=['num_samples','num_features','num_classes','score','loss','batch_size','biases','epochs','weights','lamda','learning_rate']
 let featureList=[`loss`,`num_classes`,`score`,`num_features`,`num_samples`]
 let kmeansCommonParms=['loss_per_trial']
-let kmeansiterableParams=['min_loss','best_centroid','best_trial','K','max_iters','centroids','loss_per_trial','trials']
+let kmeansiterableParams=['min_loss','best_centroid','best_trial','K','max_iters','centroids','trials']
 let numClasses=null
+
+function handle_write_parameters(param){
+    alert("yess its working params=",param)
+    if(trainResults!==null){
+    eel.write_parameters(trainResults[param])(r=>{
+        console.log(r)
+    })}
+}
 eel.getResults()(r=>{
     ComparedResults=r.ComparedResults
     trainResults=r.TrainResults
     myAlgorithm=r.myAlgorithm
     if(myAlgorithm!='K'){
-        targetDisplay.className=''
+
+        targetDisplay.style.display='block'
     //f1-score and precision table head update train and test results
     featureList.forEach((i,idx)=>{
         let temp=``
@@ -30,8 +39,8 @@ eel.getResults()(r=>{
         document.getElementById(`target_${i}`).innerHTML=temp
     })
         if(ComparedResults['f1_score']!==undefined){
-        trainCont1.className=""
-        testCont1.className=""
+        trainCont1.style.display='block'
+        testCont1.style.display='block'
         let train=`<th scope="col">Features</th>`
         let test=`<th scope="col">Features</th>`
         let temp=``
@@ -96,21 +105,36 @@ eel.getResults()(r=>{
     }
     //training parameters results update
     trainingParameters.forEach((i,idx)=>{
+        console.log(typeof(trainResults[i]))
         if(trainResults[i]!==undefined){
-            if(Number(trainResults[i]) === trainResults[i] && trainResults[i] % 1 !== 0){
-                   document.getElementById(i).innerHTML=`${i}: ${trainResults[i].toString().slice(0,9)}`
+            if(typeof(trainResults[i])==='object'){
+                document.getElementById(i).innerHTML=`<div>${i}</div><div>:</div><div><button onclick="handle_write_parameters(${i})" type="button" class="btn btn-dark">Download</button></div>`
+
+
+            }
+            else if(Number(trainResults[i]) === trainResults[i] && trainResults[i] % 1 !== 0){
+                   document.getElementById(i).innerHTML=`<div>${i}</div><div>:</div> <div>${trainResults[i].toString().slice(0,9)}</div>`
             }
             else{
-                document.getElementById(i).innerHTML=`${i}: ${trainResults[i]}`
+                document.getElementById(i).innerHTML=`<div>${i}</div><div>:</div><div> ${trainResults[i]}</div>`
             }
+        }
+        else{
+        document.getElementById(i).innerHTML=`<div>${i}</div><div>:</div><div>--</div>`
         }
     })
 
     }
     else{
-        kmeansTargetDisplay.className=''
-        let trainTrailLoss=ComparedResults[loss_per_trial][0]
-        let testTrailLoss=ComparedResults[loss_per_trial][1]
+        kmeansTargetDisplay.style.display='block'
+        let trails=[]
+        let trainTrailLoss=ComparedResults['loss_per_trial'][0].map((i,idx)=>{
+            return i.toFixed(4)
+        })
+        let testTrailLoss=ComparedResults['loss_per_trial'][1].map((i,idx)=>{
+            return i.toFixed(4)
+        })
+        trainTrailLoss.forEach((i,idx)=>{trails.push(`trail ${idx+1}`)})
         kmeansCommonParms
         var options = {
             series: [{
@@ -143,9 +167,9 @@ eel.getResults()(r=>{
             categories: trails,
           },
           yaxis: {
-            // title: {
-            //   text: '$ (thousands)'
-            // }
+            title: {
+              text: 'Loss'
+            }
           },
           fill: {
             opacity: 1
