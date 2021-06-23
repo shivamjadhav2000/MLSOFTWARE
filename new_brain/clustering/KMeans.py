@@ -33,7 +33,7 @@ class KMeans:
         best_idx = cost.argmin()
         params = {
         'min_loss' : cost[best_idx],
-        'loss_per_trial' : cost,
+        'loss_per_trial' : cost.tolist()
         }
         return params
 

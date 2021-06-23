@@ -1,7 +1,9 @@
 .hide{
     display: none;
   }
-  
+td{
+  margin:50%
+}
   input{
     text-decoration: none;
     outline: none;

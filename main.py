@@ -4,7 +4,7 @@ import pandas as pd
 import os
 from sklearn.preprocessing import StandardScaler, LabelEncoder, OneHotEncoder
 from brain_utils import split_data, run
-
+import sys
 myDataFrame=None
 myFeatures=None
 DataFrame = None
@@ -16,6 +16,8 @@ build_stat = True
 ComparedResults = None
 TrainResults = None
 TestResults = None
+PATH = None
+MyAlgorithm=None
 
 """
 0 : file path doesnt exist
@@ -39,6 +41,8 @@ def main(file_pth):
         global myFeatures
         global categorical
         global numerical
+        global PATH
+        PATH = file_pth
         myDataFrame=data
         correlationmatrix=myDataFrame.corr().values.tolist()
         correlationmatrixKeys=list(myDataFrame.corr().to_dict().keys())
@@ -147,6 +151,7 @@ def preprocessing_data(target=0, algo='C'):
 ## main build function
 @eel.expose
 def build(algorithm, params=None, target_feature=0):
+    global MyAlgorithm
     global DataFrame
     global CHOICES
     global X
@@ -155,6 +160,7 @@ def build(algorithm, params=None, target_feature=0):
     global ComparedResults
     global TrainResults 
     global TestResults 
+    MyAlgorithm=algorithm
     print("Algorithm=",algorithm,"\n","traning started!!!")
     ## For Supervised Learning (i.e, with Y)
     algorithm = list(algorithm)
@@ -218,5 +224,25 @@ def getMetaData(Algo):
 @eel.expose
 
 def getResults():
-    return {'ComparedResults':ComparedResults,'TrainResults':TrainResults,'TestResults':TestResults}
+    return {'myAlgorithm':MyAlgorithm,'ComparedResults':ComparedResults,'TrainResults':TrainResults,'TestResults':TestResults}
+
+@eel.expose
+
+def write_parameters(parameters):
+    global PATH
+    save_path = PATH.split('/')
+    save_path[-1] = 'parameters.txt'
+    save_path = '/'.join(save_path)
+    org_stdout = sys.stdout
+    with open(save_path, 'w') as f:
+        sys.stdout = f
+        print(parameters)
+        sys.stdout = org_stdout
+
+    params = {
+    'file_name' : 'parameters.txt',
+    'file_path' : save_path
+    }
+    return params
+
 eel.start("index.html",size=(1000,700))
