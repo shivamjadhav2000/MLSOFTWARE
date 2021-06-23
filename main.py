@@ -142,13 +142,7 @@ def preprocessing_data(target=0, algo='C'):
             target = myDataFrame[target_feature].values.reshape((-1,1))
             DataFrame[target_feature] = target.astype(int)
 
-    # else:
-    #     num_data = pd.DataFrame(data=StandardScaler().fit_transform(num_data), columns=num_data.columns)
-    #     cat_data = myDataFrame[new_cats].aggregate(LabelEncoder().fit_transform)
-    #     cat_data = pd.DataFrame(data=StandardScaler().fit_transform(cat_data), columns=cat_data.columns)
-    #     DataFrame = pd.concat([num_data, cat_data], axis=1)
-    #     DataFrame = pd.DataFrame(data=StandardScaler().fit_transform(DataFrame[CHOICES]), columns=CHOICES)
-
+    
 ## main build function
 @eel.expose
 def build(algorithm, params=None, target_feature=0):
