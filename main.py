@@ -182,8 +182,13 @@ def build(algorithm, params=None, target_feature=0):
 
         data = split_data(X, y=Y, algorithm=algorithm)
         train_results, test_results = run(data, params, algorithm)
+        if 'weights' in train_results.keys():
+            train_results['weights']=train_results['weights'].tolist()
+            train_results['biases']=train_results['biases'].tolist()
         compared_results = dict()
-
+        if 'best_centroid' in train_results.keys():
+            train_results['best_centroid']=train_results['best_centroid'].tolist()
+            train_results['centroids']=train_results['centroids'].tolist()
         for key in test_results.keys():
             compared_results[key] = (train_results[key], test_results[key])
         print("training finished!!!")
@@ -201,6 +206,12 @@ def build(algorithm, params=None, target_feature=0):
         X = DataFrame.values
         data = split_data(X, algorithm=algorithm)
         train_results, test_results = run(data, params, algorithm)
+        if 'weights' in train_results.keys():
+            train_results['weights']=train_results['weights'].tolist()
+            train_results['biases']=train_results['biases'].tolist()
+        if 'best_centroid' in train_results.keys():
+            train_results['best_centroid']=train_results['best_centroid'].tolist()
+            train_results['centroids']=train_results['centroids'].tolist()
         compared_results = dict()
         for key in test_results.keys():
             compared_results[key] = (train_results[key], test_results[key])
@@ -229,10 +240,12 @@ def getResults():
 
 @eel.expose
 
-def write_parameters(parameters):
+
+def write_parameters(parameters,fileName):
     global PATH
+    PATH = PATH.replace('\\', '/')
     save_path = PATH.split('/')
-    save_path[-1] = 'parameters.txt'
+    save_path[-1] = fileName+'.txt'
     save_path = '/'.join(save_path)
     org_stdout = sys.stdout
     with open(save_path, 'w') as f:
@@ -241,10 +254,9 @@ def write_parameters(parameters):
         sys.stdout = org_stdout
 
     params = {
-    'file_name' : 'parameters.txt',
+    'file_name' : fileName+'.txt',
     'file_path' : save_path
     }
-    print('params=',params)
     return params
 
 eel.start("index.html",size=(1000,700))

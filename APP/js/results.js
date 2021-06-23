@@ -4,28 +4,63 @@ let targetDisplay=document.getElementById('targetDisplay')
 let kmeansTargetDisplay=document.getElementById('kmeansTargetDisplay')
 let trainCont1=document.getElementById('trainCont1')
 let testCont1=document.getElementById('testCont1')
+let ConfusionMatTarget=document.getElementById('ConfusionMatTarget')
+trainCont1.style.display='none'
+testCont1.style.display='none'
+ConfusionMatTarget.style.display='none'
 targetDisplay.style.display="none"
 kmeansTargetDisplay.style.display="none"
-trainCont1.style.display="none"
-testCont1.style.display="none"
+
 let myAlgorithm=null
-targetStat=document.getElementById('targetStat')
+ //handleToggle
+ function handleToggle(){
+    var element = document.body;
+    document.getElementById("navCont").classList.toggle("navLightMode")
+    // document.getElementById("targetData").classList.toggle("Container1Dark")
+    document.getElementById("subNavCont").classList.toggle("subNavDarkMode")
+    let toggleImg=document.getElementById("toggleImg").src.split("/")
+    toggleImg=toggleImg[toggleImg.length-1]
+  document.getElementById("toggleImg").src=toggleImg==="half-moon.png"?"assests/sunny.png":"assests/half-moon.png"
+  var anchorTemp = document.getElementsByTagName("a")
+  var navbarHover =document.getElementsByTagName("span")
+   element.classList.toggle("dark-mode");
+   for(let i=0;i<anchorTemp.length;i++){
+     anchorTemp[i].classList.toggle("myanchorToggle")
+   }
+   for(var j=0;j<navbarHover.length;j++){
+     if(navbarHover[j].className==="navItem"){
+    navbarHover[j].className="navItemDark"
+     }
+     else {
+      navbarHover[j].className="navItem"
+     }
+  }
+ }
+
+
+// targetStat=document.getElementById('targetStat')
 let trainingParameters=['num_samples','num_features','num_classes','score','loss','batch_size','biases','epochs','weights','lamda','learning_rate']
 let featureList=[`loss`,`num_classes`,`score`,`num_features`,`num_samples`]
 let kmeansCommonParms=['loss_per_trial']
 let kmeansiterableParams=['min_loss','best_centroid','best_trial','K','max_iters','centroids','trials']
 let numClasses=null
 
-function handle_write_parameters(param){
-    alert("yess its working params=",param)
-    if(trainResults!==null){
-    eel.write_parameters(trainResults[param])(r=>{
-        console.log(r)
-    })}
+function handleDownload(inp){
+   inp=inp.firstChild.innerHTML
+   data={'name':inp,'data':trainResults[inp]}
+    eel.write_parameters(data,inp)(r=>{
+     document.getElementById('fileDownloadContent').innerHTML=
+     `<div class="alert alert-success" role="alert">${r.file_name} has been downloaded.</div>
+     <div class="alert alert-info" role="alert">
+  path ${r.file_path}
+</div>
+     `
+    })
 }
 eel.getResults()(r=>{
     ComparedResults=r.ComparedResults
     trainResults=r.TrainResults
+    console.log('r=',r,'trainResults =',trainResults)
     myAlgorithm=r.myAlgorithm
     if(myAlgorithm!='K'){
 
@@ -47,7 +82,7 @@ eel.getResults()(r=>{
         numClasses=Number(ComparedResults['num_classes'][0])
         for(let i=0;i<numClasses;i++){
 
-            temp+=`<th scope="col">${i+1}</th>`
+            temp+=`<th scope="col" style="color:black">${i+1}</th>`
         }
         train+=temp
         test+=temp
@@ -62,8 +97,8 @@ eel.getResults()(r=>{
             train+=`<tr><th scope="row">${i}</th>`
             test+=`<tr><th scope="row">${i}</th>`
             for(let j=0;j<numClasses;j++){
-                train+=`<td>${ComparedResults[i][0][j].toString().slice(0,6)}</td>`
-                test+=`<td>${ComparedResults[i][1][j].toString().slice(0,6)}</td>`
+                train+=`<td style="color:black">${ComparedResults[i][0][j].toString().slice(0,6)}</td>`
+                test+=`<td style="color:black">${ComparedResults[i][1][j].toString().slice(0,6)}</td>`
             }
             train+=`</tr>`
             test+=`</tr>`
@@ -75,6 +110,7 @@ eel.getResults()(r=>{
     }
     //confusion matrix table head and body update of  train and test results
     if(ComparedResults['confusion_matrix']!==undefined){
+        ConfusionMatTarget.style.display=''
         let confusion_matrix=ComparedResults['confusion_matrix']
         let confusion_matrix_train=confusion_matrix[0]
         let confusion_matrix_test=confusion_matrix[1]
@@ -105,10 +141,10 @@ eel.getResults()(r=>{
     }
     //training parameters results update
     trainingParameters.forEach((i,idx)=>{
-        console.log(typeof(trainResults[i]))
         if(trainResults[i]!==undefined){
             if(typeof(trainResults[i])==='object'){
-                document.getElementById(i).innerHTML=`<div>${i}</div><div>:</div><div><button onclick="handle_write_parameters(${i})" type="button" class="btn btn-dark">Download</button></div>`
+                let temp=i
+                document.getElementById(i).innerHTML=`<div>${i}</div><div>:</div><div><button data-toggle="modal" data-target="#downloadAlert" onclick='handleDownload(${i.toString()})' type="button" class="btn btn-warning">Download</button></div>`
 
 
             }
@@ -121,6 +157,11 @@ eel.getResults()(r=>{
         }
         else{
         document.getElementById(i).innerHTML=`<div>${i}</div><div>:</div><div>--</div>`
+        }
+        if(myAlgorithm==='CK'){
+            document.getElementById('weights').innerHTML=`<div>K</div><div>:</div><div> ${trainResults['K']}</div>`
+            document.getElementById('biases').innerHTML=`<div>P</div><div>:</div><div> ${trainResults['P']}</div>`
+
         }
     })
 
@@ -185,6 +226,24 @@ eel.getResults()(r=>{
   
           var chart = new ApexCharts(document.querySelector("#targetBarplot"), options);
           chart.render();
+          temp=``
+          kmeansiterableParams.forEach((i,idx)=>{
+         if(trainResults[i]==='object'){
+            temp+=`<div class="card">
+            <div class="card-body" style="display:grid;grid-template-columns:50% 50%;">
+              <div>${i}  :</div><div><button data-toggle="modal" data-target="#downloadAlert" onclick='handleDownload(${i.toString()})' type="button" class="btn btn-warning">Download</button></div>
+            </div>
+          </div>`
+         }
+         else{
+          temp+=`<div class="card">
+          <div class="card-body" style="display:grid;grid-template-columns:50% 50%;">
+            <div>${i}  :</div><div>${trainResults[i]}</div>
+          </div>
+        </div>`
+          }})
+          document.getElementById('KmeansTrainingTarget').innerHTML=temp
+         
     }
 
 
