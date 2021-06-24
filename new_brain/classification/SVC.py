@@ -1,4 +1,5 @@
 from sklearn.svm import SVC as SV
+import sklearn.utils._weight_vector
 import numpy as np
 from new_brain.base import BaseEstimator
 from sklearn.metrics import accuracy_score, confusion_matrix, precision_score, recall_score, f1_score
