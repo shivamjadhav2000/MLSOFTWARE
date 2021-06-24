@@ -2,7 +2,7 @@ import eel
 import numpy as np
 import pandas as pd
 import os
-from sklearn.preprocessing import StandardScaler, LabelEncoder, OneHotEncoder
+from sklearn.preprocessing import StandardScaler, LabelEncoder
 from brain_utils import split_data, run
 import sys
 myDataFrame=None
@@ -28,33 +28,6 @@ def heat_map(columns, corr):
     for idx, value in enumerate(corr):
         ans.append({'name' : columns[idx], 'data' : [{'x' : x[0], 'y' : x[1]} for x in list(zip(columns, value))]})
     return ans
-
-eel.init("APP")
-@eel.expose
-def main(file_pth):
-    file_pth = file_pth[1:-1]
-    data = check_for_errors(file_pth)
-    if type(data)==str:
-        return data
-    else:
-        global myDataFrame
-        global myFeatures
-        global categorical
-        global numerical
-        global PATH
-        PATH = file_pth
-        myDataFrame=data
-        correlationmatrix=myDataFrame.corr().values.tolist()
-        correlationmatrixKeys=list(myDataFrame.corr().to_dict().keys())
-        formattedCorrelationMatrix=heat_map(correlationmatrixKeys,correlationmatrix)
-        columns = list(data.columns)
-        myFeatures=columns
-        column_dtypes = np.array(data.dtypes).astype(str).tolist()
-        categorical = [columns[idx] for idx,tp in enumerate(column_dtypes) if tp=='object']
-        numerical =   [columns[idx] for idx,tp in enumerate(column_dtypes) if tp!='object']
-        return np.array(data.head(10)).tolist(), columns, numerical, categorical,formattedCorrelationMatrix
-
-
 def check_for_errors(file_pth):
 
     """
@@ -81,23 +54,6 @@ def check_for_errors(file_pth):
     data.dropna(axis=1, inplace=True)
 
     return data
-
-@eel.expose
-def GetFeatureValues(featureName):
-    global myFeatures
-    global myDataFrame
-    if featureName in myFeatures:
-        mask = [3, 4, 1, 6, 7]
-        info = np.array(list(myDataFrame[featureName].describe()))[mask]
-        info[2] = np.median(myDataFrame[featureName])
-        return info.tolist()
-
-@eel.expose
-def get_user_choices(choices): #choices = [] ==>> list of all choices numerical union categoricals
-    global CHOICES
-    global DataFrame
-    CHOICES = choices
-    return True
 
 def preprocessing_data(target=0, algo='C'):
     global numerical
@@ -142,6 +98,54 @@ def preprocessing_data(target=0, algo='C'):
             target = myDataFrame[target_feature].values.reshape((-1,1))
             DataFrame[target_feature] = target.astype(int)
 
+eel.init("APP")
+@eel.expose
+def main(file_pth):
+    file_pth = file_pth[1:-1]
+    data = check_for_errors(file_pth)
+    if type(data)==str:
+        return data
+    else:
+        global myDataFrame
+        global myFeatures
+        global categorical
+        global numerical
+        global PATH
+        PATH = file_pth
+        myDataFrame=data
+        correlationmatrix=myDataFrame.corr().values.tolist()
+        correlationmatrixKeys=list(myDataFrame.corr().to_dict().keys())
+        formattedCorrelationMatrix=heat_map(correlationmatrixKeys,correlationmatrix)
+        columns = list(data.columns)
+        myFeatures=columns
+        column_dtypes = np.array(data.dtypes).astype(str).tolist()
+        categorical = [columns[idx] for idx,tp in enumerate(column_dtypes) if tp=='object']
+        numerical =   [columns[idx] for idx,tp in enumerate(column_dtypes) if tp!='object']
+        return np.array(data.head(10)).tolist(), columns, numerical, categorical,formattedCorrelationMatrix
+
+
+
+
+@eel.expose
+def GetFeatureValues(featureName):
+    global myFeatures
+    global myDataFrame
+    if featureName in myFeatures:
+        mask = [3, 4, 1, 6, 7]
+        info = np.array(list(myDataFrame[featureName].describe()))[mask]
+        info[2] = np.median(myDataFrame[featureName])
+        return info.tolist()
+    return 'featureName invalid'
+
+@eel.expose
+def get_user_choices(choices): #choices = [] ==>> list of all choices numerical union categoricals
+    global CHOICES
+    global DataFrame
+    CHOICES = choices
+    return True
+
+
+
     
 ## main build function
 @eel.expose
@@ -156,7 +160,6 @@ def build(algorithm, params=None, target_feature=0):
     global TrainResults
     global TestResults
     MyAlgorithm=algorithm
-    print("Algorithm=",algorithm,"\n","traning started!!!")
     ## For Supervised Learning (i.e, with Y)
     algorithm = list(algorithm)
     if target_feature != 0:
@@ -185,11 +188,9 @@ def build(algorithm, params=None, target_feature=0):
             train_results['centroids']=train_results['centroids'].tolist()
         for key in test_results.keys():
             compared_results[key] = (train_results[key], test_results[key])
-        print("training finished!!!")
         ComparedResults=compared_results
         TrainResults = train_results
         TestResults = test_results
-        print("ComparedResults=",ComparedResults,"\n","TrainResults=",TrainResults,"\n","TestResults=",TestResults)
         return compared_results, train_results, test_results
 
     ## For Unsupervised Learning (i.e, without Y)
@@ -209,11 +210,9 @@ def build(algorithm, params=None, target_feature=0):
         compared_results = dict()
         for key in test_results.keys():
             compared_results[key] = (train_results[key], test_results[key])
-        print("training finished!!!")
         ComparedResults=compared_results
         TrainResults = train_results
         TestResults = test_results
-        print("ComparedResults=",ComparedResults,"\n","TrainResults=",TrainResults,"\n","TestResults=",TestResults)
         return compared_results, train_results, test_results
 
 
@@ -225,7 +224,7 @@ def getMetaData(Algo):
     global myDataFrame
     if Algo=='RL' or Algo=='RR' or Algo=="RP" or Algo=="CL" or Algo=='CS' or Algo=='CK':
         return {'datasetSize':len(myDataFrame),'totalSelectedFeatures':CHOICES}
-
+    return 'algo not valid'
 ## helper function to display results at review and analysis page
 @eel.expose
 
@@ -233,7 +232,6 @@ def getResults():
     return {'myAlgorithm':MyAlgorithm,'ComparedResults':ComparedResults,'TrainResults':TrainResults,'TestResults':TestResults}
 
 @eel.expose
-
 
 def write_parameters(parameters,fileName):
     global PATH

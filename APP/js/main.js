@@ -31,11 +31,6 @@ function handleToggle(){
   }
 
 }
-// function dummyTesting1(){
-//   eel.dummyTesting()(r=>{
-//     console.log(r)
-//   })
-// }
 function sleep (time) {
   return new Promise((resolve) => setTimeout(resolve, time));
 }
@@ -66,7 +61,6 @@ async function handleBuildSpinR(Algo){
    BuildImg.className=""
    trainingStatusTarget.className="alert alert-success"
    trainingStatusTarget.innerHTML="Traing is successfull"
-   console.log("build responsce for Algorithm =",Algo,"res=",r)
  })
 }
 async function handleBuildSpinK(Algo){
@@ -86,7 +80,7 @@ async function handleBuildSpinK(Algo){
   AlgorithmParamsData["degree"]=degree.length?parseInt(degree):3
   BuildImg.className="spinner"
   eel.build(ChosenAlgorithm,AlgorithmParamsData,TargetVariable=0)((r)=>{
-    console.log("build responsce for algorithm =",Algo,"res=",r)
+
     BuildImg.className=""
     trainingStatusTarget.className="alert alert-success"
     trainingStatusTarget.innerHTML="Traing is successfull"
@@ -128,7 +122,6 @@ async function handleBuildSpinC(Algo){
 
   }
   eel.build(ChosenAlgorithm,AlgorithmParamsData,TargetVariable)((r)=>{
-    console.log("build responsce for algorithm =",Algo,"res=",r)
     BuildImg.className=""
     trainingStatusTarget.className="alert alert-success"
     trainingStatusTarget.innerHTML="Traing is successfull"

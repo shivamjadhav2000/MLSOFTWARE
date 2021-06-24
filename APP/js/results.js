@@ -72,7 +72,6 @@ function handleDownload(inp){
 eel.getResults()(r=>{
     ComparedResults=r.ComparedResults
     trainResults=r.TrainResults
-    console.log('r=',r,'trainResults =',trainResults)
     myAlgorithm=r.myAlgorithm
     if(myAlgorithm!='K'){
 
@@ -241,7 +240,6 @@ eel.getResults()(r=>{
           temp=`<p class="lead">training Parameters </p>`
           kmeansiterableParams.forEach((i,idx)=>{
          if(typeof(trainResults[i])==="object"){
-           console.log(i,typeof(i))
             temp+=`<div class="card" style="background-color:transparent">
             <div class="card-body" style="display:grid;grid-template-columns:50% 50%;">
               <div>${i}  :</div><div><button data-toggle="modal" data-target="#downloadAlert" onclick="handleDownload('${i}')" type="button" class="btn btn-warning">Download</button></div>

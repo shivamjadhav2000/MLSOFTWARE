@@ -12,7 +12,7 @@ function handleFeatureSelection(event){
 document.querySelectorAll('input[type="checkbox"]:checked').forEach((i,idx)=>{
   checkboxList.push(i.value)
 })
-eel.get_user_choices(checkboxList)(r=>{console.log("r from main in main.js",r)})
+eel.get_user_choices(checkboxList)(r=>{let PPP=r})
 }
  function handleToggle(){
   var element = document.body;
