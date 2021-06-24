@@ -242,7 +242,6 @@ def write_parameters(parameters,fileName):
     org_stdout = sys.stdout
     with open(save_path, 'w') as f:
         sys.stdout = f
-        print(parameters)
         sys.stdout = org_stdout
 
     params = {
