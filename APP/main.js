@@ -47,10 +47,12 @@ function handleFileUploadCleaning(){
   document.querySelector("#myChart1").innerHTML=""
   document.querySelector("#myChart2").innerHTML=""
   document.querySelector("#targetDropdown").innerHTML=""
+  document.querySelector('.FileUploadCont').style.display="flex"
 }
 //control display of dynamic columns rendering get data from python as all columns
  function handleFileUpload(){
   handleFileUploadCleaning()
+
     let FileUploadErrorTarget=document.getElementById("FileUploadErrorTarget")
     // display: flex;justify-content: center;align-items: center;  
     let featureSelectionCont=document.getElementById("featureSelectionCont")
@@ -77,6 +79,8 @@ function handleFileUploadCleaning(){
         FileUploadErrorTarget.className='hidden'
       }
         else{
+          document.querySelector('.FileUploadCont').style.display="none"
+
           document.getElementById("data-visualization-section-Cont").className=""
 
             let rows=r[0]

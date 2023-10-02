@@ -58,7 +58,41 @@ text-decoration: none;
     background: -webkit-linear-gradient(45deg,#ee0979,#ff6a00);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    position: relative;
 }
+#FileUpload::after {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border: 2px solid;
+  border-image: linear-gradient(45deg, #ee0979, #ff6a00);
+  border-image-slice: 1;
+  border-radius: inherit;
+}
+.animated-button {
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+
+
+
+
+
 #dropdown{
   display: flex;
   justify-content: center;
@@ -292,7 +326,10 @@ font-size: 18px;
 display: flex;
 justify-content: center;
 text-align: center;
-margin: 5x;
+margin: 5px;
+position: absolute;
+left:50%;
+top:50%;
 } 
 
 

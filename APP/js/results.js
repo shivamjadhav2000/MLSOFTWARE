@@ -48,6 +48,7 @@ let numClasses=null
 function handleDownload(inp){
   if(typeof(inp)==='string'){
     data={'name':inp,'data':trainResults[inp]}
+    console.log("data=",data)
     eel.write_parameters(data,inp)(r=>{
       document.getElementById('fileDownloadContent').innerHTML=
       `<div class="alert alert-success" role="alert">${r.file_name} has been downloaded.</div>
@@ -72,6 +73,7 @@ function handleDownload(inp){
 eel.getResults()(r=>{
     ComparedResults=r.ComparedResults
     trainResults=r.TrainResults
+    console.log("trainResults==",trainResults)
     myAlgorithm=r.myAlgorithm
     if(myAlgorithm!='K'){
 

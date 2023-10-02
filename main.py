@@ -112,6 +112,9 @@ def main(file_pth):
         global numerical
         global PATH
         PATH = file_pth
+        print("data==",data)
+        # Convert non-numeric data to NaN
+        # Drop rows with NaN in numerical columns
         myDataFrame=data
         correlationmatrix=myDataFrame.corr().values.tolist()
         correlationmatrixKeys=list(myDataFrame.corr().to_dict().keys())
@@ -233,20 +236,20 @@ def getResults():
 
 @eel.expose
 
-def write_parameters(parameters,fileName):
+def write_parameters(parameters, fileName):
     global PATH
     PATH = PATH.replace('\\', '/')
     save_path = PATH.split('/')
     save_path[-1] = fileName+'.txt'
     save_path = '/'.join(save_path)
-    org_stdout = sys.stdout
-    with open(save_path, 'w') as f:
-        sys.stdout = f
-        sys.stdout = org_stdout
 
+    with open(save_path, 'w') as f:
+        # Write the parameters to the file
+        f.write(str(parameters))
+    print("parameters=",parameters)
     params = {
-    'file_name' : fileName+'.txt',
-    'file_path' : save_path
+        'file_name': fileName+'.txt',
+        'file_path': save_path
     }
     return params
 
