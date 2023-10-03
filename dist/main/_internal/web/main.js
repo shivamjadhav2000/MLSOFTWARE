@@ -70,7 +70,7 @@ function handleFileUploadCleaning(){
     //     </div>
 
     fpath=inputf
-    eel.main(inputf)(async (r)=>{
+    eel.main("'"+inputf+"'")(async (r)=>{
       if(typeof(r)=='string'){
         FileUploadErrorTarget.className=''
         FileUploadErrorTarget.className="alert alert-danger"
