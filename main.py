@@ -102,7 +102,6 @@ def preprocessing_data(target=0, algo='C'):
             target = myDataFrame[target_feature].values.reshape((-1,1))
             DataFrame[target_feature] = target.astype(int)
 
-eel.init("APP")
 @eel.expose
 def main(file_pth):
     file_pth = file_pth[1:-1]
@@ -257,4 +256,9 @@ def write_parameters(parameters, fileName):
     }
     return params
 
+eel.init("web")
+
+# app = eel.Bottle()
+
+# eel.init('web', app=app, host='localhost', port=8080)
 eel.start("index.html",size=(1000,700))
