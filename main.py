@@ -115,7 +115,6 @@ def main(file_pth):
         global numerical
         global PATH
         PATH = file_pth
-        print("data==",data)
         # Convert non-numeric data to NaN
         # Drop rows with NaN in numerical columns
         myDataFrame=data
@@ -249,7 +248,6 @@ def write_parameters(parameters, fileName):
     with open(save_path, 'w') as f:
         # Write the parameters to the file
         f.write(str(parameters))
-    print("parameters=",parameters)
     params = {
         'file_name': fileName+'.txt',
         'file_path': save_path
