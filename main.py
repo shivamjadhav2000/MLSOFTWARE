@@ -5,6 +5,10 @@ import os
 from sklearn.preprocessing import StandardScaler, LabelEncoder
 from brain_utils import split_data, run
 import sys
+
+outfile = open("logfile.txt", "wt")
+sys.stderr = outfile
+sys.stdout = outfile
 myDataFrame=None
 myFeatures=None
 DataFrame = None
