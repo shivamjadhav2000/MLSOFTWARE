@@ -1,0 +1,4 @@
+Eel==0.16.0
+numpy==1.26.0
+pandas==2.1.1
+scikit_learn==1.3.1
