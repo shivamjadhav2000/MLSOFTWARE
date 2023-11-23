@@ -2,6 +2,13 @@ let X=[]
 let Y=[]
 let cols
 let fpath=''
+eel.main_init()(r=>{
+  console.log(r)
+  if(r){
+    handleFileUpload()
+
+  }
+})
  //general helperfunction
  function sleep (time) {
   return new Promise((resolve) => setTimeout(resolve, time));
@@ -70,7 +77,7 @@ function handleFileUploadCleaning(){
     //     </div>
 
     fpath=inputf
-    eel.main("'"+inputf+"'")(async (r)=>{
+    eel.main(inputf)(async (r)=>{
       if(typeof(r)=='string'){
         FileUploadErrorTarget.className=''
         FileUploadErrorTarget.className="alert alert-danger"

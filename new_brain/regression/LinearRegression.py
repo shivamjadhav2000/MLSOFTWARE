@@ -64,8 +64,8 @@ class LinearRegression(BaseEstimator):
                 self.W -= self.lr * dW
                 self.B -= self.lr * dB
 
-            self.losses.append(np.mean(loss))
-            self.scores.append(np.mean(score))
+            self.losses.append(np.mean(losses))
+            self.scores.append(np.mean(scores))
 
     def score_metric(self, y_true, y_pred):
         score = r2_score(y_true.ravel(), y_pred.ravel())
