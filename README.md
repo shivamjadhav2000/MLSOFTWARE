@@ -13,3 +13,6 @@ you need to navigate inside the dist/main directory you shall find the main.exe 
 you need to install all the requirements mentioned in the requirements.txt
 command to run 
 python main.py
+
+# build the eel application
+python -m eel .\main.py web  --icon=build.ico
