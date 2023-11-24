@@ -23,7 +23,6 @@ class KNN(BaseEstimator):
         self.num_samples = None
 
     def fit(self, X, Y):
-        print(Y.dtype)
         self.X = X
         self.Y = Y
         self.num_features = self.X.shape[1]
@@ -108,7 +107,6 @@ class KNN(BaseEstimator):
         recall = recall_score(self.Y, y_pred.ravel(), average=avg, zero_division=1)
         f1 = f1_score(self.Y, y_pred.ravel(), average=avg)
         cf = confusion_matrix(self.Y, y_pred.ravel())
-        print(y_pred.shape, self.Y.shape)
         y_true, y_pred = self.Y, y_pred
         loss = self.loss_metric(y_true, y_pred)
 

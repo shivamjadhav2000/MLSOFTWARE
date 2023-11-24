@@ -58,9 +58,10 @@ async function handleBuildSpinR(Algo){
  TargetVariable=document.forms[`modelBase${Algo}`].elements['Y'].value;
  BuildImg.className="spinner"
  eel.build(ChosenAlgorithm,AlgorithmParamsData,TargetVariable)((r)=>{
+  console.log("rr==",r)
    BuildImg.className=""
-   trainingStatusTarget.className="alert alert-success"
-   trainingStatusTarget.innerHTML="Traing is successfull"
+   trainingStatusTarget.className=r.success?"alert alert-success":'alert alert-danger'
+   trainingStatusTarget.innerHTML=r.msg?r.msg:"Training completed successfully"
  })
 }
 async function handleBuildSpinK(Algo){
@@ -133,6 +134,7 @@ async function handleBuildSpinC(Algo){
 function handleAlgorithmFormDisplay(event){
   event.preventDefault()
   let l=['RL','RR','RP','CL','CS','CK','K']
+
   ChosenAlgorithm=event.target.Algorithm.value
    for(let i=0;i<l.length;i++){
      document.getElementById(l[i]).className='hide'
@@ -141,6 +143,12 @@ function handleAlgorithmFormDisplay(event){
   if (ChosenAlgorithm==='RL' || ChosenAlgorithm==='RR' || ChosenAlgorithm==='RP' || ChosenAlgorithm==='CL' ){
     eel.getMetaData(ChosenAlgorithm)(r=>{
       data=r
+      console.log("jAGSFHKAGFJHSF",data)
+      if(data.totalSelectedFeatures==null){
+        let trainingStatusTarget=document.getElementById(`trainingStatusTarget${ChosenAlgorithm}`)
+        trainingStatusTarget.className="alert alert-danger"
+        trainingStatusTarget.innerHTML="Must select features in order to train model"
+      }
       document.getElementsByName(`batch_size${ChosenAlgorithm}`)[0].placeholder=`enter Batch size range between 1-${data.datasetSize}`
       targetSelect=document.getElementById(`Select${ChosenAlgorithm}`)
       let temp=`<option selected>Select Dependent Variable</option>`

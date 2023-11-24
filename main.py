@@ -6,6 +6,8 @@ from sklearn.preprocessing import StandardScaler, LabelEncoder
 from brain_utils import split_data, run
 import sys
 import atexit
+from bottle import *  # Only if you're using wildcard import
+eel.init("web")
 
 outfile = open("logfile.txt", "wt")
 sys.stderr = outfile
@@ -155,7 +157,6 @@ def main(file_pth=PATH):
                 formattedCorrelationMatrix
             )
     except Exception as e:
-        print(f"Error: {e}", flush=True)
         return "An error occurred. Please check the input file.", None, None, None, None
 
 @eel.expose
@@ -193,7 +194,6 @@ def build(algorithm, params=None, target_feature=0):
         global TrainResults
         global TestResults
         MyAlgorithm=algorithm
-        print("algorithm, params=None, target_feature=0==",algorithm,params, target_feature,flush=True)
         ## For Supervised Learning (i.e, with Y)
         algorithm = list(algorithm)
         if target_feature != 0:
@@ -249,7 +249,6 @@ def build(algorithm, params=None, target_feature=0):
             TestResults = test_results
             return {'success':True,'msg':'Traning completed successfully'}
     except Exception as e:
-        print(f"An error occurred: {e}", flush=True)
         return {'success':False,'msg':str(e)} 
 
 
@@ -286,9 +285,4 @@ def write_parameters(parameters, fileName):
     }
     return params
 
-eel.init("web")
-
-# app = eel.Bottle()
-
-# eel.init('web', app=app, host='localhost', port=8080)
-eel.start("index.html",size=(1000,700))
+eel.start('index.html', size=(1080, 900))

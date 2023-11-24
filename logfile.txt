@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "C:\Users\jadha\AppData\Local\Programs\Python\Python311\Lib\site-packages\gevent\_ffi\loop.py", line 270, in python_check_callback
+    def python_check_callback(self, watcher_ptr): # pylint:disable=unused-argument
+    
+KeyboardInterrupt
+2023-11-23T23:48:44Z
