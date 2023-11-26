@@ -6,7 +6,6 @@ from sklearn.preprocessing import StandardScaler, LabelEncoder
 from brain_utils import split_data, run
 import sys
 import atexit
-from bottle import *  # Only if you're using wildcard import
 eel.init("web")
 
 outfile = open("logfile.txt", "wt")
@@ -103,10 +102,13 @@ def preprocessing_data(target=0, algo='C'):
             target = myDataFrame[target_feature].values.reshape((-1, 1))
             target = StandardScaler().fit_transform(target)
             DataFrame[target_feature] = target
-
         elif algo=='C':
-            target = myDataFrame[target_feature].values.reshape((-1,1))
-            DataFrame[target_feature] = target.astype(int)
+            if(myDataFrame[target_feature].dtype=='object'):
+                target = LabelEncoder().fit_transform(myDataFrame[target_feature])
+                DataFrame[target_feature]=target
+            else:
+                target = myDataFrame[target_feature].values.reshape((-1,1))
+                DataFrame[target_feature] = target.astype(int)
 @eel.expose
 def main_init():
     if(PATH!=None):
@@ -249,6 +251,7 @@ def build(algorithm, params=None, target_feature=0):
             TestResults = test_results
             return {'success':True,'msg':'Traning completed successfully'}
     except Exception as e:
+        print("error==>",e,flush=True)
         return {'success':False,'msg':str(e)} 
 
 
