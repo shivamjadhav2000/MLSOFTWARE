@@ -1,0 +1,247 @@
+.trainingItem{
+  /* line-height: 17px; */
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+}
+
+
+td{
+  margin:50%
+}
+  input{
+    text-decoration: none;
+    outline: none;
+    border: 1px solid rgba(0, 0, 0, 0.212);
+    background-color: transparent;
+    width:100%;
+  }
+  .inputDark{
+    text-decoration: none;
+    outline: none;
+    border: 1px solid rgba(202, 185, 185, 0.075) ;
+    color: white;
+    background-color: transparent;
+    width:100%;
+  }
+  
+  h6{
+    display:inline;
+  }
+  /* //anchor tags */
+  .myanchor{
+    color:rgb(8, 8, 8);
+    text-decoration:none ;
+  }
+  .myanchor:hover{
+    color:rgb(8, 8, 8);
+    text-decoration: none;
+  }
+  .myanchorToggle{
+    color: rgb(253, 253, 253);
+    text-decoration: none;
+  }
+  .myanchorToggle:hover{
+    color: rgb(253, 253, 253);
+    text-decoration: none;
+  
+  }
+  .spinner{
+    animation-name: spin;
+    animation-duration: 5000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear; 
+  }
+  button{
+    cursor: pointer;
+    background: transparent;
+    outline: none !important;
+    border:none;
+    outline-style: none;
+  }
+  button:hover, button:focus {
+  outline: none !important;
+  border: none;
+  text-decoration: none;
+  }
+  
+  #Active{
+    cursor: pointer;
+    float:left;
+    font-size: 16px;
+    font-weight: 400;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-right:20px;
+    border-bottom:1px solid rgba(240, 18, 18, 0.884);
+  }
+  
+  
+  
+  @-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+  @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+  @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+  
+  
+  /* body {background-color: powderblue;} */
+  .mainBODY {
+    /* style="margin: 0px;padding: 10px;" */
+    margin: 0px;
+    padding: 10px; 
+    background-color:#ffffff; 
+    color: black;
+    font-family:Sentinel SSm A,Sentinel SSm B,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+    font-weight: 400;
+   
+    }
+    .dark-mode {
+      background-color: rgb(8, 2, 2);
+      color: rgb(255, 255, 255);
+    }
+    /* navbar section */
+  
+    .nav{
+      height: 34px;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom:5px;
+      border:1px solid rgba(0, 0, 0, 0.205) ;
+      }
+      .navLightMode{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom:5px;
+        border:1px solid rgba(199, 183, 183, 0.075) ;
+        }
+        
+      .Logo{
+        color: white;
+      font-size:14px;
+      font-weight: 200;
+      padding:5px;
+      margin-right:20px;
+      font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      border-radius:2px;
+      background-image: linear-gradient(45deg,#ee0979  ,#ff6a00 );
+      }
+  .navItem{
+    cursor: pointer;
+    float:left;
+    font-size: 16px;
+    font-weight: 400;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-right:20px;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
+    position: relative;
+    overflow: hidden;
+  }
+  
+    .navItem:before  {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      left: 50%;
+      right: 50%;
+      bottom: 0;
+      background: #000000;
+      height: 1px;
+      -webkit-transition-property: left right;
+      transition-property: left right;
+      -webkit-transition-duration: 0.3s;
+      transition-duration: 0.3s;
+      -webkit-transition-timing-function: ease-out;
+      transition-timing-function: ease-out;
+    }
+    .navItem:hover:before {
+      left: 0;
+      right: 0;
+    }
+    .navItemDark{
+      cursor: pointer;
+    float:left;
+    font-size: 16px;
+    font-weight: 400;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-right:20px;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
+    position: relative;
+    overflow: hidden;
+  }
+  .navItemDark:before  {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    left: 50%;
+    right: 50%;
+    bottom: 0;
+    background: #e7e4e4;
+    height: 1px;
+    -webkit-transition-property: left right;
+    transition-property: left right;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+  }
+  .navItemDark:hover:before {
+    left: 0;
+    right: 0;
+  }
+   
+  #navItems{
+    padding: 0px 5px ;
+    padding-top: 4px;
+    display:flex;
+    justify-content: flex-start;
+    align-content: center;
+  }
+  #themeToggle{
+   padding:2px;
+  }
+  #toggleImg{
+  cursor: pointer;
+  }
+  /* navbar section */
+  
+  
+  /* sub navbar */
+  .subNav{
+    /* margin-top:5px; */
+    height:35px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding:0px 5px;
+    border: 1px solid rgba(0, 0, 0, 0.212) ;
+  }
+  .subNavDarkMode{
+    margin-top:5px;
+    height:35px;
+    display: flex;
+    justify-content: flex-start;
+    /* align-items: center; */
+    padding:2px 5px;
+    border: 1px solid rgba(236, 154, 154, 0.075) ;
+  }
+  /* sub navbar */
+#targetDisplayMain{
+  display: grid;
+  grid-template-columns: 40% 60%;
+}
+#targetStat{
+display:grid;
+grid-template-columns: 50% 50%;
+}
+#kmeansTargetDisplay{
+  padding:2%;
+}
+#targetBarplot{
+  padding:2%;
+}
+
